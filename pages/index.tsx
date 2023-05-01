@@ -19,7 +19,7 @@ export default function Home() {
           <p>
             Get started by editing&nbsp;
             <code className={styles.code}>pages/index.tsx</code>
-            <div>hi</div>
+            <p>hi</p>
           </p>
           <div>
             <a
