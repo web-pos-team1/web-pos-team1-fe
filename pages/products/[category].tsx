@@ -3,6 +3,9 @@ import { ProductType } from "@/types/ProductType";
 import React, { useEffect, useState } from "react";
 import { categoryList } from '../../data/categorList.json';
 import style from './Products.module.css';
+import styles from '@/styles/Products.module.css'
+import Head from 'next/head'
+import Link from 'next/link'
 
 import res  from '../../data/products-data.json';
 
@@ -56,6 +59,14 @@ export default function Products() {
 
 
     return (
+    <>
+        <Head>
+            <title>POS products list</title>
+            <meta name="description" content="Products list page" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="icon" href="/favicon.ico" />
+        </Head>
+
         <div>
             상품 리스트 페이지
             <nav className="product-list-nav">
@@ -80,6 +91,18 @@ export default function Products() {
                     </div>
                 ))
             }
+        <div className={styles.pre_btn}>
+            <Link href='/'>
+                <button>이전단계</button>
+            </Link>
         </div>
+
+        <div className={styles.next_btn}>
+            <Link href='/carts'>
+                <button>상품등록</button>
+            </Link>
+        </div>
+        </div>
+    </>
     )
 }
