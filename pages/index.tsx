@@ -3,10 +3,13 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Link from 'next/link'
+import React from 'react'
+import Layout from '@/components/layouts/layout'
+import { NextPageWithLayout } from './_app'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+const Home: NextPageWithLayout = () => {
   return (
     <>
       <Head>
@@ -109,5 +112,17 @@ export default function Home() {
         </div>
       </main>
     </>
+  );
+}
+
+Home.getLayout = function getLayout(page: React.ReactNode) {
+  return(
+    <>
+    <Layout>
+      {page}
+    </Layout>
+    </>
   )
 }
+
+export default Home

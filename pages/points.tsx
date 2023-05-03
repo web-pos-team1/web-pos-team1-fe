@@ -50,12 +50,6 @@ export default function Points() {
                 <button>이전단계</button>
             </Link>
         </div>
-
-        <div className={styles.next_btn}>
-          <Link href='/ssgService'>
-            <button>결제하기</button>
-          </Link>
-        </div>
         
       </main>
     </>

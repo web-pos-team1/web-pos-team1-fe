@@ -49,10 +49,6 @@ export default function Payments() {
                 <button>이전단계</button>
             </Link>
         </div>
-
-        <div className={styles.next_btn}>
-            <button>결제하기</button>
-        </div>
         
       </main>
     </>
