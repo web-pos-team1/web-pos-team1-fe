@@ -6,7 +6,6 @@ export default function Layout(props:{children:React.ReactNode}) {
         <div>
             <Header />
             {props.children}
-            <h2>footer</h2>
         </div>
     )
 }

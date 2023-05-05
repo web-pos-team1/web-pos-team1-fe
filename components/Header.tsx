@@ -51,8 +51,8 @@ export default function Header() {
               src="/images/callStaffIcon.png"
               alt="callStaff"
               className={style.callStaff}
-              width={85}
-              height={85}
+              width={80}
+              height={80}
             />
           </li>
           <li>
