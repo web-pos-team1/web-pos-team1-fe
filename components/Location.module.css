@@ -1,0 +1,21 @@
+.wrapper {
+    width: 1000px;
+    height: 70px;
+    background-color: #56565B;
+    align-items: center;
+    border-radius: 14px;
+    margin-top: 20px;
+    margin-left: 12px;
+}
+
+.wrapper ul {
+    display: flex;
+    font-size: 28px;
+    font-weight: 350;
+}
+
+.wrapper ul li {
+    list-style: none;
+    padding: 20px 47px;
+    justify-content: center;
+}
