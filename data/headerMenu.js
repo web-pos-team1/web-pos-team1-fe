@@ -7,19 +7,19 @@ export const headerMenu = [
         id : 1,
         title :  'language',
         path : '/',
-        icon : language
+        icon : 'language'
     },
     {
         id : 2,
         title :  'callStaff',
         path : '/',
-        icon : callStaff
+        icon : 'callStaff'
     },
     {
         id : 3,
         title :  'staff',
         path : '/',
-        icon : staff
+        icon : 'staff'
     }
 ]
 

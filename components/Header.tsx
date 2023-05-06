@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react'
 import style from './Header.module.css';
 import Image from 'next/image'
-// import { languageImg, callStaffImg, staffImg, headerMenu } from '../data/headerMenu'
+import { languageImg, callStaffImg, staffImg, headerMenu } from '../data/headerMenu'
 import Link from 'next/link'
 
 export default function Header() {
@@ -28,7 +28,7 @@ export default function Header() {
 
       <nav>
         <ul>
-          {/* {
+          {
           headerMenu.map ( menu => (
           <li key={menu.id}>
             <Link href={menu.path}>
@@ -36,8 +36,8 @@ export default function Header() {
             </Link>
           </li>
           ))
-          } */}
-          <li>
+          }
+          {/* <li>
             <Image
             src="/images/languageIcon.png"
             alt="language"
@@ -63,7 +63,7 @@ export default function Header() {
               width={70}
               height={70}
             />
-          </li>
+          </li> */}
         </ul>
       </nav>
     </header>

@@ -3,10 +3,12 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Points.module.css'
 import Link from 'next/link'
+import { NextPageWithLayout } from './_app'
+import MainLayout from '@/components/layouts/mainLayout'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Points() {
+const Points: NextPageWithLayout = () => {
   return (
     <>
       <Head>
@@ -53,5 +55,17 @@ export default function Points() {
         
       </main>
     </>
+  );
+}
+
+Points.getLayout = function getLayout(page: React.ReactNode) {
+  return(
+    <>
+    <MainLayout>
+      {page}
+    </MainLayout>
+    </>
   )
 }
+
+export default Points
