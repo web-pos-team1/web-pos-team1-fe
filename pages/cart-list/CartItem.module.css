@@ -1,0 +1,23 @@
+.cartItemRow td {
+    text-align: center;
+}
+
+.cartItemRow button {
+    width: 20px;
+    height: 20px;
+    border: 0px;
+    margin: 0px;
+    border-radius: 10px;
+    background-color: #4C304F;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+}
+
+.count {
+    padding: 10px;
+}
+
+.cartDelBtn {
+    padding-left: 10px;
+}

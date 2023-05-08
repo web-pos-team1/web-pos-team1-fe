@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { CartType } from "@/types/CartType";
+import { formatMoney } from "@/components/globalfunctions/formatMoney";
+import Image from "next/image";
+import style from "./CartItem.module.css";
 
 export default function CartItem(
     props: {
@@ -33,14 +36,30 @@ export default function CartItem(
         console.log("props: ", props);
     }, [])
     return (
-        <div>
-            <img src={props.item.image_url} />
-            <h3>{props.item.name}</h3>
-            <h3>{props.item.price}</h3>
-            <button onClick={minusCount}>-</button>
-            <span>{count}</span>
-            <button onClick={plusCount}>+</button>
-            <button onClick={delCart}>x</button>    
-        </div>
+        <tr className={style.cartItemRow}>
+            <td>
+                <Image 
+                src={props.item.image_url} width={120} height={100} alt="product image"/>
+            </td>
+            <td>
+                <p>{props.item.name}</p>
+            </td>
+            <td>
+                <button onClick={minusCount}>-</button>
+                <span className={style.count}>{count}</span>
+                <button onClick={plusCount}>+</button>
+
+            </td>
+            <td>
+                <p>{formatMoney(props.item.price)}</p>
+            </td>
+            <td>
+                <span>{formatMoney(props.item.price * count)}</span>
+            </td>
+            <td>
+            <span className={style.cartDelBtn} onClick={delCart}>x</span>   
+            </td>
+    
+        </tr>
     )
 }

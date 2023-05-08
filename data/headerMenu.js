@@ -1,6 +1,6 @@
-import languageIcon from '../public/images/languageIcon'
-import callStaffIcon from '../public/images/callStaffIcon'
-import staffIcon from '../public/images/staffIcon'
+// import languageIcon from '../public/images/languageIcon'
+// import callStaffIcon from '../public/images/callStaffIcon'
+// import staffIcon from '../public/images/staffIcon'
 
 export const headerMenu = [
     {
@@ -23,6 +23,6 @@ export const headerMenu = [
     }
 ]
 
-export const languageImg = languageIcon
-export const callStaffImg = callStaffIcon
-export const staffImg = staffIcon
+export const languageImg = "/images/languageImg.png";
+export const callStaffImg = "/images/callStaffIcon";
+export const staffImg = "/images/staffIcon";
