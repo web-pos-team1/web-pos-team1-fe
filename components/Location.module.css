@@ -1,21 +1,48 @@
 .wrapper {
+    position: relative;
     width: 1000px;
-    height: 70px;
+    height: 83px;
     background-color: #56565B;
     align-items: center;
     border-radius: 14px;
     margin-top: 20px;
     margin-left: 12px;
+    padding-top: 7px;
 }
 
 .wrapper ul {
     display: flex;
     font-size: 28px;
     font-weight: 350;
+    color: #989DA1;
+    justify-content: space-between;
 }
 
 .wrapper ul li {
     list-style: none;
-    padding: 20px 47px;
+    margin: 0 20px;
+    margin-top: 20px;
+    font-size: 28px;
     justify-content: center;
+    position: relative;
+    text-align: center;
+}
+
+.active {
+    position: absolute;
+    background-color: #E0C798;
+    padding-top: -110px ;
+    box-sizing: border-box;
+    width: 170px;
+    height: 53px;
+    border-radius: 8px;
+   
+}
+
+li.active {
+    color : #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    justify-content: center;
+    position: relative;
 }
