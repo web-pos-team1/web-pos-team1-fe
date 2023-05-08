@@ -1,0 +1,29 @@
+.btn {
+    background-color: #4C304F;
+    border: none;
+    border-radius: 30px;
+    width: 288px;
+    height: 319px;
+    font-size: 35px;
+    box-sizing: border-box;
+    color: #E0C798;
+    font-weight: bold;
+}
+
+.btn:hover {
+  filter: brightness(90%);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+  
+  .text {
+    margin-top: 30px;
+    text-align: center;
+    white-space: pre-line;
+  }
+  

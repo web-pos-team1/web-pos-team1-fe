@@ -3,10 +3,12 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Last.module.css'
 import Link from 'next/link'
+import { NextPageWithLayout } from './_app'
+import LastLayout from '@/components/layouts/lastLayout'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Last() {
+const Last: NextPageWithLayout = () => {
   return (
     <>
       <Head>
@@ -16,32 +18,40 @@ export default function Last() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-
         <div className={styles.center}>
-          
-          <Image
-            className={styles.logo}
-            src="/images/main_logo.png"
-            alt="main Logo"
-            width={500}
-            height={500}
-            priority
-          />
+            <Image
+              className={styles.logo}
+              src="/images/main_logo.png"
+              alt="main Logo"
+              width={800}
+              height={800}
+            />
         </div>
-
-        <div className={styles.description}>
-            <h1>
-            이용해 주셔서 감사합니다 즐거운 쇼핑되세요
+          <div className={styles.font}>
+            <h1>이용해 주셔서 감사합니다<br/>
+                즐거운 쇼핑되세요
             </h1>
-        </div>
+          </div>
 
-        <div className={styles.home_btn}>
+        {/* <div className={styles.home_btn}>
             <Link href='/'>
               <button>홈으로</button>
             </Link>
-        </div>
+        </div> */}
 
       </main>
     </>
   )
 }
+
+Last.getLayout = function getLayout(page: React.ReactNode) {
+  return(
+    <>
+    <LastLayout>
+      {page}
+    </LastLayout>
+    </>
+  )
+}
+
+export default Last
