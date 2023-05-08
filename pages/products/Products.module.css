@@ -1,52 +1,88 @@
-.logo img {
-    width: 150px;
-  }
-  
-.logo h1 {
-font-size: 0px;
+.categoryNav {
+    width: 1000px;
+    height: 30px;
+    background-color: #56565B;
+    align-items: center;
+    border-radius: 14px;
+    margin-top: 20px;
+    margin-left: 12px;
+    padding-left: 40px;
+    margin-bottom: 12px;
 }
 
-.product-list-nav ul {
-display: flex;
-justify-content: space-between;
-align-items: center;  
-padding: 0px;
-}
-
-.product-list-nav ul li {
-list-style: none;
-padding: 0px;
-margin: 0px 0px;
-}
-
-.product-list-nav ul li .eventBtn{
-    border-radius: 1px;
-    border-style: solid;
-    padding: 8px 18px;
-    margin-top: 0%;
-    margin-bottom: 0%;
-}
-.itemImg {
-    width: 368px;
-}
-.itemBox {
+.categoryNav ul {
     display: flex;
-    flex-direction: column;
-    border-style: solid;
-    margin-bottom: 80px;
+    font-size: 17px;
 }
-.itemBox a {
-    text-decoration: none;
-    color: black;
+
+.categoryNav ul li {
+    list-style: none;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 3px;
+    padding-bottom: 4px;
+    font-weight: 500;
+    justify-content: center;
+}
+
+li.active {
+    background-color: #E0C798;
+    color: white;
+}
+
+li.deactive {
+    background-color: #56565B;
+    color: gray;
+}
+
+.productList {
+    padding-left: 20px;
+    width: 1000px;
+    height: 1000px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;   
+}
+
+.productItem {
+    padding-left: 30px;
+    height: 50px;
+    transition-duration: 0.5s;
+}
+
+.productItemName {
+    width: 200px;
     text-align: center;
+    padding: 3px;
 }
-.price{
+
+.productItemPrice {
+    width: 200px;
+    padding: 3px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.eventProductItem {
     color: red;
     font-weight: bold;
     text-align: center;
 }
 
-li.active {
-    background-color: #ffb718;
+.notEventProductItem {
+    display: none;
+}
+
+.cartTable {
+ width: 1000px;   
+ align-items: center;
+}
+
+.cartTableHead {
+    background-color: #4C304F;
     color: white;
+}
+
+.cartItemRow {
+    align-items: center;
 }
