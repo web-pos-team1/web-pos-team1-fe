@@ -86,3 +86,10 @@ li.deactive {
 .cartItemRow {
     align-items: center;
 }
+
+.cartWrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* position: relative; */
+}

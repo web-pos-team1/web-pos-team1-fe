@@ -4,6 +4,6 @@ export interface CartType {
     name: string,
     price: number,
     image_url: string,
-    description: string,
-    qty: number
+    qty: number,
+    cartQty: number
 }
