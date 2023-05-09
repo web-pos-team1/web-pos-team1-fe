@@ -11,11 +11,11 @@ import Link from 'next/link';
 import axios from 'axios';
 import Image from "next/image";
 import { formatMoney } from "@/components/globalfunctions/formatMoney";
-
+import Cart from "../cart-list/Cart";
 
 // import {products, carts} from '../../data/productsAndCarts.json';
 // import res  from '../../data/products-data.json';
-import CartItem from "../cart-list/CartItem";
+import CartItem from "../cart-list-confirm/CartItem";
 import { NextPageWithLayout } from "../_app";
 
 const Products : NextPageWithLayout = () => {
@@ -64,12 +64,34 @@ const Products : NextPageWithLayout = () => {
         }
         setActiveState([...activeState]);
     }
-    const handleAddCartClick = (product_id : number) => {
-        console.log("handleAddCartClck()/product_id/: ", product_id);
+    const handleAddCartClick = (product : ProductType) => {
+        console.log("handleAddCartClck()/product: ", product);
+        for (let i = 0; i < cartList.length; i++) {
+            // 이미 장바구니에 담겼던 상품
+            if (cartList[i].product_id === product.product_id) {
+                cartList[i].cartQty += 1
+                return;
+            }
+        }
+        // 처음 장바구니에 담기는 상품 
+        let cartQty = 1;
+        let cart = convertProductToCart(product, cartQty);
+        setCartList([...cartList, cart]);
     }
 
     console.log("Procuts / router.query.과일: ", router.query.category);
-
+    const convertProductToCart = (product : ProductType, cartQty: number) => {
+        let cart : CartType = {
+            product_id: product.product_id,
+            product_code: product.product_code,
+            name: product.name,
+            price: product.price,
+            image_url: product.image_url,
+            qty: product.qty,
+            cartQty: cartQty
+        };
+        return cart;
+    }
     useEffect(() => {
         let c = router.query.category;
         let category_index = category_map[c ? c.toString() : "과일"];
@@ -117,7 +139,7 @@ const Products : NextPageWithLayout = () => {
             <div className={style.productList}>
                 {
                     itemList.map((item: ProductType) => (
-                        <div onClick={() => handleAddCartClick(item.product_id)} key={item.product_id} className={style.productItem}>
+                        <div onClick={() => handleAddCartClick(item)} key={item.product_id} className={style.productItem}>
                             <Image 
                                 src={item.image_url} 
                                 alt={item.description} 
@@ -149,10 +171,29 @@ const Products : NextPageWithLayout = () => {
                 <button>상품등록</button>
             </Link>
         </div>
+
         <h3 style={{alignContent: "center"}}>
             장바구니
         </h3>
         <div>
+        {
+                cartList.map((cart: CartType, index: number) => (
+                    <div className={style.cartWrap} key={index}>
+                        <Cart
+                            key={index}
+                            item={cart}
+                            delCheck={delCheck}
+                            setDelCheck={setDelCheck}
+                            totalPrice={totalPrice}
+                            setTotalPrice={setTotalPrice}
+                        />
+                    </div>
+                ))
+            }
+
+            <br/>
+            <br/>
+            <br/>
         <table className={style.cartTable}>
         <thead className={style.cartTableHead}>
             <tr >
