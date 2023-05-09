@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import React from 'react'
 import style from './Header.module.css';
 import Image from 'next/image'
-// import { languageImg, callStaffImg, staffImg, headerMenu } from '../data/headerMenu'
 import Link from 'next/link'
 import HeaderButton from "@/components/HeaderButton";
 import translations from '../data/translations.json'
