@@ -1,0 +1,9 @@
+{
+    "/products":"상품리스트", 
+    "/carts": "상품확인",
+    "/points": "포인트적립",
+    "/payments": "결제",
+    "/shoppingBag": "쇼핑백구매",
+    "/ssgService": "배송/선물",
+    "/last": "완료"
+  }

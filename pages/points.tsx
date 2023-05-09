@@ -9,6 +9,7 @@ import PointsLayout from '@/components/layouts/pointsLayout'
 const inter = Inter({ subsets: ['latin'] })
 
 const Points: NextPageWithLayout = () => {
+
   return (
     <>
       <Head>
@@ -17,14 +18,6 @@ const Points: NextPageWithLayout = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <main className={styles.main}>
-
-        <div className={styles.description}>
-          <h1>
-            신세계포인트 적립방법을 선택해 주세요
-          </h1>
-        </div>
-      </main> */}
     </>
     
   );
