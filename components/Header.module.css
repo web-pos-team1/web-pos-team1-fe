@@ -5,35 +5,23 @@
 
 .headerMenu {
     display: flex;
-    justify-content: space-between;
     margin-top: 10px;
     box-sizing: border-box;
+}
+
+.logoBox {
+    display: flex;
+    margin-right: auto;
 }
 
 .title {
     font-size: 35px;
     font-weight: normal;
-    padding-top: 43px;
-    padding-right: 490px;
+    padding-top: 40px;
+    padding-right: 450px;
+    margin-left: 10px;
 }
 
-.headerMenu ul {
-    display: flex;
-}
-
-.headerMenu ul li {
-    list-style: none;
-    padding-right: 20px;
-}
-
-.language{
-    margin-top: 10px;
-}
-
-.callStaff {
-    margin-top: 20px;
-}
-
-.staff {
-    margin-top: 20px;
+.button {
+    margin-left: auto;
 }

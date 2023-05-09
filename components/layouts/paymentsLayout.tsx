@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import Button from "@/components/Button";
 import Text from "@/components/Text";
+import Text3Button from "../Text3Button";
 // import style from "./CustomImg.module.css";
 
 interface Props {
@@ -16,26 +17,30 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
     {
       src: "/images/creditCard.png",
       alt: "credit cart payment",
-      text: "신용/체크카드",
+      text1: "신용/체크카드",
       onClick: () => console.log("btn 1"),
     },
     {
-      src: "/images/mobilePay.png",
+      src: "/images/mobilePayyy.png",
       alt: "mobile pay payment",
-      text: "모바일페이",
+      text1: "모바일페이",
       onClick: () => console.log("btn 2"),
     },
     {
       src: "/images/barcode.png",
       alt: "sensing barcode payments",
-      text: "SSGPAY",
+      text1: "SSGPAY",
+      text2: "카카오페이",
+      text3: "스마일페이",
     //   text: "SSGPAY\n카카오페이\n스마일페이",
       onClick: () => console.log("btn 3"),
     },
     {
       src: "/images/internationalPayments.png",
       alt: "international payments",
-      text: "은련카드",
+      text1: "은련카드",
+      text2: "위챗페이",
+      text3: "알리페이",
     //   text: "은련카드\n위챗페이\n알리페이",
       onClick: () => console.log("btn 4"),
     //   className: style.image
@@ -57,11 +62,13 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
         }}
       >
         {buttons.map((button, index) => (
-          <Button
+          <Text3Button
             key={index}
             src={button.src}
             alt={button.alt}
-            text={button.text}
+            text1={button.text1}
+            text2={button.text2}
+            text3={button.text3}
             onClick={button.onClick}
             // className={button.className}
           />

@@ -5,7 +5,6 @@ interface Props {
     onClick: () => void;
     src: string;
     alt: string;
-    image: string;
     text: string;
 }
 
