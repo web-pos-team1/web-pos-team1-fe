@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { NextPageWithLayout } from './_app'
 import PointsLayout from '@/components/layouts/pointsLayout'
 
+
 const inter = Inter({ subsets: ['latin'] })
 
 const Points: NextPageWithLayout = () => {
