@@ -102,23 +102,6 @@
     }
   ],
   "carts": [
-    {
-      "product_id": 1,
-      "product_code": "0000006618917",
-      "name": "파머스픽 당도선별 참외 4~7입/봉 (1.5kg)",
-      "price": 19900,
-      "image_url": "https://sitem.ssgcdn.com/17/89/61/item/0000006618917_i1_290.jpg",
-      "qty": 1,
-      "cartQty": 1
-    },
-    {
-      "product_id": 10,
-      "product_code": "0000008734935",
-      "name": "레몬9~15입/봉 (1.4kg내외)",
-      "price": 11980,
-      "image_url": "https://sitem.ssgcdn.com/35/49/73/item/0000008734935_i1_290.jpg",
-      "qty": 150,
-      "cartQty": 2
-    }
+    
   ]
 }
