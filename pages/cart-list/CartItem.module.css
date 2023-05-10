@@ -21,3 +21,10 @@
 .cartDelBtn {
     padding-left: 10px;
 }
+
+.cartItemRow:nth-child(even) {
+    background: #D4D8DB;
+}
+.cartItemRow:nth-child(odd) {
+    background: white;
+}

@@ -1,0 +1,21 @@
+.cartTable {
+    width: 1000px;   
+    align-items: center;
+    
+}
+
+.cartTableHead {
+    background-color: #4C304F;
+    color: white;
+}
+
+.cartItemRow {
+    align-items: center;
+}
+
+.cartWrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* position: relative; */
+}
