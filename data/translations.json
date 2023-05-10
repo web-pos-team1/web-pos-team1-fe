@@ -1,9 +1,10 @@
 {
-    "/products":"상품리스트", 
-    "/carts": "상품확인",
-    "/points": "포인트적립",
+    "/products":"카테고리 리스트", 
+    "/products/[category]":"상품 리스트",
+    "/carts": "상품 확인",
+    "/points": "포인트 적립",
     "/payments": "결제",
-    "/shoppingBag": "쇼핑백구매",
+    "/shoppingBag": "쇼핑백 구매",
     "/ssgService": "배송/선물",
     "/last": "완료"
   }
