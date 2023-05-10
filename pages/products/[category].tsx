@@ -70,6 +70,7 @@ const Products : NextPageWithLayout = () => {
             // 이미 장바구니에 담겼던 상품
             if (cartList[i].product_id === product.product_id) {
                 cartList[i].cartQty += 1
+                setCartList([...cartList]);
                 return;
             }
         }
@@ -92,6 +93,7 @@ const Products : NextPageWithLayout = () => {
         };
         return cart;
     }
+
     useEffect(() => {
         let c = router.query.category;
         let category_index = category_map[c ? c.toString() : "과일"];
@@ -129,8 +131,11 @@ const Products : NextPageWithLayout = () => {
                 <ul>
                     {
                     categoryList.map((category: string, index: number) => (
-                        <li onClick={() => handleCategoryBtnClick(index)}  key={index} className={activeState[index] ? `${style.active}` : `${style.deactive}`} >
-                                {category}
+                        <li onClick={() => handleCategoryBtnClick(index)}  key={index} className={activeState[index] ? `${style.active}` : `${style.deactive}`} 
+                        >
+                            <Link href={`/products/${categoryList[index]}`}>
+                            {category}
+                            </Link>
                         </li>
                     ))
                     }
@@ -166,11 +171,18 @@ const Products : NextPageWithLayout = () => {
             </Link>
         </div>
 
-        <div className={styles.next_btn}>
-            <Link href='/carts'>
-                <button>상품등록</button>
+        {/* <div className={styles.next_btn}>
+            <Link 
+                href = {"/detail"}
+                state = {{
+                cartList: cartList 
+                }}
+            >
+            <div>
+                <h1>{props.title}</h1>
+            </div>
             </Link>
-        </div>
+        </div> */}
 
         <h3 style={{alignContent: "center"}}>
             장바구니
