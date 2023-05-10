@@ -15,7 +15,7 @@ import Cart from "../cart-list/Cart";
 
 // import {products, carts} from '../../data/productsAndCarts.json';
 // import res  from '../../data/products-data.json';
-import CartItem from "../cart-list-confirm/CartItem";
+import CartItem from "../cart-list/CartItem";
 import { NextPageWithLayout } from "../_app";
 
 const Products : NextPageWithLayout = () => {
@@ -23,10 +23,13 @@ const Products : NextPageWithLayout = () => {
     const [itemList, setItemList] = useState<ProductType[]>([]);
     const [activeState, setActiveState] = useState<boolean[]>([false, false, false, false, false, false, false, false, false]);
     const [slides,  setSlides] = useState();
-    const [cartList, setCartList] = useState<CartType[]>([]);
+    const [cartList, setCartList] = useState<CartType[]>(() => {
+        const cList = isLocalStorageAvailable() ? localStorage.getItem('cartList') : null;
+        return cList !== null ? JSON.parse(cList) : [];
+    });
 
-    const [delCheck, setDelCheck] = useState(false);
-    const [totalPrice, setTotalPrice] = useState(0);
+    const [delProductId, setDelProductId] = useState<number>(0);
+    const [totalPrice, setTotalPrice] = useState<number>(0);
     const [cartId, setCartId] = useState();
     const [categoryIndex, setCategoryIndex] = useState<number>(0);
 
@@ -34,14 +37,18 @@ const Products : NextPageWithLayout = () => {
     const category_map : {[key: string] : number} = {
         "과일": 0,
         "채소": 1,
-        "수산": 2,
-        "정육-계란": 3,
+        "정육-계란": 2,
+        "수산": 3,
         "쌀-견과": 4,
-        "선물류": 5,
-        "빵-유제품": 6,
-        "간식": 7,
-        "소스-오일": 8,
+        "우유-유제품": 5,
+        "간식": 6,
+        "소스-오익": 7,
+        "선물류": 8,
     } 
+        
+    const convertSlashToDash = (category : string) => {
+        return category.replace('/', '-');
+    }
 
     const setState = (id:number) => {
         for (let i = 0; i < activeState.length; i++) {
@@ -79,7 +86,7 @@ const Products : NextPageWithLayout = () => {
         setCartList([...cartList, cart]);
     }
 
-    console.log("Procuts / router.query.과일: ", router.query.category);
+    console.log("Procuts / router.query.[category]: ", router.query.category);
     const convertProductToCart = (product : ProductType, cartQty: number) => {
         let cart : CartType = {
             product_id: product.product_id,
@@ -92,27 +99,29 @@ const Products : NextPageWithLayout = () => {
         };
         return cart;
     }
+
+    const handleCheckCartBtnClick = () => {
+        console.log("handleCheckCartBtnClick!!");
+        localStorage.setItem("cartList", JSON.stringify(cartList));
+    }
+
     useEffect(() => {
         let c = router.query.category;
         let category_index = category_map[c ? c.toString() : "과일"];
         handleCategoryBtnClick(category_index);
         const url_products = `http://localhost:3001/products`;
-        const url_carts = `http://localhost:3001/carts`;
         axios.get(url_products)
         .then((res : any) => {
             console.log("products/res: ", res);
             setItemList(res.data)
         })
         .catch((err) => console.log("products/err: ", err));
-        axios.get(url_carts)
-        .then((res:any) => {
-            console.log("carts/res: ", res);
-            setCartList(res.data);
-        })
-        .catch((err) => console.log("carts/err: ", err));
+    
+
+        console.log("final cartList: ", cartList);
         // setItemList(res.data)
         // setCartList(carts);
-    }, [router.query])
+    }, [router.query, cartList])
 
 
     return (
@@ -160,69 +169,50 @@ const Products : NextPageWithLayout = () => {
                 }
             </div>
             
-        <div className={styles.pre_btn}>
-            <Link href='/'>
-                <button>이전단계</button>
-            </Link>
-        </div>
 
-        <div className={styles.next_btn}>
-            <Link href='/carts'>
-                <button>상품등록</button>
-            </Link>
-        </div>
+            <div className={styles.pre_btn}>
+                <Link href='/'>
+                    <button>이전단계</button>
+                </Link>
+            </div>
 
-        <h3 style={{alignContent: "center"}}>
-            장바구니
-        </h3>
-        <div>
-        {
-                cartList.map((cart: CartType, index: number) => (
-                    <div className={style.cartWrap} key={index}>
-                        <Cart
-                            key={index}
-                            item={cart}
-                            delCheck={delCheck}
-                            setDelCheck={setDelCheck}
-                            totalPrice={totalPrice}
-                            setTotalPrice={setTotalPrice}
-                        />
-                    </div>
-                ))
-            }
-
-            <br/>
-            <br/>
-            <br/>
-        <table className={style.cartTable}>
-        <thead className={style.cartTableHead}>
-            <tr >
-                <th>상품이미지</th>
-                <th>상품명</th>
-                <th>수량</th>
-                <th>단가</th>
-                <th>금액</th>
-            </tr>
-        </thead>
-        <tbody>
-            {
-                cartList.map((cart: CartType, index: number) => (
-                    <CartItem
-                        key={index}
-                        item={cart}
-                        delCheck={delCheck}
-                        setDelCheck={setDelCheck}
-                        totalPrice={totalPrice}
-                        setTotalPrice={setTotalPrice}
-                    />
-                ))
-            }
-                </tbody>
-            </table>
-        </div>
+            <div className={styles.next_btn}>
+                <Link href = '/cart-list'>
+                    
+                    <button onClick={handleCheckCartBtnClick}>상품확인</button>
+                </Link>
+            </div>
+            <div className={style.cartList}>
+                {
+                        cartList.length > 0 ? 
+                        cartList.map((cart: CartType, index: number) => (
+                            <div className={style.cartWrap} key={index}>
+                                <Cart
+                                    item={cart}
+                                    delProductId={delProductId}
+                                    setDelProductId={setDelProductId}
+                                    totalPrice={totalPrice}
+                                    setTotalPrice={setTotalPrice}
+                                />
+                            </div>
+                        )) : <div>선택하신 상품이 없습니다.</div>
+                    }
+            </div>  
         </div>
     </>
     );
+}
+
+function isLocalStorageAvailable() {
+    try {
+        const testKey = 'test';
+        localStorage.setItem(testKey, testKey);
+        localStorage.removeItem(testKey);
+        return true;
+      } catch (e) {
+        console.log("isLocalStorageAvailable / e: ", e);
+        return false;
+      }
 }
 
 Products.getLayout = function getLayout(page: React.ReactNode) {

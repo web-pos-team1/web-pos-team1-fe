@@ -4,30 +4,34 @@ import { CartType } from "@/types/CartType";
 import { formatMoney } from "@/components/globalfunctions/formatMoney";
 import Image from "next/image";
 import style from "./CartItem.module.css";
+import { ProductType } from "@/types/ProductType";
 
 export default function CartItem(
     props: {
         item: CartType,
-        delCheck : boolean, 
-        setDelCheck : any, 
+        delProductId : number, 
+        setDelProductId : any, 
         totalPrice : number, 
         setTotalPrice : any
     }) 
     {
-    const [count, setCount] = useState(1);
+    const [cartQty, setCartQty] = useState<number>(props.item.cartQty);
+
     const minusCount = () => {
-        if (count === 1) {
+        if (cartQty === 1) {
             alert("최소 수량은 1개입니다.");
             return;
         }
-        setCount(count - 1);
+        setCartQty(cartQty - 1);
     }
     const plusCount = () => {
-        setCount(count + 1);
+        setCartQty(cartQty + 1);
     }
-    const delCart = () => {
+    const handleDelBtnClick = (product : ProductType) => {
+        console.log("삭제할 product: ", product);
+        props.setDelProductId(product.product_id);
         if (window.confirm("장바구니에서 삭제하시겠습니까?")) {
-            console.log("---장바구니에서 삭제하는 로직---")
+            console.log("---장바구니에서 삭제하는 로직---");
         } else {
             console.log("---삭제 취소---");
         }
@@ -46,7 +50,7 @@ export default function CartItem(
             </td>
             <td>
                 <button onClick={minusCount}>-</button>
-                <span className={style.count}>{count}</span>
+                <span className={style.count}>{cartQty}</span>
                 <button onClick={plusCount}>+</button>
 
             </td>
@@ -54,10 +58,10 @@ export default function CartItem(
                 <p>{formatMoney(props.item.price)}</p>
             </td>
             <td>
-                <span>{formatMoney(props.item.price * count)}</span>
+                <span>{formatMoney(props.item.price * cartQty)}</span>
             </td>
             <td>
-            <span className={style.cartDelBtn} onClick={delCart}>x</span>   
+            <span className={style.cartDelBtn} onClick={() => handleDelBtnClick(props.item)}>x</span>   
             </td>
     
         </tr>
