@@ -13,6 +13,8 @@ export default function CartItem(
         setDelProductId : any, 
         totalPrice : number, 
         setTotalPrice : any
+        setCartList: any
+        cartList: CartType[]
     }) 
     {
     const [cartQty, setCartQty] = useState<number>(props.item.cartQty);
@@ -22,10 +24,28 @@ export default function CartItem(
             alert("최소 수량은 1개입니다.");
             return;
         }
+        console.log("before cartQty: ", cartQty);
         setCartQty(cartQty - 1);
+        console.log("after cartQty: ", cartQty);
+        for (let i = 0; i < props.cartList.length; i++) {
+            if (props.cartList[i].product_id === props.item.product_id) {
+                props.cartList[i].cartQty -= 1;
+                break;
+            }
+        }
+        props.setCartList([...props.cartList]);
     }
     const plusCount = () => {
+        console.log("before cartQty: ", cartQty);
         setCartQty(cartQty + 1);
+        console.log("after cartQty: ", cartQty);
+        for (let i = 0; i < props.cartList.length; i++) {
+            if (props.cartList[i].product_id === props.item.product_id) {
+                props.cartList[i].cartQty += 1;
+                break;
+            }
+        }
+        props.setCartList([...props.cartList]);
     }
     const handleDelBtnClick = (product : ProductType) => {
         console.log("삭제할 product: ", product);
@@ -43,10 +63,10 @@ export default function CartItem(
         <tr className={style.cartItemRow}>
             <td>
                 <Image 
-                src={props.item.image_url} width={120} height={100} alt="product image"/>
+                src={props.item.image_url} width={140} height={140} alt="product image"/>
             </td>
             <td>
-                <p>{props.item.name}</p>
+                <p className={style.cartItemName}>{props.item.name}</p>
             </td>
             <td>
                 <button onClick={minusCount}>-</button>
@@ -55,10 +75,10 @@ export default function CartItem(
 
             </td>
             <td>
-                <p>{formatMoney(props.item.price)}</p>
+                <p className={style.cartItemPrice}>{formatMoney(props.item.price)}</p>
             </td>
             <td>
-                <span>{formatMoney(props.item.price * cartQty)}</span>
+                <span className={style.cartEachPrice}>{formatMoney(props.item.price * cartQty)}</span>
             </td>
             <td>
             <span className={style.cartDelBtn} onClick={() => handleDelBtnClick(props.item)}>x</span>   

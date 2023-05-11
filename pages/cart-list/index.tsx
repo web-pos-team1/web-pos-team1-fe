@@ -25,14 +25,21 @@ const CartList : NextPageWithLayout = () => {
 
     const handlePayBtnClick = () => {
         console.log("final cartList: ", cartList);
-        console.log("rm localStorage['cartList']: ", localStorage.removeItem("cartList"));
-        let ret = alert("포인트 적립하시겠습니까?")
-        console.log("ret from alert: ", ret);
-        // if (ret !===) {
-        //     console.log("---포인트 적립 step 페이지 이동---");
-        // } else {
-        //     console.log("---배송/선물 step 페이지 이동---");
-        // }
+        let data = []
+        for (let i = 0; i < cartList.length; i++) {
+            data.push({
+                "posId": 1,
+                "productId": cartList[i].product_id,
+                "cartQty": cartList[i].cartQty
+            })
+        }
+        console.log("final response data(List<CartAddDTO>): ", data);
+        if (window.confirm("포인트 적립하시겠습니까?")) {
+            console.log("rm localStorage['cartList']: ", localStorage.removeItem("cartList"));
+            console.log("---포인트 적립 step 페이지 이동---");
+        } else {
+            console.log("---배송/선물 step 페이지 이동---");
+        }     
     }
     const handlePrevBtnClick = () => {
         console.log("CartList / handlePrevBtnClick!!!");
@@ -81,6 +88,8 @@ const CartList : NextPageWithLayout = () => {
                                 <CartItem
                                     key={index}
                                     item={cart}
+                                    cartList={cartList}
+                                    setCartList={setCartList}
                                     delProductId={delProductId}
                                     setDelProductId={setDelProductId}
                                     totalPrice={totalPrice}
@@ -90,13 +99,19 @@ const CartList : NextPageWithLayout = () => {
                         }
                     </tbody>
                 </table>
-    
-            <div className={styles.pre_btn}>
-                <button onClick={handlePrevBtnClick}>이전단계</button>
-            </div>
-            <div className={styles.pre_btn}>
-                <button onClick={handlePayBtnClick}>결제하기</button>
-            </div>
+            <span style={{ }}>
+                <Link href="/">
+                    <button style={{ padding: "20px", fontSize: "20px", marginRight: "700px", paddingRight: "20px", marginLeft: "20px"}}
+                     onClick={handlePrevBtnClick}>
+                        이전단계
+                    </button>
+                </Link>
+                <Link href = '/cart-list'>
+                    
+                    <button style={{ padding: "20px", fontSize: "20px"}}
+                    onClick={handlePayBtnClick}>결제하기</button>
+                </Link>
+            </span>
         </div>
     )
 

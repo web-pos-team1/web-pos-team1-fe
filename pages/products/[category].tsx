@@ -12,6 +12,7 @@ import axios from 'axios';
 import Image from "next/image";
 import { formatMoney } from "@/components/globalfunctions/formatMoney";
 import Cart from "../cart-list/Cart";
+import Footer from "@/components/Footer";
 
 // import {products, carts} from '../../data/productsAndCarts.json';
 // import res  from '../../data/products-data.json';
@@ -77,6 +78,7 @@ const Products : NextPageWithLayout = () => {
             // 이미 장바구니에 담겼던 상품
             if (cartList[i].product_id === product.product_id) {
                 cartList[i].cartQty += 1
+                setCartList([...cartList]);
                 return;
             }
         }
@@ -118,10 +120,22 @@ const Products : NextPageWithLayout = () => {
         .catch((err) => console.log("products/err: ", err));
     
 
-        console.log("final cartList: ", cartList);
+        // Cart 컴포넌트에서 "삭제" 이벤트 발생했을 경우
+        if (delProductId !== 0) {
+            let tempCartList = [];
+            for (let i = 0; i < cartList.length; i++) {
+                if ( cartList[i].product_id === delProductId ) {
+                    continue;
+                } else {
+                    tempCartList.push(cartList[i]);
+                }
+            }
+            console.log("after / tempCartList: ", tempCartList);
+            setCartList(tempCartList);
+        }
         // setItemList(res.data)
         // setCartList(carts);
-    }, [router.query, cartList])
+    }, [router.query, delProductId])
 
 
     return (
@@ -170,18 +184,22 @@ const Products : NextPageWithLayout = () => {
             </div>
             
 
-            <div className={styles.pre_btn}>
-                <Link href='/'>
-                    <button>이전단계</button>
+            {/* <Link href='/'>
+                <Footer />
+            </Link> */}
+            <span style={{ }}>
+                <Link href="/products">
+                    <button style={{ padding: "20px", fontSize: "20px", marginRight: "700px", paddingRight: "20px", marginLeft: "20px"}}>
+                        이전단계
+                    </button>
                 </Link>
-            </div>
-
-            <div className={styles.next_btn}>
                 <Link href = '/cart-list'>
                     
-                    <button onClick={handleCheckCartBtnClick}>상품확인</button>
+                    <button style={{ padding: "20px", fontSize: "20px"}}
+                    onClick={handleCheckCartBtnClick}>상품확인</button>
                 </Link>
-            </div>
+            </span>
+
             <div className={style.cartList}>
                 {
                         cartList.length > 0 ? 
