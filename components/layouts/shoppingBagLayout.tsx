@@ -19,7 +19,9 @@ export default function ShoppingBagLayout(props:{children:React.ReactNode}) {
                 </div>
                 <div className={style.lowerBtn}>
                     <Text2Button src="/images/recyclingBaggg.png" alt="purchase recycling bag" text1="종량제봉투" text2="(850원)" onClick={() => console.log('btn 2')}/>
-                    <Text2Button src="/images/forbiden.png" alt="pass this step" text1="필요없음" onClick={() => console.log('btn 3')}/>
+                    <Link href="/payments">
+                        <Text2Button src="/images/forbiden.png" alt="pass this step" text1="필요없음" onClick={() => console.log('btn 3')}/>
+                    </Link>
                 </div>
             <Link href='/ssgService'>
             <Footer />

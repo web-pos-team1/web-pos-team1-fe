@@ -1,0 +1,11 @@
+.upperBtn {
+    display: flex;
+  justify-content: center;
+  margin-top: 90px;
+}
+
+.lowerBtn {
+    display: flex;
+    justify-content: space-between;
+    margin: 90px 180px 152px 180px;
+}
