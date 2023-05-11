@@ -22,6 +22,7 @@
     margin-left: 10px;
 }
 
-.button {
-    margin-left: auto;
+.btn {
+    list-style: none;
+    display: flex;
 }
