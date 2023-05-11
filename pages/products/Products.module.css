@@ -38,7 +38,7 @@ li.deactive {
 .productList {
     padding-left: 20px;
     width: 1000px;
-    height: 1000px;
+    height: 800px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;   
@@ -54,13 +54,16 @@ li.deactive {
     width: 200px;
     text-align: center;
     padding: 3px;
+    font-weight: bold;
+    font-size: 22px;
 }
 
 .productItemPrice {
     width: 200px;
     padding: 3px;
     text-align: center;
-    font-weight: bold;
+    /* font-weight: bold; */
+    font-size: 22px;
 }
 
 .eventProductItem {
@@ -73,23 +76,21 @@ li.deactive {
     display: none;
 }
 
-.cartTable {
- width: 1000px;   
- align-items: center;
-}
-
-.cartTableHead {
-    background-color: #4C304F;
-    color: white;
-}
-
-.cartItemRow {
+.cartList {
+    width: 95%;
+    padding: 1rem 0;
+    margin: 0 auto;
+    display: flex;
+    overflow: auto;
+    white-space: nowrap;
+    justify-content: flex-start;
     align-items: center;
+}
+.cartList::-webkit-scrollbar {
+    display: none;
 }
 
 .cartWrap {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    /* position: relative; */
+    margin-right: 0.5rem;
+    height: 200px;
 }
