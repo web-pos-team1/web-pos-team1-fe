@@ -15,11 +15,13 @@
 }
 
 .count {
-    padding: 10px;
+    padding: 8px;
+    font-size: 22px;
 }
 
 .cartDelBtn {
     padding-left: 10px;
+    font-size: 22px;
 }
 
 .cartItemRow:nth-child(even) {
@@ -27,4 +29,15 @@
 }
 .cartItemRow:nth-child(odd) {
     background: white;
+}
+
+.cartItemName {
+    font-size: 22px;
+}
+
+.cartItemPrice {
+    font-size: 22px;
+}
+.cartEachPrice {
+    font-size: 22px;
 }
