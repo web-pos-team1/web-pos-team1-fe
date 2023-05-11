@@ -1,8 +1,12 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import style from './Location.module.css';
+import { GnbMenu } from '@/data/headerMenu';
+import { GnbMenuType } from '@/types/GnbMenuType';
 
 export default function Location() {
+
+  const router = useRouter();
 
   const [activeIndex, setActiveIndex] = useState(0); // 초기 선택한 index를 0으로 설정
 
@@ -14,7 +18,19 @@ export default function Location() {
     <div className={style.wrapper}>
       <nav>
         <ul>
-          <li
+          {
+            GnbMenu.map((item:GnbMenuType)=>{
+              return(
+                <li 
+                  onClick={()=>router.push(`${item.path}`)}
+                  className={item.path === router.pathname ? style.active : ''}
+                >
+                  {item.name}
+                </li>
+              )
+            }) 
+          }
+          {/* <li
             className={activeIndex === 0 ? style.active : ''}
             onClick={() => handleItemClick(0)}
           >
@@ -43,7 +59,7 @@ export default function Location() {
             onClick={() => handleItemClick(4)}
           >
             5 완료
-          </li>
+          </li> */}
         </ul>
       </nav>
     </div>
