@@ -7,6 +7,7 @@ import HeaderButton from "@/components/HeaderButton";
 // import * as translations from '../data/translations';
 import { transeData } from '@/data/translations';
 import Modal from "@/components/Modal";
+import CallStaffModal from './CallStaffModal';
 
 export default function Header() {
 
@@ -31,7 +32,7 @@ export default function Header() {
           src: "/images/callStaff.png", 
           alt: "call staff",
           link: "/",
-          onClick: () => console.log('btn 2')
+          onClick: () => setShowModal(true)
       },
       {
           id: 3,
@@ -58,6 +59,7 @@ export default function Header() {
   return (
     <>
     <Modal show={showModal} onClose={setShowModal} />
+    <CallStaffModal show={showModal} onClose={setShowModal} />
     <header className={style.headerMenu}>
       
       <div className={style.logoBox}>

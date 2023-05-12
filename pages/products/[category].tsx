@@ -111,7 +111,7 @@ const Products : NextPageWithLayout = () => {
         let c = router.query.category;
         let category_index = category_map[c ? c.toString() : "과일"];
         handleCategoryBtnClick(category_index);
-        const url_products = `http://localhost:3001/products`;
+        let url_products = `http://3.36.176.254:8080/api/v1/products/${router.query.category}`;
         axios.get(url_products)
         .then((res : any) => {
             console.log("products/res: ", res);
