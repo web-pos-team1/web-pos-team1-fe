@@ -10,6 +10,7 @@
 
 .footer {
     display: flex;
+    /* justify-content: space-between; */
     justify-content: center;
 }
 
@@ -23,16 +24,21 @@
     border-style: none;
     display: flex;
     justify-content: center;
+    /* justify-content: space-between; */
     align-items: center;
 }
 
 .title {
-    padding-top: 10px;
+    /* padding-top: 10px; */
     color : #4C304F;
     font-size: 38px;
     text-align: center;
     font-weight: 500;
 }
+
+/* .title p {
+    padding-top: 15px;
+} */
 
 .overlay {
     position: absolute;
@@ -51,3 +57,21 @@
     display: flex;
     justify-content: center;
 }
+
+.body p {
+    font-size: 30px;
+    padding: 35px 0;
+}
+
+.cancel {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cancel button {
+    background-color: #D4D8DB;
+    border: none;
+}
+
+
+
