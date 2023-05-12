@@ -9,7 +9,7 @@ import styles from '@/styles/Carts.module.css';
 import Link from 'next/link';
 import { NextPageWithLayout } from "../_app";
 import { useRouter } from 'next/router';
-import Modal from "@/components/Modal";
+import PointGuideModal from '@/components/PointGuideModal';
 
 const CartList : NextPageWithLayout = () => {
     const rt = useRouter();
@@ -73,7 +73,7 @@ const CartList : NextPageWithLayout = () => {
 
     return (
         <>
-        <Modal show={showModal} onClose={setShowModal} />
+        <PointGuideModal show={showModal} onClose={setShowModal} />
         <div>
             <Head>
                 <title>POS products list</title>
