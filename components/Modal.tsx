@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react"
 import style from "./Modal.module.css"
-import LanguageButton from "@/components/LanguageButton";
+import LanguageButton from "@/components/LanguageButton"
 import Image from 'next/image'
 
 // interface Props {

@@ -5,7 +5,6 @@
     border-radius: 30px;
     padding: 20px;
     z-index: 100;
-    border: 5px solid #ffffff;
     box-sizing: border-box;
 }
 
@@ -35,6 +34,10 @@
     font-weight: 500;
 }
 
+.title p {
+    padding-top: 15px;
+}
+
 .overlay {
     position: absolute;
     top: 0;
@@ -58,7 +61,8 @@
     font-size: 30px;
     display: flex;
     justify-content: center;
-    padding: 60px 0;
+    padding: 55px 0;
+    line-height: 50px;
 }
 
 .body p span {
