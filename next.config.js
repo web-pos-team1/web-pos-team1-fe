@@ -9,7 +9,19 @@ const nextConfig = {
         port: '',
       },
     ],
-  }
+  },
 }
 
 module.exports = nextConfig
+
+// module.exports = {
+// 	async rewrites() {
+//     console.log("destination: ", process.env.NEXT_PUBLIC_ENV_BE_HOST +"/:path*");
+// 		return [
+// 			{
+// 				source: "/:path*",
+// 				destination: process.env.NEXT_PUBLIC_ENV_BE_HOST + "/:path*",
+// 			},
+// 		];
+// 	},
+// }

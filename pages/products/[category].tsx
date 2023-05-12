@@ -13,6 +13,7 @@ import Image from "next/image";
 import { formatMoney } from "@/components/globalfunctions/formatMoney";
 import Cart from "../cart-list/Cart";
 import Footer from "@/components/Footer";
+import { mapToBE } from "@/components/globalfunctions/mapToBE";
 
 // import {products, carts} from '../../data/productsAndCarts.json';
 // import res  from '../../data/products-data.json';
@@ -111,8 +112,16 @@ const Products : NextPageWithLayout = () => {
         let c = router.query.category;
         let category_index = category_map[c ? c.toString() : "과일"];
         handleCategoryBtnClick(category_index);
-        const url_products = `http://localhost:3001/products`;
-        axios.get(url_products)
+        console.log("process.env:", process.env);
+        console.log("process.env.NEXT_PUBLIC_ENV_POSID:", process.env.NEXT_PUBLIC_ENV_POS_ID);
+        let url_products = mapToBE(`/api/v1/products/${router.query.category}`);
+        // url_products = `http://localhost:3001/products`;
+        console.log("url_porducts: ", url_products);
+        axios(url_products,
+            {
+                method: 'get'    
+            }
+        )
         .then((res : any) => {
             console.log("products/res: ", res);
             setItemList(res.data)
@@ -188,8 +197,10 @@ const Products : NextPageWithLayout = () => {
                 <Footer />
             </Link> */}
             <span style={{ }}>
-                <Link href="/products">
-                    <button style={{ padding: "20px", fontSize: "20px", marginRight: "700px", paddingRight: "20px", marginLeft: "20px"}}>
+                <Link href="/abc">
+                    <button style={{ padding: "20px", fontSize: "20px", marginRight: "700px", paddingRight: "20px", marginLeft: "20px"}}
+                    onClick={() => router.back()}
+                    >
                         이전단계
                     </button>
                 </Link>
