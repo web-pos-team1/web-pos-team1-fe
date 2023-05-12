@@ -11,14 +11,28 @@ export default function PointGuideModal(props:{show:boolean, onClose:Dispatch<Se
     return (
         <div className={style.overlay}>
             <div className={style.modal}>
+                
+                <div className={style.cancel}>
+                    <button  onClick={()=>props.onClose(false)}>
+                        <Image
+                            src="/images/cancel.png"
+                            alt="cancel"
+                            className={style.cancel}
+                            width={30}
+                            height={30}
+                        />
+                    </button>
+                </div>
+                
                 <div className={style.title}>
                     <p>포인트 적립</p>    
                 </div>
+
                 <div className={style.body}>
                     <p>신세계포인트를 적립하시겠습니까?</p>
                 </div>
-                <div className={style.footer}>
 
+                <div className={style.footer}>
                 <Link href='/points'>
                     <button>
                         <Image
@@ -31,7 +45,6 @@ export default function PointGuideModal(props:{show:boolean, onClose:Dispatch<Se
                         <p>예</p>
                     </button>
                 </Link>
-
                 <Link href='/ssgService'>
                     <button>
                         <Image

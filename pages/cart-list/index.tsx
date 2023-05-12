@@ -116,11 +116,9 @@ const CartList : NextPageWithLayout = () => {
                         이전단계
                     </button>
                 </Link>
-                <Link href = '/cart-list'>
                     
                     <button style={{ padding: "20px", fontSize: "20px"}}
                     onClick={handleModal}>결제하기</button>
-                </Link>
             </span>
         </div>
         </>
