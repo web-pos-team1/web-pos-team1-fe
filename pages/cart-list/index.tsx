@@ -9,12 +9,14 @@ import styles from '@/styles/Carts.module.css';
 import Link from 'next/link';
 import { NextPageWithLayout } from "../_app";
 import { useRouter } from 'next/router';
+import Modal from "@/components/Modal";
 
 const CartList : NextPageWithLayout = () => {
     const rt = useRouter();
     
     const [delProductId, setDelProductId] = useState<number>(0);
     const [totalPrice, setTotalPrice] = useState<number>(0);
+    const [showModal, setShowModal] = useState<boolean>(false);
 
     // const [cartList, setCartList] = useState<CartType[]>(parseCartList);
 
@@ -63,7 +65,15 @@ const CartList : NextPageWithLayout = () => {
             setCartList(tempCartList);
         }
     }, [delProductId])
+
+    const handleModal = () => {
+        console.log('modal')
+        setShowModal(true)
+      }
+
     return (
+        <>
+        <Modal show={showModal} onClose={setShowModal} />
         <div>
             <Head>
                 <title>POS products list</title>
@@ -109,10 +119,11 @@ const CartList : NextPageWithLayout = () => {
                 <Link href = '/cart-list'>
                     
                     <button style={{ padding: "20px", fontSize: "20px"}}
-                    onClick={handlePayBtnClick}>결제하기</button>
+                    onClick={handleModal}>결제하기</button>
                 </Link>
             </span>
         </div>
+        </>
     )
 
 }
