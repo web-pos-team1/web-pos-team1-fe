@@ -11,6 +11,7 @@
 # next.js
 /.next/
 /out/
+.env
 
 # production
 /build
@@ -33,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# prodjct with BE
+./setupProxy.ts
