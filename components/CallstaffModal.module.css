@@ -1,5 +1,5 @@
 .modal {
-    background-color: #D4D8DB;
+    background-color: #4C304F;
     width: 600px;
     height: 400px;
     border-radius: 30px;
@@ -14,12 +14,12 @@
 }
 
 .footer button {
-    background-color: #4C304F;
+    background-color: #ffffff;
     width: 169px;
     height: 44px;
     border-radius: 24px;
     font-size: 25px;
-    color: #ffffff;
+    color: #4C304F;
     border-style: none;
     display: flex;
     justify-content: center;
@@ -28,10 +28,14 @@
 
 .title {
     padding-top: 10px;
-    color : #4C304F;
+    color : #E0C798;
     font-size: 38px;
     text-align: center;
     font-weight: 500;
+}
+
+.title p {
+    padding-top: 15px;
 }
 
 .overlay {
@@ -50,4 +54,17 @@
 .body {
     display: flex;
     justify-content: center;
+}
+
+.body p {
+    color: #ffffff;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    padding: 55px 0;
+    line-height: 50px;
+}
+
+.body p span {
+    color: #E0C798;
 }

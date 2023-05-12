@@ -7,6 +7,7 @@ import HeaderButton from "@/components/HeaderButton";
 // import * as translations from '../data/translations';
 import { transeData } from '@/data/translations';
 import Modal from "@/components/Modal";
+import CallStaffModal from './CallStaffModal';
 
 export default function Header() {
 
@@ -16,6 +17,7 @@ export default function Header() {
     // const title  = translations[pathName] || '신세계';
    
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [showCallStaffModal, setShowCallStaffModal] = useState<boolean>(false);
     const [title, setTitle] = useState<string>('');
 
     const buttons = [
@@ -31,7 +33,7 @@ export default function Header() {
           src: "/images/callStaff.png", 
           alt: "call staff",
           link: "/",
-          onClick: () => console.log('btn 2')
+          onClick: () => setShowCallStaffModal (true)
       },
       {
           id: 3,
@@ -58,6 +60,7 @@ export default function Header() {
   return (
     <>
     <Modal show={showModal} onClose={setShowModal} />
+    <CallStaffModal show={showCallStaffModal} onClose={setShowCallStaffModal} />
     <header className={style.headerMenu}>
       
       <div className={style.logoBox}>
@@ -81,7 +84,7 @@ export default function Header() {
         {buttons.map((button, index) => (
           
             button.id === 1 ? 
-            <li onClick={handleModal}>
+            <li key={index} onClick={handleModal}>
             <HeaderButton 
                 key={index} 
                 src={button.src} 
@@ -90,7 +93,7 @@ export default function Header() {
             </li>
             :
 
-            <li>
+            <li key={index}>
             <HeaderButton 
                 key={index} 
                 src={button.src} 

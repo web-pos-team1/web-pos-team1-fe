@@ -1,6 +1,7 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react"
 import style from "./Modal.module.css"
-import LanguageButton from "@/components/LanguageButton";
+import LanguageButton from "@/components/LanguageButton"
+import Image from 'next/image'
 
 // interface Props {
 //     onClick: () => void;
@@ -25,7 +26,16 @@ export default function Modal(props:{show:boolean, onClose:Dispatch<SetStateActi
                     <LanguageButton src="/images/chinaFlag.png" alt="Chinese" onClick={() => console.log('btn 4')}/>
                 </div>
                 <div className={style.footer}>
-                    <button onClick={()=>props.onClose(false)}>확인</button>
+                    <button onClick={()=>props.onClose(false)}>
+                        <Image
+                            src="/images/checkWhite.png"
+                            alt="confirm"
+                            className={style.conirm}
+                            width={28}
+                            height={28}
+                        />
+                        <p>확인</p>
+                        </button>
                 </div>
             </div>
         </div>
