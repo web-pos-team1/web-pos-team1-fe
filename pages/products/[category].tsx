@@ -214,7 +214,7 @@ const Products : NextPageWithLayout = () => {
                                     setTotalPrice={setTotalPrice}
                                 />
                             </div>
-                        )) : <div>선택하신 상품이 없습니다.</div>
+                        )) : <div></div>
                     }
             </div>  
         </div>
