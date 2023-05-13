@@ -1,0 +1,26 @@
+.footerMenu {
+    display: flex;
+}
+
+.footerMenu ul {
+    display: flex;
+}
+
+.footerMenu ul li {
+    list-style: none;
+    color : #5D436C;
+    font-size: 35px;
+    font-weight: bold;
+    padding-left: 13px;
+}
+
+.pre_btn {
+    border-color: #5D436C;
+    border: 3px solid #5D436C;
+    width: 230px;
+    height: 83px;
+    border-radius: 25px;
+    box-sizing: border-box;
+    padding-top: 18px;
+    margin-left: 60px;
+}

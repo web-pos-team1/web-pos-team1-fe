@@ -19,6 +19,7 @@ import { mapToBE } from "@/components/globalfunctions/mapToBE";
 // import res  from '../../data/products-data.json';
 import CartItem from "../cart-list/CartItem";
 import { NextPageWithLayout } from "../_app";
+import FooterPreBtn from "@/components/FooterPreBtn";
 
 const Products : NextPageWithLayout = () => {
     const router = useRouter();
@@ -196,6 +197,7 @@ const Products : NextPageWithLayout = () => {
             {/* <Link href='/'>
                 <Footer />
             </Link> */}
+            <FooterPreBtn />
             <span style={{ }}>
                 <Link href="/abc">
                     <button style={{ padding: "20px", fontSize: "20px", marginRight: "700px", paddingRight: "20px", marginLeft: "20px"}}
