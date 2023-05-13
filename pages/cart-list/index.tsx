@@ -9,7 +9,7 @@ import styles from '@/styles/Carts.module.css';
 import Link from 'next/link';
 import { NextPageWithLayout } from "../_app";
 import { useRouter } from 'next/router';
-import PointGuideModal from '@/components/PointGuideModal';
+import PointGuideModal from '@/components/PointguideModal';
 
 const CartList : NextPageWithLayout = () => {
     const rt = useRouter();
