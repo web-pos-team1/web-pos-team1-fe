@@ -4,14 +4,18 @@
     height: 300px;
     border-radius: 30px;
     padding: 20px;
-    z-index: 100;
+    position: relative;
+    z-index: 200;
     box-sizing: border-box;
 }
 
 .footer {
     display: flex;
-    /* justify-content: space-between; */
     justify-content: center;
+}
+
+.footer a {
+    padding-left: 20px;
 }
 
 .footer button {
@@ -24,27 +28,26 @@
     border-style: none;
     display: flex;
     justify-content: center;
-    /* justify-content: space-between; */
     align-items: center;
 }
 
+.footer button p {
+    padding-left: 10px;
+}
+
 .title {
-    /* padding-top: 10px; */
     color : #4C304F;
     font-size: 38px;
     text-align: center;
     font-weight: 500;
 }
 
-/* .title p {
-    padding-top: 15px;
-} */
-
 .overlay {
     position: absolute;
     top: 0;
     width: 100%;
     height: 100%;
+    z-index: 100;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,6 +59,7 @@
 .body {
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 
 .body p {

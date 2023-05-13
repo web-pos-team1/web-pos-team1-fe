@@ -26,6 +26,10 @@
     align-items: center;
 }
 
+.footer button p {
+    padding-left: 10px;
+}
+
 .title {
     padding-top: 10px;
     color : #4C304F;

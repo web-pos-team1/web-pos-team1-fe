@@ -5,10 +5,23 @@ import styles from '@/styles/ShoppingBag.module.css'
 import Link from 'next/link'
 import ShoppingBagLayout from '@/components/layouts/shoppingBagLayout'
 import { NextPageWithLayout } from './_app'
+import Text2Button from "@/components/Text2Button";
+import Text from "@/components/Text";
+import style from "../components/layouts/shoppingBagLayout.module.css"
+import GiftCardModal from '@/components/GiftCardModal'
+import { useState } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
 const Shoppingbag: NextPageWithLayout = () => {
+
+  const [showGiftCardModal, setShowGiftCardModal] = useState<boolean>(false);
+  
+    const handleModal = () => {
+      setShowGiftCardModal(true);
+    };
+  
+
   return (
     <>
       <Head>
@@ -18,7 +31,16 @@ const Shoppingbag: NextPageWithLayout = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+      <GiftCardModal show={showGiftCardModal} onClose={setShowGiftCardModal} />
 
+      <Text text="필요하신 쇼핑백을 선택해 주세요" />
+        <div className={style.upperBtn}>
+          <Text2Button src="/images/paperBagg.png" alt="purchase paper bag" text1="종이봉투" text2="(100원)" onClick={handleModal} />
+        </div>
+        <div className={style.lowerBtn}>
+          <Text2Button src="/images/recyclingBaggg.png" alt="purchase recycling bag" text1="종량제봉투" text2="(850원)" onClick={handleModal} />
+          <Text2Button src="/images/forbiden.png" alt="pass this step" text1="필요없음" onClick={handleModal} />
+        </div>
       </main>
     </>
   )

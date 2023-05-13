@@ -16,7 +16,7 @@ const CartList : NextPageWithLayout = () => {
     
     const [delProductId, setDelProductId] = useState<number>(0);
     const [totalPrice, setTotalPrice] = useState<number>(0);
-    const [showModal, setShowModal] = useState<boolean>(false);
+    const [showPointGuideModal, setShowPointGuideModal] = useState<boolean>(false);
 
     // const [cartList, setCartList] = useState<CartType[]>(parseCartList);
 
@@ -68,12 +68,12 @@ const CartList : NextPageWithLayout = () => {
 
     const handleModal = () => {
         console.log('modal')
-        setShowModal(true)
+        setShowPointGuideModal(true)
       }
 
     return (
         <>
-        <PointGuideModal show={showModal} onClose={setShowModal} />
+        <PointGuideModal show={showPointGuideModal} onClose={setShowPointGuideModal} />
         <div>
             <Head>
                 <title>POS products list</title>
