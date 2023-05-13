@@ -1,31 +1,30 @@
 import router, { useRouter } from 'next/router';
 import React from 'react'
-import style from './FooterPreBtn.module.css';
+import style from './FooterAddCartBtn.module.css';
 import Image from 'next/image'
 import Link from 'next/link'
 
-
-export default function FooterPreBtn() {
+export default function FooterAddCartBtn() {
 
   return (
     <footer className={style.footerMenu}>
-        <div className={style.pre_btn}>
+        <div className={style.next_btn}>
             <nav>
-                <ul onClick={() => router.back()}>
+                <ul>
+                    <li>
+                        상품등록
+                    </li>
                     <li>
                         <Image
-                            src="/images/arrowLeft.png"
-                            alt="arrowLeft"
-                            className={style.arrowLeft}
+                            src="/images/arrowRight.png"
+                            alt="arrowRight"
+                            className={style.arrowRight}
                             width={41}
                             height={41}
                         />
                     </li>
-                    <li>
-                        이전단계
-                    </li>
                 </ul>
-            </nav>
+            </nav>  
         </div>
     </footer>
   )

@@ -12,14 +12,13 @@ import axios from 'axios';
 import Image from "next/image";
 import { formatMoney } from "@/components/globalfunctions/formatMoney";
 import Cart from "../cart-list/Cart";
-import Footer from "@/components/Footer";
 import { mapToBE } from "@/components/globalfunctions/mapToBE";
-
 // import {products, carts} from '../../data/productsAndCarts.json';
 // import res  from '../../data/products-data.json';
 import CartItem from "../cart-list/CartItem";
 import { NextPageWithLayout } from "../_app";
 import FooterPreBtn from "@/components/FooterPreBtn";
+import FooterAddCartBtn from "@/components/FooterAddCartBtn";
 
 const Products : NextPageWithLayout = () => {
     const router = useRouter();
@@ -192,26 +191,15 @@ const Products : NextPageWithLayout = () => {
                     ))
                 }
             </div>
-            
-
-            {/* <Link href='/'>
-                <Footer />
-            </Link> */}
-            <FooterPreBtn />
-            <span style={{ }}>
-                <Link href="/abc">
-                    <button style={{ padding: "20px", fontSize: "20px", marginRight: "700px", paddingRight: "20px", marginLeft: "20px"}}
-                    onClick={() => router.back()}
-                    >
-                        이전단계
-                    </button>
+        
+            <div className={style.footer}>
+                <FooterPreBtn />
+                <Link href="/cart-list">
+                <div onClick={handleCheckCartBtnClick}>
+                    <FooterAddCartBtn />
+                </div>
                 </Link>
-                <Link href = '/cart-list'>
-                    
-                    <button style={{ padding: "20px", fontSize: "20px"}}
-                    onClick={handleCheckCartBtnClick}>상품확인</button>
-                </Link>
-            </span>
+            </div>
 
             <div className={style.cartList}>
                 {

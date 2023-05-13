@@ -28,21 +28,21 @@ export default function Cart(
     }, [cartList])
     return (
         <div className={style.cartItemWrap}>
+
             <div className={style.productImgContainer}>                
                 <img src={props.item.image_url}/>
             </div>
+
             <div className={style.cartCount}>
                 {props.item.cartQty}
             </div>
+
             <div className={style.cartItemName}>
                 {props.item.name}
             </div>
-            {/* <div>
-                <p style={{ width: "110px", margin: "0px", wordWrap:"break-word"}}>{props.item.name}</p>
-            </div>
-            */}
+
             <div className={style.cartDelBtn} onClick={handleDelCartBtnClick}>
-                <img src="/images/deleteBtn.png" />
+                <img src="/images/deleteBtn.png" alt="cart item delete button" />
             </div>
     
         </div>

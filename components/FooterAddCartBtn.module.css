@@ -1,0 +1,41 @@
+.footerMenu {
+    display: flex;
+}
+
+.footerMenu ul {
+    display: flex;
+}
+
+.footerMenu ul li {
+    list-style: none;
+    color : #5D436C;
+    font-size: 35px;
+    font-weight: bold;
+    padding-left: 13px;
+}
+
+.next_btn {
+    background-color: #56565B;
+    width: 622px;
+    height: 83px;
+    border-radius: 25px;
+    box-sizing: border-box;
+    padding-top: 12px;
+    display: flex;
+    padding-top: 20px;
+    margin-left: 50px;
+}
+
+.next_btn ul li {
+    color: #FFFFFF;
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.next_btn ul li:first-child {
+    padding-left: 410px;
+}
+
+.next_btn ul li:last-child {
+    padding-left: 30px;
+}
