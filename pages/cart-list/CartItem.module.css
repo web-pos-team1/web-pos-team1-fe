@@ -19,8 +19,7 @@
 .cartItemRow td {
     text-align: center;
     font-size: 22px;
-    padding: 0 23px;
-    /* border: black 1px solid; */
+    padding: 0 22px;;
 }
 
 .qtyController {

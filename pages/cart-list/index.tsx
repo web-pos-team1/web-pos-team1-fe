@@ -3,13 +3,15 @@ import CartItem from './CartItem';
 import { CartType } from '@/types/CartType';
 import { withRouter } from 'next/router';
 import style from './CartList.module.css';
+import Image from 'next/image';
 import Head from 'next/head';
-import Layout from '@/components/layouts/layout';
 import Link from 'next/link';
 import { NextPageWithLayout } from "../_app";
 import { useRouter } from 'next/router';
 import PointGuideModal from '@/components/PointguideModal';
 import FooterPreBtn from '@/components/FooterPreBtn';
+import Layout from '@/components/layouts/layout';
+import CartListLayout from '@/components/layouts/cartListLayout';
 
 const CartList : NextPageWithLayout = () => {
     const rt = useRouter();
@@ -89,7 +91,7 @@ const CartList : NextPageWithLayout = () => {
                                 <th>수량</th>
                                 <th>단가</th>
                                 <th>금액</th>
-                                <th>삭제</th>
+                                <th></th>
                             </tr>
                     </thead>
                     <tbody> 
@@ -110,15 +112,60 @@ const CartList : NextPageWithLayout = () => {
                     </tbody>
                 </table>
             <div className={style.footer}>    
-                    <div onClick={handlePrevBtnClick}>
-                        <FooterPreBtn />
+                    <div>
+                        <div onClick={handlePrevBtnClick}>
+                            <nav>
+                                <ul className={style.pre_btn}>
+                                    <li>
+                                        <Image
+                                            src="/images/arrowLeft.png"
+                                            alt="arrowLeft"
+                                            className={style.arrowLeft}
+                                            width={41}
+                                            height={41}
+                                        />
+                                    </li>
+                                    <li>
+                                        이전단계
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
                     
-                    <button onClick={handleModal}>
-                        결제하기
-                    </button>
+                    <div onClick={handleModal}>
+                            <nav>
+                                <ul className={style.next_btn}>
+                                    <li>
+                                        ₩ 11,050
+                                        {/* props로 받을것 */}
+                                    </li>
+                                    <li>
+                                        <Image
+                                            src="/images/won.png"
+                                            alt="won"
+                                            className={style.won}
+                                            width={50}
+                                            height={50}
+                                        />
+                                    </li>
+                                    <li>
+                                        결제하기
+                                    </li>
+                                    <li>
+                                        <Image
+                                            src="/images/arrowRight.png"
+                                            alt="arrowRight"
+                                            className={style.arrowRight}
+                                            width={41}
+                                            height={41}
+                                        />
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
             </div>
-        </div>
         </>
     )
 
@@ -127,9 +174,9 @@ const CartList : NextPageWithLayout = () => {
 CartList.getLayout = function getLayout(page: React.ReactNode) {
     return(
       <>
-        <Layout>
+        <CartListLayout>
             {page}
-        </Layout>
+        </CartListLayout>
       </>
     )
   }
