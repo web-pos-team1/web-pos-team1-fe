@@ -175,8 +175,8 @@ const Products : NextPageWithLayout = () => {
                             <Image 
                                 src={item.image_url} 
                                 alt={item.description} 
-                                width={200}
-                                height={200}
+                                width={210}
+                                height={210}
                             />
                             <p className={style.productItemName}>
                                 {item.name}
