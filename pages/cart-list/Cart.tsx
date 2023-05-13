@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState, useEffect, Fragment } from "react";
 import style from "./Cart.module.css";
 
+
 export default function Cart(
     props: {
         item: CartType,
@@ -33,12 +34,16 @@ export default function Cart(
             <div className={style.cartCount}>
                 {props.item.cartQty}
             </div>
+            <div className={style.cartItemName}>
+                {props.item.name}
+            </div>
             {/* <div>
                 <p style={{ width: "110px", margin: "0px", wordWrap:"break-word"}}>{props.item.name}</p>
             </div>
             */}
-            
-            <span className={style.cartDelBtn} onClick={handleDelCartBtnClick}>x</span>
+            <div className={style.cartDelBtn} onClick={handleDelCartBtnClick}>
+                <img src="/images/deleteBtn.png" />
+            </div>
     
         </div>
     )

@@ -182,7 +182,7 @@ const Products : NextPageWithLayout = () => {
                                 {item.name}
                             </p>
                             <p className={style.productItemPrice}>
-                                {formatMoney(item.price)}
+                                {formatMoney(item.price)}<span>원</span>
                             </p> 
                             <p className={item.isEvent === true ? `${style.eventProductItem}` : `${style.notEventProductItem}`}>
                                 기획

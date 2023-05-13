@@ -16,14 +16,15 @@
     border-radius: 14px;
     margin-top: 20px;
     margin-left: 12px;
-    margin-bottom: 37px;
+    /* margin-bottom: 37px; */
 }
 
 .categoryNav ul {
     /* display: flex;
     font-size: 17px; */
     display: flex;
-    font-size: 28px;
+    font-size: 23px;
+    /* font-size: 28px; */
     justify-content: center;
     align-items: center;
 }
@@ -39,6 +40,7 @@
     list-style: none;
     margin: 15px 0;
     font-weight: 500;
+    /* justify-content: space-around; */
     justify-content: center;
     align-items: center;
     width: 172px;
@@ -58,31 +60,33 @@ li.deactive {
 }
 
 .productList {
-    padding-left: 20px;
+    /* padding-left: 20px; */
     width: 1020px;
     height: 760px;
     display: flex;
     justify-content: center;
     flex-direction: row;
-    flex-wrap: wrap;   
+    flex-wrap: wrap;
+    box-sizing: border-box;
 }
 
 .productItem {
     /* padding-left: 30px;
-    height: 50px;
-    transition-duration: 0.5s; */
+    height: 50px; */
+    transition-duration: 0.5s;
     padding: 0 14px;
 }
 
 .productItem img {
     border-radius: 30px;
     border : solid 3px #4C304F;
+    margin-top: 35px;
+    /* margin-top: 30px; */
 }
 
 .productItemName {
     width: 210px;
     text-align: center;
-    padding: 3px;
     font-weight: bold;
     font-size: 22px;
     padding-top: 20px;
@@ -93,12 +97,23 @@ li.deactive {
     padding: 3px;
     text-align: center;
     font-size: 22px;
+    color: #4C304F;
+    font-weight: bold;
+    Padding-top: 10px;
+}
+
+.productItemPrice span {
+    font-size: 15px;
+    padding-left: 1px;
+    font-weight: bold;
 }
 
 .eventProductItem {
     color: red;
+    font-size: 15px;
     font-weight: bold;
     text-align: center;
+    /* padding: 11px 0; */
 }
 
 .notEventProductItem {
@@ -106,20 +121,35 @@ li.deactive {
 }
 
 .cartList {
-    width: 95%;
-    padding: 1rem 0;
+    /* width: 95%; */
+    /* padding: 1rem 1rem; */
     margin: 0 auto;
     display: flex;
     overflow: auto;
     white-space: nowrap;
     justify-content: flex-start;
     align-items: center;
+    width: 942px;
+    height: 281px;
+    border :#E0C798 solid 5px;
+    border-radius: 30px;
+    box-sizing: border-box;
 }
+
+.cartList img {
+    width: 140px;
+    height: 140px;
+    border-radius: 30px;
+    border : solid 3px #4C304F;
+    /* margin-bottom: 0.5rem; */
+}
+
 .cartList::-webkit-scrollbar {
     display: none;
 }
 
 .cartWrap {
-    margin-right: 0.5rem;
+    /* margin-right: 0.5rem; */
     height: 200px;
+    padding: 0 2rem;
 }
