@@ -11,7 +11,7 @@ export const transeData = [
   },
   {
     id: 3,
-    key: "/carts",
+    key: "/cart-list",
     value: "상품 확인"
   },
   {

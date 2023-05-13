@@ -5,11 +5,11 @@ import { withRouter } from 'next/router';
 import style from './CartList.module.css';
 import Head from 'next/head';
 import Layout from '@/components/layouts/layout';
-import styles from '@/styles/Carts.module.css';
 import Link from 'next/link';
 import { NextPageWithLayout } from "../_app";
 import { useRouter } from 'next/router';
 import PointGuideModal from '@/components/PointguideModal';
+import FooterPreBtn from '@/components/FooterPreBtn';
 
 const CartList : NextPageWithLayout = () => {
     const rt = useRouter();
@@ -84,7 +84,7 @@ const CartList : NextPageWithLayout = () => {
                 <table className={style.cartTable}>
                     <thead className={style.cartTableHead}>
                             <tr >
-                                <th>상품이미지</th>
+                                {/* <th>상품이미지</th> */}
                                 <th>상품명</th>
                                 <th>수량</th>
                                 <th>단가</th>
@@ -109,17 +109,15 @@ const CartList : NextPageWithLayout = () => {
                         }
                     </tbody>
                 </table>
-            <span style={{ }}>
-                <Link href="/">
-                    <button style={{ padding: "20px", fontSize: "20px", marginRight: "700px", paddingRight: "20px", marginLeft: "20px"}}
-                     onClick={handlePrevBtnClick}>
-                        이전단계
-                    </button>
-                </Link>
+            <div className={style.footer}>    
+                    <div onClick={handlePrevBtnClick}>
+                        <FooterPreBtn />
+                    </div>
                     
-                    <button style={{ padding: "20px", fontSize: "20px"}}
-                    onClick={handleModal}>결제하기</button>
-            </span>
+                    <button onClick={handleModal}>
+                        결제하기
+                    </button>
+            </div>
         </div>
         </>
     )

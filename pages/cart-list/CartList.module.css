@@ -1,17 +1,21 @@
 .cartTable {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 1000px;   
-    align-items: center;
-    
+    width: 961px;
+    margin: 0 auto;
+    border-spacing: 0;
 }
 
 .cartTableHead {
     background-color: #4C304F;
     color: white;
+    
+    font-size: 22px;
 }
 
-.cartItemRow {
+.cartTableHead th {
+    padding: 24px 0;
+}
+
+/* .cartItemRow {
     align-items: center;
 }
 
@@ -19,5 +23,5 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /* position: relative; */
-}
+    position: relative; 이건 원래 주석처리 돼있었음
+} */
