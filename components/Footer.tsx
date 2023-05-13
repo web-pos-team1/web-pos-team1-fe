@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import router, { useRouter } from 'next/router';
 import React from 'react'
 import style from './Footer.module.css';
 import Image from 'next/image'
@@ -10,7 +10,7 @@ export default function Footer() {
     <footer className={style.footerMenu}>
         <div className={style.pre_btn}>
             <nav>
-                <ul>
+                <ul onClick={() => router.back()}>
                     <li>
                         <Image
                             src="/images/arrowLeft.png"
@@ -31,9 +31,10 @@ export default function Footer() {
             <nav>
                 <ul>
                     <li>
-                        ₩ 11,050
+                        결제금액
                     </li>
                     <li>
+                        
                         <Image
                             src="/images/won.png"
                             alt="won"
@@ -43,17 +44,8 @@ export default function Footer() {
                         />
                     </li>
                     <li>
-                        결제하기
+                        ₩ 11,050
                         {/* props로 받을것 */}
-                    </li>
-                    <li>
-                        <Image
-                            src="/images/arrowRight.png"
-                            alt="arrowRight"
-                            className={style.arrowRight}
-                            width={41}
-                            height={41}
-                        />
                     </li>
                 </ul>
             </nav>  

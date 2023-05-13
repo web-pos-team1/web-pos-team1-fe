@@ -52,9 +52,9 @@ export default function ShoppingBagLayout(props: { children: React.ReactNode }) 
         <Location />
         {props.children}
        
-        <Link href="/ssgService">
+        {/* <Link href="/ssgService"> */}
           <Footer />
-        </Link>
+        {/* </Link> */}
       </div>
       </>
     );

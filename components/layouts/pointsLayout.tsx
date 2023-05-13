@@ -65,9 +65,9 @@ export default function PointsLayout(props:{children:React.ReactNode}) {
                     </Link>
                 ))}
             </div>
-            <Link href='/carts'>
+            {/* <Link href='/cart-list'> */}
                 <Footer />
-            </Link>
+            {/* </Link> */}
         </div>
     )
 }

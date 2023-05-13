@@ -23,9 +23,9 @@ export default function ssgServiceLayout(props:{children:React.ReactNode}) {
                 <Button src="/images/deliveryService.png" alt="purchase recycling bag" text="배송" onClick={() => console.log('btn 2')}/>
                 <Button src="/images/giftService.png" alt="pass this step" text="선물" onClick={() => console.log('btn 3')}/>
             </div>
-            <Link href='/points'>
+            {/* <Link href='/points'> */}
             <Footer />
-            </Link>
+            {/* </Link> */}
         </div>
     )
 }
