@@ -1,10 +1,10 @@
 import router, { useRouter } from 'next/router';
 import React from 'react'
-import style from './FooterAddCartBtn.module.css';
+import style from './FooterCheckCartBtn.module.css';
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function FooterAddCartBtn() {
+export default function FooterCheckCartBtn() {
 
   return (
     <footer className={style.footerMenu}>

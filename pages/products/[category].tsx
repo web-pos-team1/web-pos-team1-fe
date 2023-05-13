@@ -18,7 +18,7 @@ import { mapToBE } from "@/components/globalfunctions/mapToBE";
 import CartItem from "../cart-list/CartItem";
 import { NextPageWithLayout } from "../_app";
 import FooterPreBtn from "@/components/FooterPreBtn";
-import FooterAddCartBtn from "@/components/FooterAddCartBtn";
+import FooterCheckCartBtn from "@/components/FooterCheckCartBtn";
 
 const Products : NextPageWithLayout = () => {
     const router = useRouter();
@@ -196,7 +196,7 @@ const Products : NextPageWithLayout = () => {
                 <FooterPreBtn />
                 <Link href="/cart-list">
                 <div onClick={handleCheckCartBtnClick}>
-                    <FooterAddCartBtn />
+                    <FooterCheckCartBtn />
                 </div>
                 </Link>
             </div>
