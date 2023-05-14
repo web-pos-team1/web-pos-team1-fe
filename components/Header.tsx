@@ -7,6 +7,9 @@ import HeaderButton from "@/components/HeaderButton";
 import { transeData } from '@/data/translations';
 import Modal from "@/components/Modal";
 import CallStaffModal from './CallStaffModal';
+import GiftCardNumberModal from './GiftCardNumberModal';
+import GiftModal from './GiftModal';
+import PhoneNumberModal from './PhoneNumberModal';
 
 export default function Header() {
 
