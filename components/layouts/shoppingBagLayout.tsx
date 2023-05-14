@@ -6,7 +6,7 @@ import Link from "next/link";
 import Text2Button from "@/components/Text2Button";
 import Text from "@/components/Text";
 import style from "./shoppingBagLayout.module.css"
-import GiftCardModal from "../GiftCardModal";
+import GiftCardModal from "../GiftGuideCardModal";
 
 // export default function ShoppingBagLayout(props:{children:React.ReactNode}) {
 

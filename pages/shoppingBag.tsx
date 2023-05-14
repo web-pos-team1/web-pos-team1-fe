@@ -8,17 +8,17 @@ import { NextPageWithLayout } from './_app'
 import Text2Button from "@/components/Text2Button";
 import Text from "@/components/Text";
 import style from "../components/layouts/shoppingBagLayout.module.css"
-import GiftCardModal from '@/components/GiftCardModal'
+import GiftCardGuideModal from '@/components/GiftGuideCardModal'
 import { useState } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
 const Shoppingbag: NextPageWithLayout = () => {
 
-  const [showGiftCardModal, setShowGiftCardModal] = useState<boolean>(false);
+  const [showGiftCardGuideModal, setShowGiftCardGuideModal] = useState<boolean>(false);
   
     const handleModal = () => {
-      setShowGiftCardModal(true);
+      setShowGiftCardGuideModal(true);
     };
   
 
@@ -31,7 +31,7 @@ const Shoppingbag: NextPageWithLayout = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-      <GiftCardModal show={showGiftCardModal} onClose={setShowGiftCardModal} />
+      <GiftCardGuideModal show={showGiftCardGuideModal} onClose={setShowGiftCardGuideModal} />
 
       <Text text="필요하신 쇼핑백을 선택해 주세요" />
         <div className={style.upperBtn}>

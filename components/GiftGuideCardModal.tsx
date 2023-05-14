@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
-import style from "./GiftCardModal.module.css";
+import style from "./GiftCardGuideModal.module.css";
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function GiftCardModal(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
+export default function GiftCardGuideModal(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
 
 
     if(!props.show) return null
