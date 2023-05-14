@@ -8,7 +8,7 @@ import { NextPageWithLayout } from './_app'
 import Text2Button from "@/components/Text2Button";
 import Text from "@/components/Text";
 import style from "../components/layouts/shoppingBagLayout.module.css"
-import GiftCardGuideModal from '@/components/GiftGuideCardModal'
+import GiftCardGuideModal from '@/components/GiftCardGuideModal'
 import { useState } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
