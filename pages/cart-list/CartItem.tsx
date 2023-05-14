@@ -89,5 +89,6 @@ export default function CartItem(
                 </span>   
             </td>
         </tr>
+        
     )
 }

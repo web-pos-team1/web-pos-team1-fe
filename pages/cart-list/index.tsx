@@ -5,12 +5,9 @@ import { withRouter } from 'next/router';
 import style from './CartList.module.css';
 import Image from 'next/image';
 import Head from 'next/head';
-import Link from 'next/link';
 import { NextPageWithLayout } from "../_app";
 import { useRouter } from 'next/router';
 import PointGuideModal from '@/components/PointguideModal';
-import FooterPreBtn from '@/components/FooterPreBtn';
-import Layout from '@/components/layouts/layout';
 import CartListLayout from '@/components/layouts/cartListLayout';
 
 const CartList : NextPageWithLayout = () => {
@@ -113,7 +110,7 @@ const CartList : NextPageWithLayout = () => {
                 </table>
             <div className={style.footer}>    
                     <div>
-                        <div onClick={handlePrevBtnClick}>
+                        <button onClick={handlePrevBtnClick}>
                             <nav>
                                 <ul className={style.pre_btn}>
                                     <li>
@@ -130,10 +127,10 @@ const CartList : NextPageWithLayout = () => {
                                     </li>
                                 </ul>
                             </nav>
-                        </div>
+                        </button>
                     </div>
                     
-                    <div onClick={handleModal}>
+                    <button onClick={handleModal}>
                             <nav>
                                 <ul className={style.next_btn}>
                                     <li>
@@ -163,7 +160,7 @@ const CartList : NextPageWithLayout = () => {
                                     </li>
                                 </ul>
                             </nav>
-                        </div>
+                        </button>
                     </div>
             </div>
         </>
