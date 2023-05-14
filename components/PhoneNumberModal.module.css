@@ -3,10 +3,11 @@
     width: 756px;
     height: 900px;
     border-radius: 30px;
-    padding: 20px;
+    padding: 25px;
     position: relative;
     z-index: 200;
     box-sizing: border-box;
+    
 }
 
 .overlay {

@@ -6,7 +6,6 @@ export default function Layout(props:{children:React.ReactNode}) {
     return (
         <div>
             <Header />
-            <PhoneNumber />
             {props.children}
         </div>
     )

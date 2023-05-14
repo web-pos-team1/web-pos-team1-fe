@@ -1,33 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import Location from "@/components/Location";
 import Header from "@/components/Header"
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import Button from "@/components/Button";
 import Text from "@/components/Text";
+import PhoneNumberModal from "../PhoneNumberModal";
 
 export default function PointsLayout(props:{children:React.ReactNode}) {
+    
+    const [showPhoneNumberModal, setShowPhoneNumberModal] = useState<boolean>(false);
     
     const buttons = [
         {
             src: "/images/dial.png", 
             alt: "enter the phone number", 
             text: "전화번호 입력",
-            link: "/",
-            onClick: () => console.log('btn 1')
+            link: "",
+            onClick: () => setShowPhoneNumberModal(true)
         },
         {
             src: "/images/barcode.png", 
             alt: "scanning barcode", 
             text: "바코드 스캔",
-            link: "/",
+            link: "",
             onClick: () => console.log('btn 2')
         },
         {
             src: "/images/pointSensing.png", 
             alt: "sensing the point card", 
             text: "포인트카드 센싱",
-            link: "/",
+            link: "",
             onClick: () => console.log('btn 3')
         },
         {
@@ -39,8 +42,14 @@ export default function PointsLayout(props:{children:React.ReactNode}) {
         }
     ];
 
+    const handleModal = () => {
+        console.log('modal')
+        setShowPhoneNumberModal(true)
+      }
+
     return (
-        <div>
+        <>
+        <PhoneNumberModal show={showPhoneNumberModal} onClose={setShowPhoneNumberModal} />
             <Header />
             <Location />
             {props.children}
@@ -68,6 +77,6 @@ export default function PointsLayout(props:{children:React.ReactNode}) {
             {/* <Link href='/cart-list'> */}
                 <Footer />
             {/* </Link> */}
-        </div>
+        </>
     )
 }

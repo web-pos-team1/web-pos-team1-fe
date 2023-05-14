@@ -7,7 +7,6 @@ import HeaderButton from "@/components/HeaderButton";
 import { transeData } from '@/data/translations';
 import Modal from "@/components/Modal";
 import CallStaffModal from './CallStaffModal';
-import PhoneNumberModal from './PhoneNumberModal';
 
 export default function Header() {
 
@@ -59,7 +58,7 @@ export default function Header() {
 
   return (
     <>
-    <PhoneNumberModal show={showModal} onClose={setShowModal} />
+    <Modal show={showModal} onClose={setShowModal} />
     <CallStaffModal show={showCallStaffModal} onClose={setShowCallStaffModal} />
     <header className={style.headerMenu}>
       
