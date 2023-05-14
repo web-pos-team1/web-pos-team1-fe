@@ -5,7 +5,7 @@
     font-size: 40px;
     text-align: center;
     color: #4C304F;
-    /* background-color: #D9D9D9; */
+    background-color: #D4D8DB;
     margin-bottom: 35px;
     outline: none;
 }
@@ -23,13 +23,13 @@
     grid-gap: 25px;
     grid-template-columns: repeat(3, 1fr);
     margin: 10px 350px;
-    padding-bottom: 71px;
+    padding-bottom: 50px;
 }
 
 .NumberPad button {
     background-color: #4C304F;
     color: #ffffff;
-    font-size: 40px;
+    font-size: 38px;
     width: 80px;
     height: 80px;
     border-radius: 50%;

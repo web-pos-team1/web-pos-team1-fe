@@ -4,10 +4,10 @@ import style from './Header.module.css';
 import Image from 'next/image'
 import Link from 'next/link'
 import HeaderButton from "@/components/HeaderButton";
-// import * as translations from '../data/translations';
 import { transeData } from '@/data/translations';
 import Modal from "@/components/Modal";
 import CallStaffModal from './CallStaffModal';
+import PhoneNumberModal from './PhoneNumberModal';
 
 export default function Header() {
 
@@ -59,7 +59,7 @@ export default function Header() {
 
   return (
     <>
-    <Modal show={showModal} onClose={setShowModal} />
+    <PhoneNumberModal show={showModal} onClose={setShowModal} />
     <CallStaffModal show={showCallStaffModal} onClose={setShowCallStaffModal} />
     <header className={style.headerMenu}>
       
