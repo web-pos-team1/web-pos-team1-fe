@@ -10,6 +10,7 @@ import CallStaffModal from './CallStaffModal';
 import GiftCardNumberModal from './GiftCardNumberModal';
 import GiftModal from './GiftModal';
 import PhoneNumberModal from './PhoneNumberModal';
+import DeliveryModal from './DeliveryModal';
 
 export default function Header() {
 
@@ -61,7 +62,7 @@ export default function Header() {
 
   return (
     <>
-    <Modal show={showModal} onClose={setShowModal} />
+    <DeliveryModal show={showModal} onClose={setShowModal} />
     <CallStaffModal show={showCallStaffModal} onClose={setShowCallStaffModal} />
     <header className={style.headerMenu}>
       

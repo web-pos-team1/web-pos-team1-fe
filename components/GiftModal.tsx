@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
 import style from './GiftModal.module.css'
+import Link from 'next/link';
 
 export default function GiftModal(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
 
@@ -41,6 +42,7 @@ export default function GiftModal(props:{show:boolean, onClose:Dispatch<SetState
           <input type="text" />
         </div>
 
+      <Link href="/payments">
         <div className={style.confirmBtn}>
           <Image 
             src="/images/checkPurple.png"
@@ -50,6 +52,7 @@ export default function GiftModal(props:{show:boolean, onClose:Dispatch<SetState
             />
           <p>확인</p>
           </div>
+      </Link>
       </div>
     </div>
   );
