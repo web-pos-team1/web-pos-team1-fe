@@ -62,7 +62,7 @@ export default function Header() {
 
   return (
     <>
-    <DeliveryModal show={showModal} onClose={setShowModal} />
+    <Modal show={showModal} onClose={setShowModal} />
     <CallStaffModal show={showCallStaffModal} onClose={setShowCallStaffModal} />
     <header className={style.headerMenu}>
       

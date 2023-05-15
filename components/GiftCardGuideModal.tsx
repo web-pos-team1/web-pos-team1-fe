@@ -2,8 +2,20 @@ import { Dispatch, SetStateAction } from "react";
 import style from "./GiftCardGuideModal.module.css";
 import Image from 'next/image';
 import Link from 'next/link';
+import GiftCardNumberModal from "./GiftCardNumberModal";
+import React from "react";
 
 export default function GiftCardGuideModal(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
+
+    const [showGiftCardNumberModal,setShowGiftCardNumberModal] = React.useState<boolean>(false);
+
+    const handleGiftCardNumberModal = () => {
+        setShowGiftCardNumberModal(true)
+    };
+
+    const handleGiftCardNumberModalClose = () => {
+        setShowGiftCardNumberModal(false)
+    };
 
 
     if(!props.show) return null
@@ -34,7 +46,8 @@ export default function GiftCardGuideModal(props:{show:boolean, onClose:Dispatch
 
                 <div className={style.footer}>
                 {/* <Link href='/points'> 링크 대신에 모달창이 뜨도록 모바일 쿠폰 사용 모달창 설정하기*/}
-                    <button>
+                    <button onClick={handleGiftCardNumberModal}>
+                        <GiftCardNumberModal show={showGiftCardNumberModal} onClose={handleGiftCardNumberModalClose}/>
                         <Image
                             src="/images/checkWhite.png"
                             alt="confirm"

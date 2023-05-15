@@ -4,6 +4,7 @@ import style from './DeliveryModal.module.css'
 import Link from 'next/link';
 import DaumPostcode from 'react-daum-postcode';
 import Modal from 'react-modal';
+import DeliveryTimeModal from './DeliveryTimeModal';
 
 export default function DeliveryModal(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
 
@@ -13,6 +14,7 @@ export default function DeliveryModal(props:{show:boolean, onClose:Dispatch<SetS
   const [isOpenAddress, setIsOpenAddress] = useState<boolean>(false);
   const [detailAddress, setDetailAddress] = useState<string>("");
   const [postCode, setPostCode] = useState<string>("");
+  const [showDeliveryTimeModal, setShowDeliveryTimeModal] = useState<boolean>(false);
 
     if(!props.show) return null
 
@@ -28,6 +30,10 @@ export default function DeliveryModal(props:{show:boolean, onClose:Dispatch<SetS
       setAddress(data.roadAddress);
       setPostCode(data.zonecode);
       setIsOpenAddress(false); 
+  }
+
+  const showDeliveryTimeModalHandler = () => {
+    setShowDeliveryTimeModal(true);
   }
 
   return (
@@ -58,13 +64,13 @@ export default function DeliveryModal(props:{show:boolean, onClose:Dispatch<SetS
           </div>
           <hr />
 
-          <div className={style.inputBox}>
+          <div className={style.nameInputBox}>
                 <label>받는 분</label>
                 <input value={name} onChange={(e) => setName(e.target.value)} type="text"/>
           </div>
           <hr />
 
-          <div className={style.inputBox}>
+          <div className={style.phoneInputBox}>
             <label>연락처</label>
 
             <span>
@@ -82,7 +88,7 @@ export default function DeliveryModal(props:{show:boolean, onClose:Dispatch<SetS
           </div>
           <hr />
 
-          <div className={style.inputBox}>
+          <div className={style.addressInputBox}>
                 <label>주소</label>
                 <input className={style.addressInput} value={address} readOnly type="text" onClick={toggleAddress}/>
                 <Modal isOpen={isOpenAddress} ariaHideApp={false}>
@@ -127,8 +133,10 @@ export default function DeliveryModal(props:{show:boolean, onClose:Dispatch<SetS
         </label>
       </div>
 
-      <Link href="/payments">
-        <div className={style.confirmBtn}>
+      <button>취소</button>
+      {/* <Link href="/payments"> */}
+      <DeliveryTimeModal show={showDeliveryTimeModal} onClose={setShowDeliveryTimeModal}/>
+        <div onClick={showDeliveryTimeModalHandler} className={style.confirmBtn}>
           <Image 
             src="/images/checkPurple.png"
             alt="confirm button"
@@ -137,7 +145,7 @@ export default function DeliveryModal(props:{show:boolean, onClose:Dispatch<SetS
             />
           <p>확인</p>
           </div>
-      </Link>
+      {/* </Link> */}
       </div>
     </div>
   );
