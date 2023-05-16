@@ -12,13 +12,13 @@ import axios from 'axios';
 import Image from "next/image";
 import { formatMoney } from "@/components/globalfunctions/formatMoney";
 import Cart from "../cart-list/Cart";
-import Footer from "@/components/Footer";
 import { mapToBE } from "@/components/globalfunctions/mapToBE";
-
 // import {products, carts} from '../../data/productsAndCarts.json';
 // import res  from '../../data/products-data.json';
 import CartItem from "../cart-list/CartItem";
 import { NextPageWithLayout } from "../_app";
+import FooterPreBtn from "@/components/FooterPreBtn";
+import FooterCheckCartBtn from "@/components/FooterCheckCartBtn";
 
 const Products : NextPageWithLayout = () => {
     const router = useRouter();
@@ -175,14 +175,14 @@ const Products : NextPageWithLayout = () => {
                             <Image 
                                 src={item.image_url} 
                                 alt={item.description} 
-                                width={200}
-                                height={200}
+                                width={210}
+                                height={210}
                             />
                             <p className={style.productItemName}>
                                 {item.name}
                             </p>
                             <p className={style.productItemPrice}>
-                                {formatMoney(item.price)}
+                                {formatMoney(item.price)}<span>원</span>
                             </p> 
                             <p className={item.isEvent === true ? `${style.eventProductItem}` : `${style.notEventProductItem}`}>
                                 기획
@@ -191,25 +191,15 @@ const Products : NextPageWithLayout = () => {
                     ))
                 }
             </div>
-            
-
-            {/* <Link href='/'>
-                <Footer />
-            </Link> */}
-            <span style={{ }}>
-                <Link href="/abc">
-                    <button style={{ padding: "20px", fontSize: "20px", marginRight: "700px", paddingRight: "20px", marginLeft: "20px"}}
-                    onClick={() => router.back()}
-                    >
-                        이전단계
-                    </button>
+        
+            <div className={style.footer}>
+                <FooterPreBtn />
+                <Link href="/cart-list">
+                <div onClick={handleCheckCartBtnClick}>
+                    <FooterCheckCartBtn />
+                </div>
                 </Link>
-                <Link href = '/cart-list'>
-                    
-                    <button style={{ padding: "20px", fontSize: "20px"}}
-                    onClick={handleCheckCartBtnClick}>상품확인</button>
-                </Link>
-            </span>
+            </div>
 
             <div className={style.cartList}>
                 {
@@ -224,7 +214,7 @@ const Products : NextPageWithLayout = () => {
                                     setTotalPrice={setTotalPrice}
                                 />
                             </div>
-                        )) : <div>선택하신 상품이 없습니다.</div>
+                        )) : <div></div>
                     }
             </div>  
         </div>

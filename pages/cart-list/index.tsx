@@ -3,20 +3,19 @@ import CartItem from './CartItem';
 import { CartType } from '@/types/CartType';
 import { withRouter } from 'next/router';
 import style from './CartList.module.css';
+import Image from 'next/image';
 import Head from 'next/head';
-import Layout from '@/components/layouts/layout';
-import styles from '@/styles/Carts.module.css';
-import Link from 'next/link';
 import { NextPageWithLayout } from "../_app";
 import { useRouter } from 'next/router';
-import PointGuideModal from '@/components/PointGuideModal';
+import PointGuideModal from '@/components/PointguideModal';
+import CartListLayout from '@/components/layouts/cartListLayout';
 
 const CartList : NextPageWithLayout = () => {
     const rt = useRouter();
     
     const [delProductId, setDelProductId] = useState<number>(0);
     const [totalPrice, setTotalPrice] = useState<number>(0);
-    const [showModal, setShowModal] = useState<boolean>(false);
+    const [showPointGuideModal, setShowPointGuideModal] = useState<boolean>(false);
 
     // const [cartList, setCartList] = useState<CartType[]>(parseCartList);
 
@@ -68,12 +67,12 @@ const CartList : NextPageWithLayout = () => {
 
     const handleModal = () => {
         console.log('modal')
-        setShowModal(true)
+        setShowPointGuideModal(true)
       }
 
     return (
         <>
-        <PointGuideModal show={showModal} onClose={setShowModal} />
+        <PointGuideModal show={showPointGuideModal} onClose={setShowPointGuideModal} />
         <div>
             <Head>
                 <title>POS products list</title>
@@ -84,12 +83,12 @@ const CartList : NextPageWithLayout = () => {
                 <table className={style.cartTable}>
                     <thead className={style.cartTableHead}>
                             <tr >
-                                <th>상품이미지</th>
+                                {/* <th>상품이미지</th> */}
                                 <th>상품명</th>
                                 <th>수량</th>
                                 <th>단가</th>
                                 <th>금액</th>
-                                <th>삭제</th>
+                                <th></th>
                             </tr>
                     </thead>
                     <tbody> 
@@ -109,20 +108,61 @@ const CartList : NextPageWithLayout = () => {
                         }
                     </tbody>
                 </table>
-            <span style={{ }}>
-                <Link href="/">
-                    <button style={{ padding: "20px", fontSize: "20px", marginRight: "700px", paddingRight: "20px", marginLeft: "20px"}}
-                     onClick={handlePrevBtnClick}>
-                        이전단계
-                    </button>
-                </Link>
-                <Link href = '/cart-list'>
+            <div className={style.footer}>    
+                    <div>
+                        <button onClick={handlePrevBtnClick}>
+                            <nav>
+                                <ul className={style.pre_btn}>
+                                    <li>
+                                        <Image
+                                            src="/images/arrowLeft.png"
+                                            alt="arrowLeft"
+                                            className={style.arrowLeft}
+                                            width={41}
+                                            height={41}
+                                        />
+                                    </li>
+                                    <li>
+                                        이전단계
+                                    </li>
+                                </ul>
+                            </nav>
+                        </button>
+                    </div>
                     
-                    <button style={{ padding: "20px", fontSize: "20px"}}
-                    onClick={handleModal}>결제하기</button>
-                </Link>
-            </span>
-        </div>
+                    <button onClick={handleModal}>
+                            <nav>
+                                <ul className={style.next_btn}>
+                                    <li>
+                                        ₩ 11,050
+                                        {/* props로 받을것 */}
+                                    </li>
+                                    <li>
+                                        <Image
+                                            src="/images/won.png"
+                                            alt="won"
+                                            className={style.won}
+                                            width={50}
+                                            height={50}
+                                        />
+                                    </li>
+                                    <li>
+                                        결제하기
+                                    </li>
+                                    <li>
+                                        <Image
+                                            src="/images/arrowRight.png"
+                                            alt="arrowRight"
+                                            className={style.arrowRight}
+                                            width={41}
+                                            height={41}
+                                        />
+                                    </li>
+                                </ul>
+                            </nav>
+                        </button>
+                    </div>
+            </div>
         </>
     )
 
@@ -131,9 +171,9 @@ const CartList : NextPageWithLayout = () => {
 CartList.getLayout = function getLayout(page: React.ReactNode) {
     return(
       <>
-        <Layout>
+        <CartListLayout>
             {page}
-        </Layout>
+        </CartListLayout>
       </>
     )
   }

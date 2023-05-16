@@ -1,0 +1,151 @@
+.modal {
+    background-color: #D4D8DB;
+    width: 756px;
+    height: 900px;
+    border-radius: 30px;
+    padding: 25px;
+    position: relative;
+    z-index: 200;
+    box-sizing: border-box;
+    
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: center;
+    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.cancel {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cancel button {
+    background-color: #D4D8DB;
+    border: none;
+    padding-right: 5px;
+}
+
+.title h1 {
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+    color: #4C304F;
+    font-weight: 500;
+    padding-bottom: 27px;
+    padding-top: 20px;
+}
+
+/* .body {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+} */
+
+.body p {
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    padding-bottom: 42px;
+}
+
+.inputBox {
+    display: flex;
+    justify-content: center;
+    /* flex-direction: column; */
+    align-items: center;
+    margin: 0 auto;
+    font-size: 25px;
+    color: #4C304F;
+    font-weight: 500;
+}
+
+.inputBox p {
+    padding-bottom: 32px;
+}
+
+.inputBox input {
+    border: none;
+    /* margin: 0 auto; */
+    /* display: flex; */
+    font-size: 25px;
+    padding-left: 10px;
+    margin-left: 40px;
+    color: #4C304F;
+    background-color: #ffffff;
+    margin-bottom: 35px;
+    outline: none;
+    width: 280px;
+    height: 42px;
+    border-radius: 3px;
+}
+
+.inputBox input:focus-within {
+    border: 1px solid #4C304F;
+}
+
+/* .inputBox input:last-child {
+    margin: 0 20px;
+} */
+
+ 
+.PhoneInputBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    font-size: 25px;
+    color: #4C304F;
+    font-weight: 500;
+}
+
+.PhoneInputBox p {
+    padding-bottom: 32px;
+}
+
+.PhoneInputBox input {
+    border: none;
+    font-size: 25px;
+    padding-left: 10px;
+    margin-left: 20px;
+    color: #4C304F;
+    background-color: #ffffff;
+    margin-bottom: 35px;
+    outline: none;
+    width: 280px;
+    height: 42px;
+    border-radius: 3px;
+}
+
+.PhoneInputBox input:focus-within {
+    border: 1px solid #4C304F;
+}
+
+.confirmBtn {
+    display: flex;
+    justify-content: center;
+    width: 169px;
+    height: 60px;
+    /* border: 1px solid #4C304F; */
+    border-radius: 24px;
+    align-items: center;
+    margin: 0 auto;
+    background-color: #ffffff;
+    margin-top: 370px;
+}
+
+.confirmBtn p {
+    padding-top: 5px;
+    padding-left: 10px;
+    font-size: 30px;
+    color: #4C304F;
+}

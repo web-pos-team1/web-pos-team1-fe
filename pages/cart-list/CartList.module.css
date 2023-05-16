@@ -1,17 +1,65 @@
 .cartTable {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 1000px;   
-    align-items: center;
-    
+    width: 961px;
+    height: 161px;
+    margin: 0 auto;
+    border-spacing: 0;
+    padding: 47px 0;
+    /* overflow: auto; */
 }
+
+/* .cartTable::-webkit-scrollbar {
+    display: none;
+} */
 
 .cartTableHead {
     background-color: #4C304F;
     color: white;
+    font-size: 22px;
 }
 
-.cartItemRow {
+.cartTableHead th {
+    padding: 12px 0;
+}
+
+.cartTableHead td {
+    padding: 120px 0;
+}
+
+.footer {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    padding-bottom: 40px;
+    padding-top: 20px;
+  }
+
+.footer li {
+    list-style: none;
+}
+
+.pre_btn {
+    border-color: #5D436C;
+    border: 3px solid #5D436C;
+    width: 230px;
+    height: 83px;
+    border-radius: 25px;
+    box-sizing: border-box;
+    padding-top: 18px;
+    margin-left: 60px;
+    display: flex;
+}
+
+.pre_btn li {
+    list-style: none;
+    color : #5D436C;
+    font-size: 35px;
+    font-weight: bold;
+    padding-left: 13px;
+}
+/* .cartItemRow {
     align-items: center;
 }
 
@@ -19,5 +67,45 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /* position: relative; */
+    position: relative; 이건 원래 주석처리 돼있었음
+} */
+
+.next_btn {
+    background-color: #56565B;
+    width: 622px;
+    height: 83px;
+    border-radius: 25px;
+    box-sizing: border-box;
+    padding-top: 12px;
+    display: flex;
+    padding-top: 20px;
+    margin-left: 50px;
+}
+
+.next_btn li {
+    color: #FFFFFF;
+    align-items: center;
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.next_btn li:first-child {
+    padding-left: 85px;
+}
+
+.next_btn li:nth-child(2){
+    margin-top: -5px;
+    padding-left: 105px
+}
+
+.next_btn li:nth-child(3){
+    padding-left: 28px
+}
+
+.next_btn li:last-child {
+    padding-left: 40px;
+}
+
+.footer button {
+    all: unset;
 }

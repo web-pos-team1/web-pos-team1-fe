@@ -1,9 +1,21 @@
 import { Dispatch, SetStateAction } from "react";
-import style from "./PointGuideModal.module.css";
+import style from "./GiftCardGuideModal.module.css";
 import Image from 'next/image';
 import Link from 'next/link';
+import GiftCardNumberModal from "./GiftCardNumberModal";
+import React from "react";
 
-export default function PointGuideModal(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
+export default function GiftCardGuideModal(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
+
+    const [showGiftCardNumberModal,setShowGiftCardNumberModal] = React.useState<boolean>(false);
+
+    const handleGiftCardNumberModal = () => {
+        setShowGiftCardNumberModal(true)
+    };
+
+    const handleGiftCardNumberModalClose = () => {
+        setShowGiftCardNumberModal(false)
+    };
 
 
     if(!props.show) return null
@@ -25,16 +37,17 @@ export default function PointGuideModal(props:{show:boolean, onClose:Dispatch<Se
                 </div>
                 
                 <div className={style.title}>
-                    <p>포인트 적립</p>    
+                    <p>상품권 사용</p>    
                 </div>
 
                 <div className={style.body}>
-                    <p>신세계포인트를 적립하시겠습니까?</p>
+                    <p>모바일 상품권을 사용하시겠습니까? <br/> <span>초과된 금액은 사용하실 수 없습니다</span></p>
                 </div>
 
                 <div className={style.footer}>
-                <Link href='/points'>
-                    <button>
+                {/* <Link href='/points'> 링크 대신에 모달창이 뜨도록 모바일 쿠폰 사용 모달창 설정하기*/}
+                    <button onClick={handleGiftCardNumberModal}>
+                        <GiftCardNumberModal show={showGiftCardNumberModal} onClose={handleGiftCardNumberModalClose}/>
                         <Image
                             src="/images/checkWhite.png"
                             alt="confirm"
@@ -44,8 +57,8 @@ export default function PointGuideModal(props:{show:boolean, onClose:Dispatch<Se
                         />
                         <p>예</p>
                     </button>
-                </Link>
-                <Link href='/ssgService'>
+                {/* </Link> */}
+                <Link href='/payments'>
                     <button>
                         <Image
                             src="/images/nopeWhite.png"

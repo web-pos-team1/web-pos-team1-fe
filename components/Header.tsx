@@ -4,10 +4,13 @@ import style from './Header.module.css';
 import Image from 'next/image'
 import Link from 'next/link'
 import HeaderButton from "@/components/HeaderButton";
-// import * as translations from '../data/translations';
 import { transeData } from '@/data/translations';
 import Modal from "@/components/Modal";
 import CallStaffModal from './CallStaffModal';
+import GiftCardNumberModal from './GiftCardNumberModal';
+import GiftModal from './GiftModal';
+import PhoneNumberModal from './PhoneNumberModal';
+import DeliveryModal from './DeliveryModal';
 
 export default function Header() {
 

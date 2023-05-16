@@ -14,17 +14,6 @@
     padding-left: 13px;
 }
 
-.pre_btn {
-    border-color: #5D436C;
-    border: 3px solid #5D436C;
-    width: 230px;
-    height: 83px;
-    border-radius: 25px;
-    box-sizing: border-box;
-    padding-top: 18px;
-    margin-left: 60px;
-}
-
 .next_btn {
     background-color: #56565B;
     width: 622px;
@@ -44,16 +33,7 @@
 }
 
 .next_btn ul li:first-child {
-    padding-left: 75px;
-}
-
-.next_btn ul li:nth-child(2){
-    margin-top: -5px;
-    padding-left: 130px
-}
-
-.next_btn ul li:nth-child(3){
-    padding-left: 28px
+    padding-left: 410px;
 }
 
 .next_btn ul li:last-child {

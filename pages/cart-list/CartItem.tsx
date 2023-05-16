@@ -61,29 +61,34 @@ export default function CartItem(
     }, [])
     return (
         <tr className={style.cartItemRow}>
-            <td>
+            <td className={style.cartItemName}>
                 <Image 
                 src={props.item.image_url} width={140} height={140} alt="product image"/>
+                <p>{props.item.name}</p>
             </td>
-            <td>
-                <p className={style.cartItemName}>{props.item.name}</p>
-            </td>
-            <td>
-                <button onClick={minusCount}>-</button>
-                <span className={style.count}>{cartQty}</span>
-                <button onClick={plusCount}>+</button>
+            <td className={style.qtyController}>
+                <button onClick={minusCount}>
+                    <img src="/images/minus.png" alt="declineQty" />
+                </button>
 
+                <span className={style.count}>{cartQty}</span>
+                
+                <button onClick={plusCount}>
+                    <img src="/images/plus.png" alt="increseQty" />
+                </button>
+            </td>
+            <td className={style.cartItemPrice}>
+                <p>{formatMoney(props.item.price)}</p>
+            </td>
+            <td className={style.cartEachPrice}>
+                <span>{formatMoney(props.item.price * cartQty)}</span>
             </td>
             <td>
-                <p className={style.cartItemPrice}>{formatMoney(props.item.price)}</p>
+                <span className={style.cartDelBtn} onClick={() => handleDelBtnClick(props.item)}>
+                    <img src="/images/deleteBtn.png" alt="cart item delete button" />
+                </span>   
             </td>
-            <td>
-                <span className={style.cartEachPrice}>{formatMoney(props.item.price * cartQty)}</span>
-            </td>
-            <td>
-            <span className={style.cartDelBtn} onClick={() => handleDelBtnClick(props.item)}>x</span>   
-            </td>
-    
         </tr>
+        
     )
 }

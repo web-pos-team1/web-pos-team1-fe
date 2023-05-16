@@ -74,9 +74,9 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
           />
         ))}
       </div>
-      <Link href="/ssgService">
+      {/* <Link href="/ssgService"> */}
         <Footer />
-      </Link>
+      {/* </Link> */}
     </div>
   );
 };
