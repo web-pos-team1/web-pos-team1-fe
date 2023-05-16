@@ -34,6 +34,7 @@ export default function CartItem(
             }
         }
         props.setCartList([...props.cartList]);
+        props.setTotalPrice(props.totalPrice - props.item.price);
     }
     const plusCount = () => {
         console.log("before cartQty: ", cartQty);
@@ -46,19 +47,23 @@ export default function CartItem(
             }
         }
         props.setCartList([...props.cartList]);
+        props.setTotalPrice(props.totalPrice + props.item.price);
     }
-    const handleDelBtnClick = (product : ProductType) => {
-        console.log("삭제할 product: ", product);
-        props.setDelProductId(product.product_id);
+    const handleDelBtnClick = (cart : CartType) => {
+        console.log("삭제할 product: ", cart);
+        props.setDelProductId(cart.product_id);
         if (window.confirm("장바구니에서 삭제하시겠습니까?")) {
             console.log("---장바구니에서 삭제하는 로직---");
+            props.setTotalPrice(props.totalPrice - cart.cartQty*cart.price);
         } else {
             console.log("---삭제 취소---");
         }
+        
     }
     useEffect(() => {
         console.log("props: ", props);
-    }, [])
+        // props.setTotalPrice(props.totalPrice + props.item.cartQty * props.item.price);
+    }, [props.totalPrice])
     return (
         <tr className={style.cartItemRow}>
             <td className={style.cartItemName}>
@@ -87,6 +92,7 @@ export default function CartItem(
                 <span className={style.cartDelBtn} onClick={() => handleDelBtnClick(props.item)}>
                     <img src="/images/deleteBtn.png" alt="cart item delete button" />
                 </span>   
+                {formatMoney(props.totalPrice)}
             </td>
         </tr>
         

@@ -2,6 +2,8 @@ import { CartType } from "@/types/CartType";
 import Image from "next/image";
 import { useState, useEffect, Fragment } from "react";
 import style from "./Cart.module.css";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { CartListState } from "@/state";
 
 
 export default function Cart(
@@ -12,10 +14,12 @@ export default function Cart(
         totalPrice : number,
         setTotalPrice : any
     }) {
-    const [cartList, setCartList] = useState<CartType[]>(() => {
-        const cList = isLocalStorageAvailable() ? localStorage.getItem('cartList') : null;
-        return cList !== null ? JSON.parse(cList) : [];
-    });
+    const [cartList, setCartList] = useRecoilState(CartListState);
+    const recoilValue = useRecoilValue(CartListState);
+    // const [cartList, setCartList] = useState<CartType[]>(() => {
+    //     const cList = isLocalStorageAvailable() ? localStorage.getItem('cartList') : null;
+    //     return cList !== null ? JSON.parse(cList) : [];
+    // });
 
   
     const handleDelCartBtnClick = () => {
@@ -49,14 +53,14 @@ export default function Cart(
     )
 }
 
-function isLocalStorageAvailable() {
-    try {
-        const testKey = 'test1';
-        localStorage.setItem(testKey, testKey);
-        localStorage.removeItem(testKey);
-        return true;
-      } catch (e) {
-        console.log("isLocalStorageAvailable / e: ", e);
-        return false;
-      }
-}
+// function isLocalStorageAvailable() {
+//     try {
+//         const testKey = 'test1';
+//         localStorage.setItem(testKey, testKey);
+//         localStorage.removeItem(testKey);
+//         return true;
+//       } catch (e) {
+//         console.log("isLocalStorageAvailable / e: ", e);
+//         return false;
+//       }
+// }

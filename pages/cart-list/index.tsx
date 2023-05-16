@@ -9,6 +9,10 @@ import { NextPageWithLayout } from "../_app";
 import { useRouter } from 'next/router';
 import PointGuideModal from '@/components/PointguideModal';
 import CartListLayout from '@/components/layouts/cartListLayout';
+import { formatMoney } from '@/components/globalfunctions/formatMoney';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { CartListState } from '@/state';
+import axios from 'axios';
 
 const CartList : NextPageWithLayout = () => {
     const rt = useRouter();
@@ -19,50 +23,67 @@ const CartList : NextPageWithLayout = () => {
 
     // const [cartList, setCartList] = useState<CartType[]>(parseCartList);
 
-    const [cartList, setCartList] = useState<CartType[]>(() => {
-        const cList = isLocalStorageAvailable() ? localStorage.getItem('cartList') : null;
-        return cList !== null ? JSON.parse(cList) : [];
-    });
+    // const [cartList, setCartList] = useState<CartType[]>(() => {
+    //     const cList = isLocalStorageAvailable() ? localStorage.getItem('cartList') : null;
+    //     return cList !== null ? JSON.parse(cList) : [];
+    // });
+
+    const [cartList, setCartList] = useRecoilState(CartListState);
+    const recoilValue = useRecoilValue(CartListState);
 
     const handlePayBtnClick = () => {
         console.log("final cartList: ", cartList);
         let data = []
         for (let i = 0; i < cartList.length; i++) {
             data.push({
-                "posId": 1,
+                "storeId": process.env.NEXT_PUBLIC_ENV_STORE_ID, 
+                "posId": process.env.NEXT_PUBLIC_ENV_POS_ID,
                 "productId": cartList[i].product_id,
                 "cartQty": cartList[i].cartQty
             })
         }
         console.log("final response data(List<CartAddDTO>): ", data);
         if (window.confirm("포인트 적립하시겠습니까?")) {
-            console.log("rm localStorage['cartList']: ", localStorage.removeItem("cartList"));
+            console.log("rm Recoil[cartList] ");
+            setCartList([]);
             console.log("---포인트 적립 step 페이지 이동---");
+            
         } else {
             console.log("---배송/선물 step 페이지 이동---");
         }     
     }
     const handlePrevBtnClick = () => {
         console.log("CartList / handlePrevBtnClick!!!");
-        localStorage.setItem("cartList", JSON.stringify(cartList));
+        // localStorage.setItem("cartList", JSON.stringify(cartList));
+        setCartList(cartList);
         rt.back();
     }
 
     useEffect(() => {
         console.log("CartList / delProductId: ", delProductId);
-        isLocalStorageAvailable();
+        // isLocalStorageAvailable();
+        let tPrice = 0;
+
         if (delProductId !== 0) {
             let tempCartList = [];
             for (let i = 0; i < cartList.length; i++) {
                 if ( cartList[i].product_id === delProductId ) {
                     continue;
                 } else {
+                    tPrice += cartList[i].cartQty * cartList[i].price;
                     tempCartList.push(cartList[i]);
                 }
             }
             console.log("after / tempCartList: ", tempCartList);
             setCartList(tempCartList);
+            setTotalPrice(tPrice)
+        } else {
+            for (let i = 0; i < cartList.length; i++) {
+                tPrice += cartList[i].cartQty * cartList[i].price;
+                }
+            setTotalPrice(tPrice)
         }
+        
     }, [delProductId])
 
     const handleModal = () => {
@@ -134,8 +155,8 @@ const CartList : NextPageWithLayout = () => {
                             <nav>
                                 <ul className={style.next_btn}>
                                     <li>
-                                        ₩ 11,050
-                                        {/* props로 받을것 */}
+                                        {/* ₩ 11,050 */}
+                                        ₩{formatMoney(totalPrice)}
                                     </li>
                                     <li>
                                         <Image
@@ -178,16 +199,16 @@ CartList.getLayout = function getLayout(page: React.ReactNode) {
     )
   }
 
-function isLocalStorageAvailable() {
-    try {
-        const testKey = 'test1';
-        localStorage.setItem(testKey, testKey);
-        localStorage.removeItem(testKey);
-        return true;
-      } catch (e) {
-        console.log("isLocalStorageAvailable / e: ", e);
-        return false;
-      }
-}
+// function isLocalStorageAvailable() {
+//     try {
+//         const testKey = 'test1';
+//         localStorage.setItem(testKey, testKey);
+//         localStorage.removeItem(testKey);
+//         return true;
+//       } catch (e) {
+//         console.log("isLocalStorageAvailable / e: ", e);
+//         return false;
+//       }
+// }
 
 export default CartList;

@@ -19,16 +19,21 @@ import CartItem from "../cart-list/CartItem";
 import { NextPageWithLayout } from "../_app";
 import FooterPreBtn from "@/components/FooterPreBtn";
 import FooterCheckCartBtn from "@/components/FooterCheckCartBtn";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { CartListState } from "@/state";
 
 const Products : NextPageWithLayout = () => {
     const router = useRouter();
     const [itemList, setItemList] = useState<ProductType[]>([]);
     const [activeState, setActiveState] = useState<boolean[]>([false, false, false, false, false, false, false, false, false]);
     const [slides,  setSlides] = useState();
-    const [cartList, setCartList] = useState<CartType[]>(() => {
-        const cList = isLocalStorageAvailable() ? localStorage.getItem('cartList') : null;
-        return cList !== null ? JSON.parse(cList) : [];
-    });
+    // const [cartList, setCartList] = useState<CartType[]>(() => {
+    //     const cList = isLocalStorageAvailable() ? localStorage.getItem('cartList') : null;
+    //     return cList !== null ? JSON.parse(cList) : [];
+    // });
+
+    const [cartList, setCartList] = useRecoilState(CartListState);
+    const recoilValue = useRecoilValue(CartListState);
 
     const [delProductId, setDelProductId] = useState<number>(0);
     const [totalPrice, setTotalPrice] = useState<number>(0);
@@ -46,7 +51,22 @@ const Products : NextPageWithLayout = () => {
         "간식": 6,
         "소스-오익": 7,
         "선물류": 8,
-    } 
+    }
+
+    const handleCategoryBtnClick = (category:string) => {
+        const id = category_map[category];
+        setState(id);
+        for (let i = 0; i < activeState.length; i++) {
+            if (id === i) {
+                activeState[i] = true;
+            }
+        }
+        setActiveState([...activeState]);
+        console.log("category select btn click");
+        console.log("category: ", category); // "정육/계란"
+        console.log("router.pathname: ", router.pathname);
+
+    }
         
     const convertSlashToDash = (category : string) => {
         return category.replace('/', '-');
@@ -64,15 +84,6 @@ const Products : NextPageWithLayout = () => {
         setActiveState([...activeState]);
     }
 
-    const handleCategoryBtnClick = (id:number) => {
-        setState(id);
-        for (let i = 0; i < activeState.length; i++) {
-            if (id === i) {
-                activeState[i] = true;
-            }
-        }
-        setActiveState([...activeState]);
-    }
     const handleAddCartClick = (product : ProductType) => {
         console.log("handleAddCartClck()/product: ", product);
         for (let i = 0; i < cartList.length; i++) {
@@ -87,9 +98,10 @@ const Products : NextPageWithLayout = () => {
         let cartQty = 1;
         let cart = convertProductToCart(product, cartQty);
         setCartList([...cartList, cart]);
+        console.log("router.pathname: ", router.pathname);
+        router.push("/products/" + router.query.category);
     }
 
-    console.log("Procuts / router.query.[category]: ", router.query.category);
     const convertProductToCart = (product : ProductType, cartQty: number) => {
         let cart : CartType = {
             product_id: product.product_id,
@@ -105,27 +117,29 @@ const Products : NextPageWithLayout = () => {
 
     const handleCheckCartBtnClick = () => {
         console.log("handleCheckCartBtnClick!!");
-        localStorage.setItem("cartList", JSON.stringify(cartList));
+        // localStorage.setItem("cartList", JSON.stringify(cartList));
+
+        // setCartList(cartList);
     }
 
     useEffect(() => {
-        let c = router.query.category;
-        let category_index = category_map[c ? c.toString() : "과일"];
-        handleCategoryBtnClick(category_index);
-        console.log("process.env:", process.env);
-        console.log("process.env.NEXT_PUBLIC_ENV_POSID:", process.env.NEXT_PUBLIC_ENV_POS_ID);
-        let url_products = mapToBE(`/api/v1/products/${router.query.category}`);
+        console.log("Procuts / router.query.[category]: ", router.query.category);
+        const c = router.query.category;
+        handleCategoryBtnClick(c ? c.toString() : "과일");  // router.push 하면 계속 요청보낸다
+
+        const url_products = mapToBE(`/api/v1/products/${router.query.category}`);
         // url_products = `http://localhost:3001/products`;
         console.log("url_porducts: ", url_products);
-        axios("http:localhost:3001/products",
+        axios(url_products,
             {
-                method: 'get'    
+                method: 'get'
             }
         )
-        .then((res : any) => {
+        .then((res : any) => {  // res.data.status: 200 <=  < 300
             console.log("products/res: ", res);
             setItemList(res.data)
-        })
+        }) 
+        // err.data.status 400, 500 이 꼳힘
         .catch((err) => console.log("products/err: ", err));
     
 
@@ -144,6 +158,8 @@ const Products : NextPageWithLayout = () => {
         }
         // setItemList(res.data)
         // setCartList(carts);
+        console.log("router.pathname: ", router.pathname);
+        console.log("router.query.category: ", router.query.category);
     }, [router.query, delProductId])
 
 
@@ -161,7 +177,7 @@ const Products : NextPageWithLayout = () => {
                 <ul>
                     {
                     categoryList.map((category: string, index: number) => (
-                        <li onClick={() => handleCategoryBtnClick(index)}  key={index} className={activeState[index] ? `${style.active}` : `${style.deactive}`} >
+                        <li onClick={() => handleCategoryBtnClick(category)}  key={index} className={activeState[index] ? `${style.active}` : `${style.deactive}`} >
                                 {category}
                         </li>
                     ))
@@ -222,17 +238,17 @@ const Products : NextPageWithLayout = () => {
     );
 }
 
-function isLocalStorageAvailable() {
-    try {
-        const testKey = 'test';
-        localStorage.setItem(testKey, testKey);
-        localStorage.removeItem(testKey);
-        return true;
-      } catch (e) {
-        console.log("isLocalStorageAvailable / e: ", e);
-        return false;
-      }
-}
+// function isLocalStorageAvailable() {
+//     try {
+//         const testKey = 'test';
+//         localStorage.setItem(testKey, testKey);
+//         localStorage.removeItem(testKey);
+//         return true;
+//       } catch (e) {
+//         console.log("isLocalStorageAvailable / e: ", e);
+//         return false;
+//       }
+// }
 
 Products.getLayout = function getLayout(page: React.ReactNode) {
     return(
