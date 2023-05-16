@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import style from "./PhoneNumberModal.module.css";
+import style from "./GiftCardNumberModal.module.css";
 import Image from 'next/image';
 import Link from 'next/link';
 import GiftCardNumber from "./GiftCardNumber";

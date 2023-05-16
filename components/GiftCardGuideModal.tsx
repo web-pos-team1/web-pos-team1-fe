@@ -13,9 +13,9 @@ export default function GiftCardGuideModal(props:{show:boolean, onClose:Dispatch
         setShowGiftCardNumberModal(true)
     };
 
-    const handleGiftCardNumberModalClose = () => {
-        setShowGiftCardNumberModal(false)
-    };
+    // const handleGiftCardNumberModalClose = () => {
+    //     setShowGiftCardNumberModal(false)
+    // };
 
 
     if(!props.show) return null
@@ -45,9 +45,9 @@ export default function GiftCardGuideModal(props:{show:boolean, onClose:Dispatch
                 </div>
 
                 <div className={style.footer}>
-                {/* <Link href='/points'> 링크 대신에 모달창이 뜨도록 모바일 쿠폰 사용 모달창 설정하기*/}
                     <button onClick={handleGiftCardNumberModal}>
-                        <GiftCardNumberModal show={showGiftCardNumberModal} onClose={handleGiftCardNumberModalClose}/>
+                    {/* <button onClick={() => { handleGiftCardNumberModal(); props.onClose(false); }}> */}
+                        <GiftCardNumberModal show={showGiftCardNumberModal} onClose={setShowGiftCardNumberModal}/>
                         <Image
                             src="/images/checkWhite.png"
                             alt="confirm"
