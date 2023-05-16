@@ -23,6 +23,8 @@
     "react-dom": "18.2.0",
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.11.1",
+    "recoil": "^0.7.7",
+    "recoil-persist": "^4.2.0",
     "typescript": "5.0.4"
   }
 }
