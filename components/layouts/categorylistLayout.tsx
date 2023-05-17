@@ -3,11 +3,14 @@ import Header from "@/components/Header"
 import Link from "next/link";
 import Button from "@/components/Button";
 import Text from "@/components/Text";
+import { RecoilRoot } from "recoil";
 
 export default function CategorylistLayout(props:{children:React.ReactNode}) {
     return (
         <div>
-            <Header />
+            <RecoilRoot>
+                <Header />
+            </RecoilRoot>
             {props.children}
             <Text text="카테고리를 선택해 주세요" />
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gridGap: '40px', margin: '85px 40px 160px 40px' }}>

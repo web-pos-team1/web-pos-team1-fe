@@ -3,11 +3,14 @@ import Header from "@/components/Header";
 import Location from "@/components/Location";
 import HomeButton from "@/components/HomeButton";
 import Link from "next/link";
+import { RecoilRoot } from "recoil";
 
 export default function LastLayout(props:{children:React.ReactNode}) {
     return (
         <div>
-            <Header />
+            <RecoilRoot>
+                <Header />
+            </RecoilRoot>
             <Location />
             {props.children}
             <Link href="/">

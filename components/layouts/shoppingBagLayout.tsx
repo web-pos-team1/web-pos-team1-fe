@@ -7,7 +7,7 @@ import Text2Button from "@/components/Text2Button";
 import Text from "@/components/Text";
 import style from "./shoppingBagLayout.module.css"
 import GiftCardModal from "../GiftCardGuideModal";
-import { useRecoilState } from "recoil";
+import { RecoilRoot, useRecoilState } from "recoil";
 import { totalPriceState } from "@/state/totalPriceState";
 
 // export default function ShoppingBagLayout(props:{children:React.ReactNode}) {
@@ -51,7 +51,10 @@ export default function ShoppingBagLayout(props: { children: React.ReactNode }) 
         <>
 
       <div>
-        <Header />
+        <RecoilRoot>
+          <Header />
+        </RecoilRoot>
+        
         <Location />
         {props.children}
        

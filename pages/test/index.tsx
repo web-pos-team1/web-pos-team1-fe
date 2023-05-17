@@ -1,8 +1,11 @@
+import Header from "@/components/Header";
+import { PayGuideTextList } from "@/data/payGuideTextList";
 import { CartListState } from "@/state/CartListState"
+import { LanguageIndexState } from "@/state/LanguageIndexState";
 import { totalPriceState } from "@/state/totalPriceState";
 import { CartType } from "@/types/CartType";
-import { useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useEffect, useState } from "react";
+import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil"
 
 export default function Test() {
     const [testList, setTestList] = useRecoilState(CartListState);
@@ -10,27 +13,27 @@ export default function Test() {
 
     const [tPrice, setTPrice] = useRecoilState(totalPriceState);
     const totalPrice = useRecoilValue(totalPriceState);
+    const [languageIndex, setLanguageIndex] = useRecoilState(LanguageIndexState);
+    const [payGuideTextList, setPayGuideTextList] = useState<string[]>(PayGuideTextList);
+
     useEffect(() => {
         console.log("recoilValue: ", recoilValue);
         console.log("reset recoil CartListState");
         console.log("totalPrice from recoil: ", totalPrice);
-        console.log("tPrice from recoil: ", totalPrice);
+        console.log("tPrice from recoil: ", tPrice);
+        console.log("languageIndex: ", languageIndex);
         setTestList([]);
     }, [])
     return(
         <div>
-            {
-                recoilValue && recoilValue.map((cart:CartType, index:number) => (
-                    <div key={index}>
-                        <div>
-                            <img src={cart.image_url} />
-                            <div>
-                                {cart.name}
-                            </div>
-                        </div>
-                    </div>
-                ))
-            }
+            <RecoilRoot>
+                <Header />    
+            </RecoilRoot>
+            <h3>
+                {
+                    payGuideTextList && payGuideTextList[languageIndex]
+                }
+            </h3>
         </div>
     )
 }

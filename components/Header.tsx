@@ -11,6 +11,17 @@ import GiftCardNumberModal from './GiftCardNumberModal';
 import GiftModal from './GiftModal';
 import PhoneNumberModal from './PhoneNumberModal';
 import DeliveryModal from './DeliveryModal';
+import { useRecoilState } from 'recoil';
+import { LanguageIndexState } from '@/state/LanguageIndexState';
+import { countryImg } from '@/data/countryImg';
+
+type Button = {
+  id: number,
+  src: string,
+  alt: string,
+  link: string,
+  onClick: any
+} 
 
 export default function Header() {
 
@@ -23,10 +34,18 @@ export default function Header() {
     const [showCallStaffModal, setShowCallStaffModal] = useState<boolean>(false);
     const [title, setTitle] = useState<string>('');
 
-    const buttons = [
+    const [languageIndex, setLanguageIndex] = useRecoilState(LanguageIndexState);
+    const [buttons, setButtons] = useState<Button[]>([]);
+
+  useEffect(()=>{
+    const res = transeData.filter(item => item.key === pathName)
+    if ( res.length > 0 ) {
+      setTitle(res[0].value)
+    }
+    const tempButtons = [
       {
           id: 1,
-          src: "/images/southKorea.png", 
+          src: countryImg[languageIndex], 
           alt: "select languages",
           link: "",
           onClick: () => setShowModal(true)
@@ -46,13 +65,9 @@ export default function Header() {
           onClick: () => console.log('btn 3')
       }
   ];
+  setButtons(tempButtons);
 
-  useEffect(()=>{
-    const res = transeData.filter(item => item.key === pathName)
-    if ( res.length > 0 ) {
-      setTitle(res[0].value)
-    }
-  },[pathName])
+  },[pathName, languageIndex])
 
   const handleModal = () => {
     console.log('modal')
@@ -62,7 +77,10 @@ export default function Header() {
 
   return (
     <>
-    <Modal show={showModal} onClose={setShowModal} />
+    <Modal 
+      show={showModal} onClose={setShowModal} 
+      setLanguageIndex={setLanguageIndex}
+    />
     <CallStaffModal show={showCallStaffModal} onClose={setShowCallStaffModal} />
     <header className={style.headerMenu}>
       
@@ -84,7 +102,7 @@ export default function Header() {
       </div>
 
       <ul className={style.btn}>
-        {buttons.map((button, index) => (
+        {buttons && buttons.map((button, index) => (
           
             button.id === 1 ? 
             <li key={index} onClick={handleModal}>
