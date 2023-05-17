@@ -34,6 +34,7 @@ export default function CartItem(
             }
         }
         props.setCartList([...props.cartList]);
+        props.setTotalPrice(props.totalPrice - props.item.price);
     }
     const plusCount = () => {
         console.log("before cartQty: ", cartQty);
@@ -46,10 +47,11 @@ export default function CartItem(
             }
         }
         props.setCartList([...props.cartList]);
+        props.setTotalPrice(props.totalPrice + props.item.price);
     }
-    const handleDelBtnClick = (product : ProductType) => {
-        console.log("삭제할 product: ", product);
-        props.setDelProductId(product.product_id);
+    const handleDelBtnClick = (cart : CartType) => {
+        console.log("삭제할 product: ", cart);
+        props.setDelProductId(cart.product_id);
         if (window.confirm("장바구니에서 삭제하시겠습니까?")) {
             console.log("---장바구니에서 삭제하는 로직---");
         } else {

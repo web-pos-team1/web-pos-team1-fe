@@ -71,7 +71,19 @@ const Products : NextPageWithLayout = () => {
                 activeState[i] = true;
             }
         }
+        let url = ''
+        Object.entries(category_map).map(([key, value]) => {
+            console.log("key: ", key);
+            console.log("value: ", value);
+            if (value === id) {
+                console.log("finded key: ", key);
+                url = `/products/` + key;
+                console.log('router url: ', url);
+            }
+        })
+        
         setActiveState([...activeState]);
+        router.push(url);
     }
     const handleAddCartClick = (product : ProductType) => {
         console.log("handleAddCartClck()/product: ", product);
@@ -97,6 +109,7 @@ const Products : NextPageWithLayout = () => {
             name: product.name,
             price: product.price,
             image_url: product.image_url,
+            description: product.description,
             qty: product.qty,
             cartQty: cartQty
         };
@@ -144,7 +157,7 @@ const Products : NextPageWithLayout = () => {
         }
         // setItemList(res.data)
         // setCartList(carts);
-    }, [router.query, delProductId])
+    }, [router.query.category, delProductId])
 
 
     return (

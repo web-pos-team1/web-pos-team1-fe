@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Location from "@/components/Location";
 import Header from "@/components/Header"
 import Footer from "@/components/Footer";
@@ -6,6 +6,8 @@ import Link from "next/link";
 import Button from "@/components/Button";
 import Text from "@/components/Text";
 import Text3Button from "../Text3Button";
+import { useRecoilState } from "recoil";
+import { totalPriceState } from "@/state/totalPriceState";
 // import style from "./CustomImg.module.css";
 
 interface Props {
@@ -13,6 +15,7 @@ interface Props {
 }
 
 const PaymentsLayout: React.FC<Props> = ({ children }) => {
+  const [totalPrice, setTotalPrice] = useRecoilState(totalPriceState);
   const buttons = [
     {
       src: "/images/creditCard.png",
@@ -75,7 +78,9 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
         ))}
       </div>
       {/* <Link href="/ssgService"> */}
-        <Footer />
+        <Footer 
+          totalPrice={totalPrice}
+        />
       {/* </Link> */}
     </div>
   );

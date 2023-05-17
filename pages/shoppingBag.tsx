@@ -10,6 +10,7 @@ import Text from "@/components/Text";
 import style from "../components/layouts/shoppingBagLayout.module.css"
 import GiftCardGuideModal from '@/components/GiftCardGuideModal'
 import { useState } from 'react'
+import { RecoilRoot } from 'recoil'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -49,9 +50,11 @@ const Shoppingbag: NextPageWithLayout = () => {
 Shoppingbag.getLayout = function getLayout(page: React.ReactNode) {
   return(
     <>
-    <ShoppingBagLayout>
-      {page}
-    </ShoppingBagLayout>
+      <RecoilRoot>
+        <ShoppingBagLayout>
+          {page}
+        </ShoppingBagLayout>
+      </RecoilRoot>
     </>
   )
 }

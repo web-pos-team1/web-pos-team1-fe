@@ -2,6 +2,8 @@ import { CartType } from "@/types/CartType";
 import Image from "next/image";
 import { useState, useEffect, Fragment } from "react";
 import style from "./Cart.module.css";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { CartListState } from "@/state/CartListState";
 
 
 export default function Cart(
@@ -12,6 +14,8 @@ export default function Cart(
         totalPrice : number,
         setTotalPrice : any
     }) {
+    // const [cartList, setCartList] = useRecoilState(CartListState);
+    // const recoilValue = useRecoilValue(CartListState);
     const [cartList, setCartList] = useState<CartType[]>(() => {
         const cList = isLocalStorageAvailable() ? localStorage.getItem('cartList') : null;
         return cList !== null ? JSON.parse(cList) : [];
@@ -30,7 +34,10 @@ export default function Cart(
         <div className={style.cartItemWrap}>
 
             <div className={style.productImgContainer}>                
-                <img src={props.item.image_url}/>
+                <img 
+                    src={props.item.image_url}
+                    alt={props.item.description}
+                />
             </div>
 
             <div className={style.cartCount}>

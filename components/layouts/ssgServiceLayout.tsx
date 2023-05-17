@@ -9,11 +9,14 @@ import style from "./shoppingBagLayout.module.css"
 import GiftModal from "../GiftModal";
 import Delivery from "@/pages/delivery";
 import DeliveryModal from "../DeliveryModal";
+import { useRecoilState } from "recoil";
+import { totalPriceState } from "@/state/totalPriceState";
 
 export default function ssgServiceLayout(props:{children:React.ReactNode}) {
 
     const [showGiftModal, setShowGiftModal] = useState<boolean>(false);
     const [showDeliveryModal, setShowDeliveryModal] = useState<boolean>(false);
+    const [totalPrice, setTotalPrice] = useRecoilState(totalPriceState);
 
     const handleModal = () => {
         console.log('modal')
@@ -41,7 +44,9 @@ export default function ssgServiceLayout(props:{children:React.ReactNode}) {
                 <Button src="/images/deliveryService.png" alt="purchase recycling bag" text="배송" onClick={() => setShowDeliveryModal(true)}/>
                 <Button src="/images/giftService.png" alt="pass this step" text="선물" onClick={() => setShowGiftModal(true)}/>
             </div>
-            <Footer />
+            <Footer 
+                totalPrice={totalPrice}
+            />
         </>
     )
 }
