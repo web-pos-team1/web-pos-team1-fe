@@ -54,16 +54,13 @@ export default function CartItem(
         props.setDelProductId(cart.product_id);
         if (window.confirm("장바구니에서 삭제하시겠습니까?")) {
             console.log("---장바구니에서 삭제하는 로직---");
-            props.setTotalPrice(props.totalPrice - cart.cartQty*cart.price);
         } else {
             console.log("---삭제 취소---");
         }
-        
     }
     useEffect(() => {
         console.log("props: ", props);
-        // props.setTotalPrice(props.totalPrice + props.item.cartQty * props.item.price);
-    }, [props.totalPrice])
+    }, [])
     return (
         <tr className={style.cartItemRow}>
             <td className={style.cartItemName}>
@@ -92,7 +89,6 @@ export default function CartItem(
                 <span className={style.cartDelBtn} onClick={() => handleDelBtnClick(props.item)}>
                     <img src="/images/deleteBtn.png" alt="cart item delete button" />
                 </span>   
-                {formatMoney(props.totalPrice)}
             </td>
         </tr>
         

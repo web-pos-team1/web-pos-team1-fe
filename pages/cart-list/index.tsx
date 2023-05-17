@@ -11,8 +11,9 @@ import PointGuideModal from '@/components/PointguideModal';
 import CartListLayout from '@/components/layouts/cartListLayout';
 import { formatMoney } from '@/components/globalfunctions/formatMoney';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { CartListState } from '@/state';
+import { CartListState } from '@/state/CartListState';
 import axios from 'axios';
+import { totalPriceState } from '@/state/totalPriceState';
 
 const CartList : NextPageWithLayout = () => {
     const rt = useRouter();
@@ -23,13 +24,13 @@ const CartList : NextPageWithLayout = () => {
 
     // const [cartList, setCartList] = useState<CartType[]>(parseCartList);
 
-    // const [cartList, setCartList] = useState<CartType[]>(() => {
-    //     const cList = isLocalStorageAvailable() ? localStorage.getItem('cartList') : null;
-    //     return cList !== null ? JSON.parse(cList) : [];
-    // });
-
-    const [cartList, setCartList] = useRecoilState(CartListState);
-    const recoilValue = useRecoilValue(CartListState);
+    const [cartList, setCartList] = useState<CartType[]>(() => {
+        const cList = isLocalStorageAvailable() ? localStorage.getItem('cartList') : null;
+        return cList !== null ? JSON.parse(cList) : [];
+    });
+    const [recoilTotalPrice, setRecoilTotalPrice] = useRecoilState(totalPriceState);
+    // const [cartList, setCartList] = useRecoilState(CartListState);
+    // const recoilValue = useRecoilValue(CartListState);
 
     const handlePayBtnClick = () => {
         console.log("final cartList: ", cartList);
@@ -46,6 +47,8 @@ const CartList : NextPageWithLayout = () => {
         if (window.confirm("포인트 적립하시겠습니까?")) {
             console.log("rm Recoil[cartList] ");
             setCartList([]);
+            console.log("final totalPrice: ", totalPrice);
+            setRecoilTotalPrice(totalPrice);
             console.log("---포인트 적립 step 페이지 이동---");
             
         } else {
@@ -54,33 +57,41 @@ const CartList : NextPageWithLayout = () => {
     }
     const handlePrevBtnClick = () => {
         console.log("CartList / handlePrevBtnClick!!!");
-        // localStorage.setItem("cartList", JSON.stringify(cartList));
-        setCartList(cartList);
+        localStorage.setItem("cartList", JSON.stringify(cartList));
+        // setCartList(cartList);
         rt.back();
     }
 
     useEffect(() => {
         console.log("CartList / delProductId: ", delProductId);
-        // isLocalStorageAvailable();
+        isLocalStorageAvailable();
         let tPrice = 0;
 
         if (delProductId !== 0) {
-            let tempCartList = [];
+            // let newCartList = cartList.map((cart : CartType) => {
+            //     let newCart = {...cart}
+            //     if (cart.product_id !== delProductId) {
+            //         tPrice += tPrice += cart.cartQty * cart.price;
+            //         return cart;
+            //     }
+            // })
+            let newCartList = [];
             for (let i = 0; i < cartList.length; i++) {
                 if ( cartList[i].product_id === delProductId ) {
                     continue;
                 } else {
                     tPrice += cartList[i].cartQty * cartList[i].price;
-                    tempCartList.push(cartList[i]);
+                    newCartList.push(cartList[i]);
                 }
             }
-            console.log("after / tempCartList: ", tempCartList);
-            setCartList(tempCartList);
-            setTotalPrice(tPrice)
+            console.log("after / tempCartList: ", newCartList);
+            setCartList(newCartList);
+            setTotalPrice(tPrice);
+
         } else {
             for (let i = 0; i < cartList.length; i++) {
                 tPrice += cartList[i].cartQty * cartList[i].price;
-                }
+            }
             setTotalPrice(tPrice)
         }
         
@@ -88,12 +99,17 @@ const CartList : NextPageWithLayout = () => {
 
     const handleModal = () => {
         console.log('modal')
+        setRecoilTotalPrice(totalPrice);
         setShowPointGuideModal(true)
       }
 
     return (
         <>
-        <PointGuideModal show={showPointGuideModal} onClose={setShowPointGuideModal} />
+        <PointGuideModal 
+            show={showPointGuideModal} 
+            onClose={setShowPointGuideModal} 
+
+        />
         <div>
             <Head>
                 <title>POS products list</title>
@@ -155,7 +171,6 @@ const CartList : NextPageWithLayout = () => {
                             <nav>
                                 <ul className={style.next_btn}>
                                     <li>
-                                        {/* ₩ 11,050 */}
                                         ₩{formatMoney(totalPrice)}
                                     </li>
                                     <li>
@@ -199,16 +214,16 @@ CartList.getLayout = function getLayout(page: React.ReactNode) {
     )
   }
 
-// function isLocalStorageAvailable() {
-//     try {
-//         const testKey = 'test1';
-//         localStorage.setItem(testKey, testKey);
-//         localStorage.removeItem(testKey);
-//         return true;
-//       } catch (e) {
-//         console.log("isLocalStorageAvailable / e: ", e);
-//         return false;
-//       }
-// }
+function isLocalStorageAvailable() {
+    try {
+        const testKey = 'test1';
+        localStorage.setItem(testKey, testKey);
+        localStorage.removeItem(testKey);
+        return true;
+      } catch (e) {
+        console.log("isLocalStorageAvailable / e: ", e);
+        return false;
+      }
+}
 
 export default CartList;

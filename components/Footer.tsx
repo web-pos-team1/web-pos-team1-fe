@@ -3,8 +3,11 @@ import React from 'react'
 import style from './Footer.module.css';
 import Image from 'next/image'
 import Link from 'next/link'
+import { formatMoney } from './globalfunctions/formatMoney';
 
-export default function Footer() {
+export default function Footer(props: {
+    totalPrice?: number
+}) {
 
   return (
     <footer className={style.footerMenu}>
@@ -44,8 +47,7 @@ export default function Footer() {
                         />
                     </li>
                     <li>
-                        ₩ 11,050
-                        {/* props로 받을것 */}
+                       ₩{formatMoney(props.totalPrice ? props.totalPrice : 1)}
                     </li>
                 </ul>
             </nav>  

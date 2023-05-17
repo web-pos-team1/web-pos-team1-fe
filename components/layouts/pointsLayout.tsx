@@ -6,10 +6,13 @@ import Link from "next/link";
 import Button from "@/components/Button";
 import Text from "@/components/Text";
 import PhoneNumberModal from "../PhoneNumberModal";
+import { useRecoilState } from "recoil";
+import { totalPriceState } from "@/state/totalPriceState";
 
 export default function PointsLayout(props:{children:React.ReactNode}) {
     
     const [showPhoneNumberModal, setShowPhoneNumberModal] = useState<boolean>(false);
+    const [totalPrice, setTotalPrice] = useRecoilState(totalPriceState);
     
     const buttons = [
         {
@@ -75,7 +78,9 @@ export default function PointsLayout(props:{children:React.ReactNode}) {
                 ))}
             </div>
             {/* <Link href='/cart-list'> */}
-                <Footer />
+                <Footer 
+                    totalPrice={totalPrice}
+                />
             {/* </Link> */}
         </>
     )

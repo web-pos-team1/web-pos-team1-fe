@@ -19,9 +19,10 @@ export default function Location() {
       <nav>
         <ul>
           {
-            GnbMenu.map((item:GnbMenuType)=>{
+            GnbMenu.map((item:GnbMenuType, index:number)=>{
               return(
                 <li 
+                  key={index}
                   className={item.path.includes(router.pathname) ? style.active : ''}
                 >
                   {item.name}

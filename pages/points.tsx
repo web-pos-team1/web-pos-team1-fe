@@ -5,6 +5,7 @@ import styles from '@/styles/Points.module.css'
 import Link from 'next/link'
 import { NextPageWithLayout } from './_app'
 import PointsLayout from '@/components/layouts/pointsLayout'
+import { RecoilRoot } from 'recoil'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -27,9 +28,11 @@ const Points: NextPageWithLayout = () => {
 Points.getLayout = function getLayout(page: React.ReactNode) {
   return(
     <>
-    <PointsLayout>
-      {page}
-    </PointsLayout>
+      <RecoilRoot>
+        <PointsLayout>
+          {page}
+        </PointsLayout>
+      </RecoilRoot>
     </>
   )
 }

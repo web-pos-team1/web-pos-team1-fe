@@ -7,6 +7,8 @@ import Text2Button from "@/components/Text2Button";
 import Text from "@/components/Text";
 import style from "./shoppingBagLayout.module.css"
 import GiftCardModal from "../GiftCardGuideModal";
+import { useRecoilState } from "recoil";
+import { totalPriceState } from "@/state/totalPriceState";
 
 // export default function ShoppingBagLayout(props:{children:React.ReactNode}) {
 
@@ -43,6 +45,7 @@ import GiftCardModal from "../GiftCardGuideModal";
 // }
 
 export default function ShoppingBagLayout(props: { children: React.ReactNode }) {
+    const [totalPrice, setTotalPrice] = useRecoilState(totalPriceState);
     
     return (
         <>
@@ -53,7 +56,9 @@ export default function ShoppingBagLayout(props: { children: React.ReactNode }) 
         {props.children}
        
         {/* <Link href="/ssgService"> */}
-          <Footer />
+          <Footer 
+            totalPrice={totalPrice}
+          />
         {/* </Link> */}
       </div>
       </>

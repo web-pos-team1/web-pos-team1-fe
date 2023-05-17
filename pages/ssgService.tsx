@@ -5,6 +5,7 @@ import styles from '@/styles/SsgService.module.css'
 import Link from 'next/link'
 import SsgServiceLayout from '@/components/layouts/ssgServiceLayout'
 import { NextPageWithLayout } from './_app'
+import { RecoilRoot } from 'recoil'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,9 +28,11 @@ const SsgService: NextPageWithLayout = () => {
 SsgService.getLayout = function getLayout(page: React.ReactNode) {
   return(
     <>
-    <SsgServiceLayout>
-      {page}
-    </SsgServiceLayout>
+      <RecoilRoot>
+        <SsgServiceLayout>
+          {page}
+        </SsgServiceLayout>    
+      </RecoilRoot>
     </>
   )
 }

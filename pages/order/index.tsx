@@ -1,4 +1,4 @@
-import { CartListState } from "@/state";
+import { CartListState } from "@/state/CartListState";
 import { CartType } from "@/types/CartType";
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";

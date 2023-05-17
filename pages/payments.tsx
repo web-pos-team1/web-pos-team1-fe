@@ -5,6 +5,7 @@ import styles from '@/styles/Payments.module.css'
 import Link from 'next/link'
 import PaymentsLayout from '@/components/layouts/paymentsLayout'
 import { NextPageWithLayout } from './_app'
+import { RecoilRoot } from 'recoil'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,9 +27,11 @@ const Payments: NextPageWithLayout = () => {
 Payments.getLayout = function getLayout(page: React.ReactNode) {
   return(
     <>
-    <PaymentsLayout>
-      {page}
-    </PaymentsLayout>
+    <RecoilRoot>
+      <PaymentsLayout>
+        {page}
+      </PaymentsLayout>
+    </RecoilRoot>
     </>
   )
 }
