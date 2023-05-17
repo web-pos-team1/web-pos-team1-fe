@@ -6,7 +6,7 @@ import Link from "next/link";
 import Button from "@/components/Button";
 import Text from "@/components/Text";
 import PhoneNumberModal from "../PhoneNumberModal";
-import { useRecoilState } from "recoil";
+import { RecoilRoot, useRecoilState } from "recoil";
 import { totalPriceState } from "@/state/totalPriceState";
 
 export default function PointsLayout(props:{children:React.ReactNode}) {
@@ -53,7 +53,10 @@ export default function PointsLayout(props:{children:React.ReactNode}) {
     return (
         <>
         <PhoneNumberModal show={showPhoneNumberModal} onClose={setShowPhoneNumberModal} />
+        <RecoilRoot>
             <Header />
+        </RecoilRoot>
+            
             <Location />
             {props.children}
             <Text text="신세계포인트 적립방법을 선택해 주세요" />

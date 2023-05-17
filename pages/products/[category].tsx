@@ -19,6 +19,7 @@ import CartItem from "../cart-list/CartItem";
 import { NextPageWithLayout } from "../_app";
 import FooterPreBtn from "@/components/FooterPreBtn";
 import FooterCheckCartBtn from "@/components/FooterCheckCartBtn";
+import { RecoilRoot } from "recoil";
 
 const Products : NextPageWithLayout = () => {
     const router = useRouter();
@@ -168,7 +169,7 @@ const Products : NextPageWithLayout = () => {
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" href="/favicon.ico" />
         </Head>
-
+    
         <div>
             <nav className={style.categoryNav}>
                 <ul>

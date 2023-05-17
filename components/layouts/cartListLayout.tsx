@@ -5,11 +5,14 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import Button from "@/components/Button";
 import Text from "@/components/Text";
+import { RecoilRoot } from "recoil";
 
 export default function cartListLayout(props:{children:React.ReactNode}) {
     return (
         <div>
-            <Header />
+            <RecoilRoot>
+                <Header />
+            </RecoilRoot>
             <Location />
             {props.children}
         </div>

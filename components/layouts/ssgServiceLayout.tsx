@@ -9,7 +9,7 @@ import style from "./shoppingBagLayout.module.css"
 import GiftModal from "../GiftModal";
 import Delivery from "@/pages/delivery";
 import DeliveryModal from "../DeliveryModal";
-import { useRecoilState } from "recoil";
+import { RecoilRoot, useRecoilState } from "recoil";
 import { totalPriceState } from "@/state/totalPriceState";
 
 export default function ssgServiceLayout(props:{children:React.ReactNode}) {
@@ -31,7 +31,9 @@ export default function ssgServiceLayout(props:{children:React.ReactNode}) {
         <>
         <GiftModal show={showGiftModal} onClose={setShowGiftModal} />
         <DeliveryModal show={showDeliveryModal} onClose={setShowDeliveryModal} />
+        <RecoilRoot>
             <Header />
+        </RecoilRoot>
             <Location />
             {props.children}
             <Text text="이용하실 SSG service를 선택해 주세요" />
