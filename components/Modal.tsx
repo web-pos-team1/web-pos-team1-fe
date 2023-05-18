@@ -7,7 +7,12 @@ import Image from 'next/image'
 //     onClick: () => void;
 // }
 
-export default function Modal(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>, setLanguageIndex:Dispatch<SetStateAction<number>>}) {
+export default function Modal(
+    props: {
+        show:boolean, 
+        onClose:Dispatch<SetStateAction<boolean>>, 
+        setLanguageIndex?:Dispatch<SetStateAction<number>>
+    }) {
 
     // console.log(props.show)
 
