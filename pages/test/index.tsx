@@ -16,6 +16,8 @@ export default function Test() {
     const [languageIndex, setLanguageIndex] = useRecoilState(LanguageIndexState);
     const [payGuideTextList, setPayGuideTextList] = useState<string[]>(PayGuideTextList);
 
+    const [globalText, setGlobalText] = useState<string>('');
+
     useEffect(() => {
         console.log("recoilValue: ", recoilValue);
         console.log("reset recoil CartListState");
@@ -23,17 +25,21 @@ export default function Test() {
         console.log("tPrice from recoil: ", tPrice);
         console.log("languageIndex: ", languageIndex);
         setTestList([]);
-    }, [])
+        setGlobalText(payGuideTextList[languageIndex]);
+    }, [languageIndex])
     return(
         <div>
             <RecoilRoot>
-                <Header />    
+                <Header 
+                    languageIndex={languageIndex}
+                    setLanguageIndex={setLanguageIndex}
+                />    
             </RecoilRoot>
-            <h3>
+            <h1 style={{ textAlign: "center"}}>
                 {
-                    payGuideTextList && payGuideTextList[languageIndex]
+                    globalText
                 }
-            </h3>
+            </h1>
         </div>
     )
 }

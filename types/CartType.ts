@@ -6,5 +6,6 @@ export interface CartType {
     image_url: string,
     description: string,
     qty: number,
-    cartQty: number
+    cartQty: number,
+    event: boolean
 }

@@ -112,7 +112,8 @@ const Products : NextPageWithLayout = () => {
             image_url: product.image_url,
             description: product.description,
             qty: product.qty,
-            cartQty: cartQty
+            cartQty: cartQty,
+            event: product.event
         };
         return cart;
     }
@@ -198,7 +199,7 @@ const Products : NextPageWithLayout = () => {
                             <p className={style.productItemPrice}>
                                 {formatMoney(item.price)}<span>원</span>
                             </p> 
-                            <p className={item.isEvent === true ? `${style.eventProductItem}` : `${style.notEventProductItem}`}>
+                            <p className={item.event === true ? `${style.eventProductItem}` : `${style.notEventProductItem}`}>
                                 기획
                             </p>                                
                         </div>
