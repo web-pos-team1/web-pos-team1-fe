@@ -30,20 +30,24 @@ export default function Header(
   }
 ) {
 
-    const router = useRouter();
-    // const title = router.pathname.split('/')[1];
-    const pathName  = router.pathname;
-    // const title  = translations[pathName] || '신세계';
+  const router = useRouter();
+  // const title = router.pathname.split('/')[1];
+  const pathName  = router.pathname;
+  // const title  = translations[pathName] || '신세계';
    
-    const [showModal, setShowModal] = useState<boolean>(false);
-    const [showCallStaffModal, setShowCallStaffModal] = useState<boolean>(false);
-    const [title, setTitle] = useState<string>('');
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [showCallStaffModal, setShowCallStaffModal] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>('');
 
-    const [languageIndex, setLanguageIndex] = useRecoilState(LanguageIndexState);
-    const [buttons, setButtons] = useState<Button[]>([]);
+  const [buttons, setButtons] = useState<Button[]>([]);
+
+  const handleModal = () => {
+    console.log('modal')
+    setShowModal(true)
+  }
 
   useEffect(()=>{
-    console.log("Header's useEffect() / languageIndex: ", languageIndex);
+    console.log("Header's useEffect() / props.languageIndex: ", props.languageIndex);
     const res = transeData.filter(item => item.key === pathName)
     if ( res.length > 0 ) {
       setTitle(res[0].value)
@@ -51,7 +55,7 @@ export default function Header(
     const tempButtons = [
       {
           id: 1,
-          src: countryImg[languageIndex], 
+          src: countryImg[props.languageIndex ? props.languageIndex : 0], 
           alt: "select languages",
           link: "",
           onClick: () => setShowModal(true)
@@ -73,13 +77,7 @@ export default function Header(
   ];
   setButtons(tempButtons);
 
-  },[pathName, languageIndex])
-
-  const handleModal = () => {
-    console.log('modal')
-    setShowModal(true)
-  }
-
+  },[pathName, props.languageIndex]);
 
   return (
     <>

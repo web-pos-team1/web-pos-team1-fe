@@ -5,6 +5,7 @@ import { formatMoney } from "@/components/globalfunctions/formatMoney";
 import Image from "next/image";
 import style from "./CartItem.module.css";
 import { ProductType } from "@/types/ProductType";
+import CartDelModal from "@/components/AlertModal/CartDelModal";
 
 export default function CartItem(
     props: {
@@ -19,6 +20,8 @@ export default function CartItem(
     }) 
     {
     const [cartQty, setCartQty] = useState<number>(props.item.cartQty);
+    const [showCartDelModal, setShowCartDelModal] = useState<boolean>(false);
+    const [delState, setDelState] = useState<boolean>(false);
 
     const minusCount = () => {
         if (cartQty === 1) {
@@ -52,46 +55,56 @@ export default function CartItem(
     }
     const handleDelBtnClick = (cart : CartType) => {
         console.log("삭제할 product: ", cart);
-        props.setDelProductId(cart.product_id);
-        if (window.confirm("장바구니에서 삭제하시겠습니까?")) {
-            console.log("---장바구니에서 삭제하는 로직---");
-        } else {
-            console.log("---삭제 취소---");
-        }
+        setShowCartDelModal(true);
+        // if (window.confirm("장바구니에서 삭제하시겠습니까?")) {
+        //     console.log("---장바구니에서 삭제하는 로직---");
+        // } else {
+        //     console.log("---삭제 취소---");
+        // }
     }
     useEffect(() => {
         console.log("props: ", props);
-    }, [])
+        if (delState) {
+            props.setDelProductId(props.item.product_id);
+        }
+    }, [delState])
     return (
-        <tr className={style.cartItemRow}>
-            <td className={style.cartItemName}>
-                <Image 
-                src={props.item.image_url} width={140} height={140} alt="product image"/>
-                <p>{props.item.name}</p>
-            </td>
-            <td className={style.qtyController}>
-                <button onClick={minusCount}>
-                    <img src="/images/minus.png" alt="declineQty" />
-                </button>
+        <>
+            <CartDelModal 
+                show={showCartDelModal}
+                onClose={setShowCartDelModal}
+                setDelState={setDelState}
+            />
+            <tr className={style.cartItemRow}>
+                <td className={style.cartItemName}>
+                    <Image 
+                    src={props.item.image_url} width={140} height={140} alt="product image"/>
+                    <p>{props.item.name}</p>
+                </td>
+                <td className={style.qtyController}>
+                    <button onClick={minusCount}>
+                        <img src="/images/minus.png" alt="declineQty" />
+                    </button>
 
-                <span className={style.count}>{cartQty}</span>
-                
-                <button onClick={plusCount}>
-                    <img src="/images/plus.png" alt="increseQty" />
-                </button>
-            </td>
-            <td className={style.cartItemPrice}>
-                <p>{formatMoney(props.item.price)}</p>
-            </td>
-            <td className={style.cartEachPrice}>
-                <span>{formatMoney(props.item.price * cartQty)}</span>
-            </td>
-            <td>
-                <span className={style.cartDelBtn} onClick={() => handleDelBtnClick(props.item)}>
-                    <img src="/images/deleteBtn.png" alt="cart item delete button" />
-                </span>   
-            </td>
-        </tr>
+                    <span className={style.count}>{cartQty}</span>
+                    
+                    <button onClick={plusCount}>
+                        <img src="/images/plus.png" alt="increseQty" />
+                    </button>
+                </td>
+                <td className={style.cartItemPrice}>
+                    <p>{formatMoney(props.item.price)}</p>
+                </td>
+                <td className={style.cartEachPrice}>
+                    <span>{formatMoney(props.item.price * cartQty)}</span>
+                </td>
+                <td>
+                    <span className={style.cartDelBtn} onClick={() => handleDelBtnClick(props.item)}>
+                        <img src="/images/deleteBtn.png" alt="cart item delete button" />
+                    </span>   
+                </td>
+            </tr>
+        </>
         
     )
 }

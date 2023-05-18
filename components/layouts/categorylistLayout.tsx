@@ -3,16 +3,23 @@ import Header from "@/components/Header"
 import Link from "next/link";
 import Button from "@/components/Button";
 import Text from "@/components/Text";
-import { RecoilRoot } from "recoil";
+import { RecoilRoot, useRecoilState } from "recoil";
+import { LanguageIndexState } from "@/state/LanguageIndexState";
 
 export default function CategorylistLayout(props:{children:React.ReactNode}) {
+    const [languageIndex, setLanguageIndex] = useRecoilState(LanguageIndexState);
     return (
         <div>
             <RecoilRoot>
-                <Header />
+                <Header 
+                    languageIndex={languageIndex}
+                    setLanguageIndex={setLanguageIndex}
+                />
             </RecoilRoot>
             {props.children}
-            <Text text="카테고리를 선택해 주세요" />
+            <Text 
+            text="카테고리를 선택해 주세요" 
+            />
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gridGap: '40px', margin: '85px 40px 160px 40px' }}>
                 <Link href="/products/과일">
                     <Button src="/images/fruit.png" alt="fruit category" text="과일" onClick={() => console.log('btn 1')}/>

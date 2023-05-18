@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import Link from 'next/link'
 import CategorylistLayout from '@/components/layouts/categorylistLayout'
 import { NextPageWithLayout } from '../_app'
+import { RecoilRoot } from 'recoil'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,9 +25,11 @@ const Products: NextPageWithLayout = () => {
 Products.getLayout = function getLayout(page: React.ReactNode) {
   return(
     <>
-    <CategorylistLayout>
-      {page}
-    </CategorylistLayout>
+      <RecoilRoot>
+        <CategorylistLayout>
+          {page}
+        </CategorylistLayout>
+      </RecoilRoot>
     </>
   )
 }
