@@ -140,6 +140,7 @@ const CartList : NextPageWithLayout = () => {
                                     setDelProductId={setDelProductId}
                                     totalPrice={totalPrice}
                                     setTotalPrice={setTotalPrice}
+                                    event={cart.event}
                                 />
                             ))
                         }

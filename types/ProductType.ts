@@ -6,5 +6,5 @@ export interface ProductType {
     image_url: string,
     description: string,
     qty: number,
-    isEvent: boolean
+    event: boolean
 }
