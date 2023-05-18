@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import style from './Header.module.css';
 import Image from 'next/image'
 import Link from 'next/link'
@@ -23,7 +23,12 @@ type Button = {
   onClick: any
 } 
 
-export default function Header() {
+export default function Header(
+  props: {
+    languageIndex?: number,
+    setLanguageIndex?: Dispatch<SetStateAction<number>>
+  }
+) {
 
     const router = useRouter();
     // const title = router.pathname.split('/')[1];
@@ -38,6 +43,7 @@ export default function Header() {
     const [buttons, setButtons] = useState<Button[]>([]);
 
   useEffect(()=>{
+    console.log("Header's useEffect() / languageIndex: ", languageIndex);
     const res = transeData.filter(item => item.key === pathName)
     if ( res.length > 0 ) {
       setTitle(res[0].value)
@@ -79,7 +85,7 @@ export default function Header() {
     <>
     <Modal 
       show={showModal} onClose={setShowModal} 
-      setLanguageIndex={setLanguageIndex}
+      setLanguageIndex={props.setLanguageIndex}
     />
     <CallStaffModal show={showCallStaffModal} onClose={setShowCallStaffModal} />
     <header className={style.headerMenu}>

@@ -14,7 +14,8 @@ export default function CartItem(
         totalPrice : number, 
         setTotalPrice : any
         setCartList: any
-        cartList: CartType[]
+        cartList: CartType[],
+        event: boolean
     }) 
     {
     const [cartQty, setCartQty] = useState<number>(props.item.cartQty);
