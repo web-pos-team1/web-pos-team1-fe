@@ -23,7 +23,7 @@ export default function PhoneMatch(props:{show:boolean, onClose:Dispatch<SetStat
                 </div>
                 <div className={style.footer}>
                     <Link href="/ssgService">
-                        <button onClick={()=>props.onClose(false)}>
+                        <button>
                             <Image
                                 src="/images/checkPurple.png"
                                 alt="confirm"
@@ -31,7 +31,9 @@ export default function PhoneMatch(props:{show:boolean, onClose:Dispatch<SetStat
                                 width={28}
                                 height={28}
                             />
-                            <p>확인</p>
+                            <p onClick={()=>props.onClose(false)}>
+                                확인
+                            </p>
                         </button>
                     </Link>
                 </div>

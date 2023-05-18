@@ -14,7 +14,7 @@ export default function PhoneMismatch(props:{show:boolean, onClose:Dispatch<SetS
                     <p>회원으로 등록되지 않은 번호입니다</p>
                 </div>
                 <div className={style.footer}>
-                    <button onClick={()=>props.onClose(false)}>
+                    <button>
                         <Image
                             src="/images/checkPurple.png"
                             alt="confirm"
@@ -22,8 +22,10 @@ export default function PhoneMismatch(props:{show:boolean, onClose:Dispatch<SetS
                             width={28}
                             height={28}
                         />
-                        <p>확인</p>
-                        </button>
+                        <p onClick={()=>props.onClose(false)}>
+                            확인
+                        </p>
+                    </button>
                 </div>
             </div>
         </div>

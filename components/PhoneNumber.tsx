@@ -42,18 +42,6 @@ const PhoneNumber: React.FC = () => {
     })
   };
 
-  // const handlePhoneMismatch = () => {
-  //   setShowPhoneMismatch(true)
-  // };
-
-  const handlePhoneMatchClose = () => {
-    setShowPhoneMatch(false)
-  };
-
-  // const handlePhoneMismatchClose = () => {
-  //   setShowPhoneMismatch(false)
-  // };
-
   return (
     <div className={style.topWrap}>
       <h1>신세계포인트</h1>
@@ -63,8 +51,8 @@ const PhoneNumber: React.FC = () => {
         setPhoneNumber={setPhoneNumber}
       />
       
-        <div onClick={handlePhoneMatch} className={style.confirmBtn}>
-          <PhoneMatch show={showPhoneMatch} onClose={handlePhoneMatchClose}/>
+        <div className={style.confirmBtn}>
+          <PhoneMatch show={showPhoneMatch} onClose={setShowPhoneMatch}/>
           <PhoneMismatch show={showPhoneMismatch} onClose={setShowPhoneMismatch} />
            <Image 
             src="/images/checkPurple.png"
@@ -72,8 +60,9 @@ const PhoneNumber: React.FC = () => {
             width={30}
             height={30}
             />
-          
-          <p>확인</p>
+          <p onClick={handlePhoneMatch}>
+            확인
+          </p>
         </div>
       
     </div>

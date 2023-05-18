@@ -14,7 +14,6 @@ export default function Test() {
     const [tPrice, setTPrice] = useRecoilState(totalPriceState);
     const totalPrice = useRecoilValue(totalPriceState);
     const [languageIndex, setLanguageIndex] = useRecoilState(LanguageIndexState);
-    const [payGuideTextList, setPayGuideTextList] = useState<string[]>(PayGuideTextList);
 
     const [globalText, setGlobalText] = useState<string>('');
 
@@ -25,7 +24,7 @@ export default function Test() {
         console.log("tPrice from recoil: ", tPrice);
         console.log("languageIndex: ", languageIndex);
         setTestList([]);
-        setGlobalText(payGuideTextList[languageIndex]);
+        setGlobalText(PayGuideTextList[languageIndex]);
     }, [languageIndex])
     return(
         <div>
