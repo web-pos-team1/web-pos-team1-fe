@@ -132,7 +132,9 @@ const Products : NextPageWithLayout = () => {
         let url_products = mapToBE(`/api/v1/products/${router.query.category}`);
         // url_products = `http://localhost:3001/products`;
         console.log("url_porducts: ", url_products);
-        axios(url_products,
+
+        axios(
+            url_products,
             {
                 method: 'get'    
             }
@@ -142,6 +144,7 @@ const Products : NextPageWithLayout = () => {
             setItemList(res.data)
         })
         .catch((err) => console.log("products/err: ", err));
+
     
 
         // Cart 컴포넌트에서 "삭제" 이벤트 발생했을 경우
