@@ -15,6 +15,7 @@
     "@types/react-dom": "18.2.1",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.2",
+    "hangul-virtual-keyboard": "^1.0.2",
     "http-proxy-middleware": "^2.0.6",
     "next": "13.3.2",
     "next-http-proxy-middleware": "^1.2.5",
@@ -22,10 +23,14 @@
     "react": "18.2.0",
     "react-daum-postcode": "^3.1.1",
     "react-dom": "18.2.0",
+    "react-hangul-virtual-keyboard": "^1.0.0",
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.11.1",
+    "react-simple-keyboard": "^3.5.75",
     "recoil": "^0.7.7",
     "recoil-persist": "^4.2.0",
+    "simple-keyboard": "^3.5.62",
+    "simple-keyboard-layouts": "^3.1.325",
     "typescript": "5.0.4"
   }
 }
