@@ -48,30 +48,32 @@
 .title hr {
     border: 3px solid #4C304F;
     width: 700px;
+    margin-bottom: 28px;
 }
 
-.body {
+.deliveryTimeList {
     /* display: flex; */
     justify-content: center;
 }
-.body hr {
+.deliveryTimeList hr {
     border: 0.9px solid #56565B;
     width: 700px;
+    margin: 25px 0px;
 }
 
-.body p {
+.deliveryTimeList label {
      /* display: flex; */
     /*justify-content: center; */
     font-size: 30px;
     font-weight: 300;
-    padding: 26px 0;
 }
 
-.body input {
+.deliveryTimeList input {
     width: 25px;
     height: 25px;
     border-radius: 50%;
     background-color: #ffffff;
+    color: #4C304F;
     /* appearance: none; */
     cursor: pointer;
     transition: background 0.2s;
@@ -79,7 +81,7 @@
     margin-right: 10px;
 }
 
-/* .body input:checked {
+/* .deliveryTimeList input:checked {
     background-color: #4C304F;
 } */
 
@@ -101,3 +103,7 @@
     font-size: 25px;
     color: #FFFFFF;
 }
+
+.deliveryTimeList input:checked {
+    background-color: #4C304F;
+  }

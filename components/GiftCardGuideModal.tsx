@@ -45,7 +45,7 @@ export default function GiftCardGuideModal(props:{show:boolean, onClose:Dispatch
                 </div>
 
                 <div className={style.footer}>
-                    <button onClick={handleGiftCardNumberModal}>
+                    <button >
                     {/* <button onClick={() => { handleGiftCardNumberModal(); props.onClose(false); }}> */}
                         <GiftCardNumberModal show={showGiftCardNumberModal} onClose={setShowGiftCardNumberModal}/>
                         <Image
@@ -55,7 +55,7 @@ export default function GiftCardGuideModal(props:{show:boolean, onClose:Dispatch
                             width={28}
                             height={28}
                         />
-                        <p>예</p>
+                        <p onClick={handleGiftCardNumberModal} >예</p>
                     </button>
                 {/* </Link> */}
                 <Link href='/payments'>

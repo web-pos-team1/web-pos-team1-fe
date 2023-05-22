@@ -9,28 +9,38 @@ import style from "./shoppingBagLayout.module.css"
 import GiftModal from "../GiftModal";
 import Delivery from "@/pages/delivery";
 import DeliveryModal from "../DeliveryModal";
+import DeliveryTimeModal from "../DeliveryTimeModal";
 import { RecoilRoot, useRecoilState } from "recoil";
 import { totalPriceState } from "@/state/totalPriceState";
+
 
 export default function ssgServiceLayout(props:{children:React.ReactNode}) {
 
     const [showGiftModal, setShowGiftModal] = useState<boolean>(false);
     const [showDeliveryModal, setShowDeliveryModal] = useState<boolean>(false);
     const [totalPrice, setTotalPrice] = useRecoilState(totalPriceState);
+    const [showDeliveryTimeModal, setShowDeliveryTimeModal] = useState<boolean>(false);
 
     const handleModal = () => {
         console.log('modal')
         setShowGiftModal(true)
+        setShowDeliveryTimeModal(true)
+        setShowDeliveryModal(false)
       }
 
-    const handleDeliveryModal = () => {
-        setShowDeliveryModal(true)
-    }
+    // const handleDeliveryModal = () => {
+    //     setShowDeliveryModal(true)
+    // }
+    // const handleDeliveryTimeModal = () => {
+    //     setShowDeliveryTimeModal(true)
+    //     setShowDeliveryModal(false)
+    // }
     
     return (
         <>
         <GiftModal show={showGiftModal} onClose={setShowGiftModal} />
-        <DeliveryModal show={showDeliveryModal} onClose={setShowDeliveryModal} />
+        <DeliveryModal show={showDeliveryModal} onClose={handleModal} />
+        <DeliveryTimeModal show={showDeliveryTimeModal} onClose={setShowDeliveryTimeModal}/>
         <RecoilRoot>
             <Header />
         </RecoilRoot>

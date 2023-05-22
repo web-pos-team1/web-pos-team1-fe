@@ -14,7 +14,6 @@ export default function DeliveryModal(props:{show:boolean, onClose:Dispatch<SetS
   const [isOpenAddress, setIsOpenAddress] = useState<boolean>(false);
   const [detailAddress, setDetailAddress] = useState<string>("");
   const [postCode, setPostCode] = useState<string>("");
-  const [showDeliveryTimeModal, setShowDeliveryTimeModal] = useState<boolean>(false);
 
     if(!props.show) return null
 
@@ -30,10 +29,6 @@ export default function DeliveryModal(props:{show:boolean, onClose:Dispatch<SetS
       setAddress(data.roadAddress);
       setPostCode(data.zonecode);
       setIsOpenAddress(false); 
-  }
-
-  const showDeliveryTimeModalHandler = () => {
-    setShowDeliveryTimeModal(true);
   }
 
   return (
@@ -134,18 +129,15 @@ export default function DeliveryModal(props:{show:boolean, onClose:Dispatch<SetS
       </div>
 
       <button>취소</button>
-      {/* <Link href="/payments"> */}
-      <DeliveryTimeModal show={showDeliveryTimeModal} onClose={setShowDeliveryTimeModal}/>
-        <div onClick={showDeliveryTimeModalHandler} className={style.confirmBtn}>
+        <div className={style.confirmBtn}>
           <Image 
             src="/images/checkPurple.png"
             alt="confirm button"
             width={30}
             height={30}
             />
-          <p>확인</p>
+          <p onClick={()=>props.onClose(false)}>확인</p>
           </div>
-      {/* </Link> */}
       </div>
     </div>
   );

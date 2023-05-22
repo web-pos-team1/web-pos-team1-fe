@@ -1,14 +1,24 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import Image from 'next/image';
 import style from './DeliveryTimeModal.module.css'
 import Link from 'next/link';
+import { deliveryTimeList } from '@/data/deliveryTimeList';
+import { time } from 'console';
+import { DeliveryTimeType } from '@/types/DeliveryTimeType';
+import GiftCardGuideModal from './GiftCardGuideModal';
 
 export default function DeliveryTimeModal(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
 
     if(!props.show) return null
 
-  return (
+    const [showGiftCardGuideModal, setShowGiftCardGuideModal] = useState<boolean>(false);
+  
+    const handleModal = () => {
+      setShowGiftCardGuideModal(true);
+    };
 
+  return (
+    <>
     <div className={style.overlay}>
       <div className={style.modal}>
         <div className={style.cancel}>
@@ -28,24 +38,23 @@ export default function DeliveryTimeModal(props:{show:boolean, onClose:Dispatch<
           <hr/>
         </div>
 
-        <div className={style.body}>
-        <p><input type="radio"/>11:00 ~ 14:00</p>
-        <hr />
-        <p><input type="radio"/>12:00 ~ 15:00</p>
-        <hr />
-        <p><input type="radio"/>13:00 ~ 16:00</p>
-        <hr />
-        <p><input type="radio"/>14:00 ~ 17:00</p>
-        <hr />
-        <p><input type="radio"/>15:00 ~ 18:00</p>
-        <hr />
-        <p><input type="radio"/>16:00 ~ 19:00</p>
-        <hr />
-        <p><input type="radio"/>17:00 ~ 20:00</p>
-        <hr />
-        </div>
+      <div className={style.deliveryTimeList}>
+        <form>
+          {
+            deliveryTimeList && deliveryTimeList.map((time:DeliveryTimeType, id:number) => (
+              <div key={id}>
+              <label>
+                <input type='radio' name="delivery" value="time"/>
+                {time.title}
+              </label>
+              <hr/>
+              </div>
+            ))}
+        </form>
+      </div>
 
-      <Link href="/payments">
+      {/* <Link href="/payments"> */}
+      <GiftCardGuideModal show={showGiftCardGuideModal} onClose={setShowGiftCardGuideModal} />
         <div className={style.confirmBtn}>
           <Image 
             src="/images/checkWhite.png"
@@ -53,10 +62,11 @@ export default function DeliveryTimeModal(props:{show:boolean, onClose:Dispatch<
             width={30}
             height={30}
             />
-          <p>선택하기</p>
+          <p onClick={handleModal}>선택하기</p>
           </div>
-      </Link>
+      {/* </Link> */}
       </div>
     </div>
+    </>
   );
 };
