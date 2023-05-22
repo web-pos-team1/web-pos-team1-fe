@@ -8,6 +8,7 @@ import Text from "@/components/Text";
 import Text3Button from "../Text3Button";
 import { useRecoilState } from "recoil";
 import { totalPriceState } from "@/state/totalPriceState";
+import GiftCardGuideModal from "../GiftCardGuideModal";
 // import style from "./CustomImg.module.css";
 
 interface Props {
@@ -16,12 +17,19 @@ interface Props {
 
 const PaymentsLayout: React.FC<Props> = ({ children }) => {
   const [totalPrice, setTotalPrice] = useRecoilState(totalPriceState);
+  const [showGiftCardGuideModal, setShowGiftCardGuideModal] = useState<boolean>(false);
+
+  const handleGiftCardModal = () => {
+    console.log("handleGiftCardModal");
+    setShowGiftCardGuideModal(true);
+  };
+
   const buttons = [
     {
       src: "/images/creditCard.png",
       alt: "credit cart payment",
       text1: "신용/체크카드",
-      onClick: () => console.log("btn 1"),
+      onClick: () => setShowGiftCardGuideModal(true)
     },
     {
       src: "/images/mobilePayyy.png",
@@ -35,7 +43,6 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       text1: "SSGPAY",
       text2: "카카오페이",
       text3: "스마일페이",
-    //   text: "SSGPAY\n카카오페이\n스마일페이",
       onClick: () => console.log("btn 3"),
     },
     {
@@ -44,13 +51,13 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       text1: "은련카드",
       text2: "위챗페이",
       text3: "알리페이",
-    //   text: "은련카드\n위챗페이\n알리페이",
       onClick: () => console.log("btn 4"),
-    //   className: style.image
     },
   ];
 
   return (
+    <>
+    <GiftCardGuideModal show={showGiftCardGuideModal} onClose={setShowGiftCardGuideModal} onClickTrue={handleGiftCardModal}/>
     <div>
       <Header />
       <Location />
@@ -73,16 +80,14 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
             text2={button.text2}
             text3={button.text3}
             onClick={button.onClick}
-            // className={button.className}
           />
         ))}
       </div>
-      {/* <Link href="/ssgService"> */}
         <Footer 
           totalPrice={totalPrice}
         />
-      {/* </Link> */}
     </div>
+    </>
   );
 };
 

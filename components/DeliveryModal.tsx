@@ -1,7 +1,6 @@
 import React, { Dispatch, SetStateAction, useState, useEffect } from 'react';
 import Image from 'next/image';
 import style from './DeliveryModal.module.css'
-import Link from 'next/link';
 import DaumPostcode from 'react-daum-postcode';
 import Modal from 'react-modal';
 import DeliveryTimeModal from './DeliveryTimeModal';

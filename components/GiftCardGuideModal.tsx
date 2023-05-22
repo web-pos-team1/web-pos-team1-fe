@@ -5,21 +5,24 @@ import Link from 'next/link';
 import GiftCardNumberModal from "./GiftCardNumberModal";
 import React from "react";
 
-export default function GiftCardGuideModal(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
+export default function GiftCardGuideModal(props:{show:boolean,
+    onClose:Dispatch<SetStateAction<boolean>>,
+    onClickTrue:()=>void
+}) {
 
-    const [showGiftCardNumberModal,setShowGiftCardNumberModal] = React.useState<boolean>(false);
+    // const [showGiftCardNumberModal,setShowGiftCardNumberModal] = React.useState<boolean>(false);
 
-    const handleGiftCardNumberModal = () => {
-        setShowGiftCardNumberModal(true)
-    };
+    // const handleGiftCardNumberModal = () => {
+    //     setShowGiftCardNumberModal(true)
+    // };
 
     // const handleGiftCardNumberModalClose = () => {
     //     setShowGiftCardNumberModal(false)
     // };
-
+    const { show, onClose, onClickTrue } = props;
 
     if(!props.show) return null
-    
+
     return (
         <div className={style.overlay}>
             <div className={style.modal}>
@@ -45,9 +48,9 @@ export default function GiftCardGuideModal(props:{show:boolean, onClose:Dispatch
                 </div>
 
                 <div className={style.footer}>
-                    <button >
+                    <div onClick={onClickTrue}>
                     {/* <button onClick={() => { handleGiftCardNumberModal(); props.onClose(false); }}> */}
-                        <GiftCardNumberModal show={showGiftCardNumberModal} onClose={setShowGiftCardNumberModal}/>
+                        {/* <GiftCardNumberModal show={showGiftCardNumberModal} onClose={setShowGiftCardNumberModal}/> */}
                         <Image
                             src="/images/checkWhite.png"
                             alt="confirm"
@@ -55,8 +58,8 @@ export default function GiftCardGuideModal(props:{show:boolean, onClose:Dispatch
                             width={28}
                             height={28}
                         />
-                        <p onClick={handleGiftCardNumberModal} >예</p>
-                    </button>
+                        <p>예2</p>
+                    </div>
                 {/* </Link> */}
                 <Link href='/payments'>
                     <button>
