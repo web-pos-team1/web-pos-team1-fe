@@ -15,6 +15,7 @@
     "@types/react-dom": "18.2.1",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.2",
+    "hangul-js": "^0.2.6",
     "hangul-virtual-keyboard": "^1.0.2",
     "http-proxy-middleware": "^2.0.6",
     "next": "13.3.2",
