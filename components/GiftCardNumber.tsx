@@ -5,12 +5,19 @@ import style from './PhoneNumber.module.css'
 import Link from 'next/link';
 
 const GiftCardNumber: React.FC = () => {
+  
+  const [giftCardNumber, setGiftCardNumber] = React.useState<string>('')
+
+
   return (
     
     <div className={style.topWrap}>
       <h1>모바일 상품권</h1>
       <p>상품권의 일련번호를 입력해 주세요</p>
-      <GiftCardNumberInput />
+      <GiftCardNumberInput 
+        giftCardNumber={giftCardNumber}
+        setGiftCardNumber={setGiftCardNumber}
+      />
       <Link href="/payments">
       <div className={style.confirmBtn}>
         <Image 

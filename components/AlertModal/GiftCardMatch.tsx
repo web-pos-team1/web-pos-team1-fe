@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import style from "./AlertModal.module.css";
 import Image from 'next/image';
+import Link from "next/link";
 
 export default function GiftCardMatch(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
 
@@ -14,7 +15,8 @@ export default function GiftCardMatch(props:{show:boolean, onClose:Dispatch<SetS
                     <p>입력 완료되었습니다</p>
                 </div>
                 <div className={style.footer}>
-                    <button onClick={()=>props.onClose(false)}>
+                <Link href="/payments">
+                    <button>
                         <Image
                             src="/images/checkPurple.png"
                             alt="confirm"
@@ -22,8 +24,9 @@ export default function GiftCardMatch(props:{show:boolean, onClose:Dispatch<SetS
                             width={28}
                             height={28}
                         />
-                        <p>확인</p>
+                        <p onClick={()=>props.onClose(false)}>확인</p>
                         </button>
+                        </Link>
                 </div>
             </div>
         </div>

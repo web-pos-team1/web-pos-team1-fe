@@ -14,7 +14,7 @@ export default function GiftCardExpired(props:{show:boolean, onClose:Dispatch<Se
                     <p>만료된 상품권입니다</p>
                 </div>
                 <div className={style.footer}>
-                    <button onClick={()=>props.onClose(false)}>
+                    <button>
                         <Image
                             src="/images/checkPurple.png"
                             alt="confirm"
@@ -22,7 +22,7 @@ export default function GiftCardExpired(props:{show:boolean, onClose:Dispatch<Se
                             width={28}
                             height={28}
                         />
-                        <p>확인</p>
+                        <p onClick={()=>props.onClose(false)}>확인</p>
                         </button>
                 </div>
             </div>

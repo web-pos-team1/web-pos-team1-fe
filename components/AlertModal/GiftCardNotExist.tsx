@@ -14,7 +14,7 @@ export default function GiftCardNotExist(props:{show:boolean, onClose:Dispatch<S
                     <p>존재하지 않는 상품권입니다</p>
                 </div>
                 <div className={style.footer}>
-                    <button onClick={()=>props.onClose(false)}>
+                    <button>
                         <Image
                             src="/images/checkPurple.png"
                             alt="confirm"
@@ -22,7 +22,7 @@ export default function GiftCardNotExist(props:{show:boolean, onClose:Dispatch<S
                             width={28}
                             height={28}
                         />
-                        <p>확인</p>
+                        <p onClick={()=>props.onClose(false)}>확인</p>
                         </button>
                 </div>
             </div>

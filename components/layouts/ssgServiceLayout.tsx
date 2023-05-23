@@ -9,28 +9,57 @@ import style from "./shoppingBagLayout.module.css"
 import GiftModal from "../GiftModal";
 import Delivery from "@/pages/delivery";
 import DeliveryModal from "../DeliveryModal";
+import DeliveryTimeModal from "../DeliveryTimeModal";
 import { RecoilRoot, useRecoilState } from "recoil";
 import { totalPriceState } from "@/state/totalPriceState";
+import GiftCardGuideModal from "../GiftCardGuideModal";
+import GiftCardNumberModal from "../GiftCardNumberModal";
+
 
 export default function ssgServiceLayout(props:{children:React.ReactNode}) {
 
     const [showGiftModal, setShowGiftModal] = useState<boolean>(false);
     const [showDeliveryModal, setShowDeliveryModal] = useState<boolean>(false);
     const [totalPrice, setTotalPrice] = useRecoilState(totalPriceState);
+    const [showDeliveryTimeModal, setShowDeliveryTimeModal] = useState<boolean>(false);
+    const [showGiftCardGuideModal, setShowGiftCardGuideModal] = useState<boolean>(false);
+    const [showGiftCardNumberModal, setShowGiftCardNumberModal] = useState<boolean>(false);
 
     const handleModal = () => {
         console.log('modal')
-        setShowGiftModal(true)
+        setShowGiftModal(!showGiftModal)
+        // setShowGiftModal(false)
       }
 
     const handleDeliveryModal = () => {
         setShowDeliveryModal(true)
     }
+    const handleDeliveryTimeModal = () => {
+        setShowDeliveryTimeModal(true)
+        setShowDeliveryModal(false)
+    }
+
+    const handleGiftCardGuideModal = () => {
+        // setShowGiftCardGuideModal(true)
+        setShowDeliveryTimeModal(false)
+    }
+
+    const handleGiftCardNumberModal = () => {
+        setShowGiftCardNumberModal(true)
+        console.log('handleGiftCardNumberModal')
+    }
     
     return (
         <>
-        <GiftModal show={showGiftModal} onClose={setShowGiftModal} />
-        <DeliveryModal show={showDeliveryModal} onClose={setShowDeliveryModal} />
+        <GiftModal show={showGiftModal} onClose={handleModal}/>
+        <DeliveryModal show={showDeliveryModal} onClose={handleDeliveryTimeModal}/>
+        <DeliveryTimeModal show={showDeliveryTimeModal} onClose={setShowDeliveryTimeModal}/>
+        <GiftCardGuideModal 
+            show={showGiftCardGuideModal} 
+            onClose={setShowGiftCardGuideModal}
+            onClickTrue={handleGiftCardNumberModal}
+        />
+        <GiftCardNumberModal show={showGiftCardNumberModal} onClose={setShowGiftCardNumberModal}/>
         <RecoilRoot>
             <Header />
         </RecoilRoot>
