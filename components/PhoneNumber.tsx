@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import PhoneNumberInput from './PhoneNumberInput';
 import Image from 'next/image';
-import style from './PhoneNumber.module.css'
-import Link from 'next/link';
+import style from './PhoneNumber.module.css';
 import PhoneMatch from './AlertModal/PhoneMatch';
 import PhoneMismatch from './AlertModal/PhoneMismatch';
 import axios from 'axios';

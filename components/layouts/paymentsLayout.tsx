@@ -16,6 +16,7 @@ interface Props {
 
 const PaymentsLayout: React.FC<Props> = ({ children }) => {
   const [totalPrice, setTotalPrice] = useRecoilState(totalPriceState);
+
   const buttons = [
     {
       src: "/images/creditCard.png",
@@ -35,7 +36,6 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       text1: "SSGPAY",
       text2: "카카오페이",
       text3: "스마일페이",
-    //   text: "SSGPAY\n카카오페이\n스마일페이",
       onClick: () => console.log("btn 3"),
     },
     {
@@ -44,13 +44,12 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       text1: "은련카드",
       text2: "위챗페이",
       text3: "알리페이",
-    //   text: "은련카드\n위챗페이\n알리페이",
       onClick: () => console.log("btn 4"),
-    //   className: style.image
     },
   ];
 
   return (
+    <>
     <div>
       <Header />
       <Location />
@@ -73,16 +72,14 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
             text2={button.text2}
             text3={button.text3}
             onClick={button.onClick}
-            // className={button.className}
           />
         ))}
       </div>
-      {/* <Link href="/ssgService"> */}
         <Footer 
           totalPrice={totalPrice}
         />
-      {/* </Link> */}
     </div>
+    </>
   );
 };
 

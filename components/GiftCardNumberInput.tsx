@@ -6,10 +6,9 @@ const GiftCardNumberInput: React.FC = () => {
     const [inputValue, setInputValue] = useState<string>('');
   
     const handleNumberClick = (value: number) => {
-      if (inputValue.length < 16) {
+      if (inputValue.length < 12) {
         const newValue = inputValue + value;
-        const maskedValue = maskNumberAtPosition(newValue, 4, 11);
-        setInputValue(maskedValue);
+        setInputValue(newValue);
       }
     };
   
@@ -21,16 +20,6 @@ const GiftCardNumberInput: React.FC = () => {
       setInputValue((prevValue) => prevValue.slice(0, -1));
     };
 
-    const maskNumberAtPosition = (value: string, start: number, end: number) => {
-        const maskedValue = value.split('');
-        for (let i = start; i <= end; i++) {
-          if (i < maskedValue.length) {
-            maskedValue[i] = '*';
-          }
-        }
-        return maskedValue.join('');
-      };
-  
     return (
       <div className={style.phoneWrap}>
         <input type="text" value={inputValue} readOnly 

@@ -3,9 +3,10 @@ import style from "./GiftCardNumberModal.module.css";
 import Image from 'next/image';
 import Link from 'next/link';
 import GiftCardNumber from "./GiftCardNumber";
+import React from "react";
+import { mapToBE } from "./globalfunctions/mapToBE";
 
 export default function GiftCardNumberModal(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
-
 
     if(!props.show) return null
     
