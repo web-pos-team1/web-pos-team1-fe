@@ -64,7 +64,6 @@ export default function DeliveryTimeModal(props:{show:boolean, onClose:Dispatch<
         </form>
       </div>
 
-        <GiftCardGuideModal show={showGiftCardGuideModal} onClose={setShowGiftCardGuideModal} />
         <div className={style.confirmBtn}>
           <Image 
             src="/images/checkWhite.png"

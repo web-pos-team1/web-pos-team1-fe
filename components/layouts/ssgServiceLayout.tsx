@@ -40,7 +40,7 @@ export default function ssgServiceLayout(props:{children:React.ReactNode}) {
     }
 
     const handleGiftCardGuideModal = () => {
-        setShowGiftCardGuideModal(true)
+        // setShowGiftCardGuideModal(true)
         setShowDeliveryTimeModal(false)
     }
 
@@ -53,10 +53,10 @@ export default function ssgServiceLayout(props:{children:React.ReactNode}) {
         <>
         <GiftModal show={showGiftModal} onClose={handleModal}/>
         <DeliveryModal show={showDeliveryModal} onClose={handleDeliveryTimeModal}/>
-        <DeliveryTimeModal show={showDeliveryTimeModal} onClose={handleGiftCardGuideModal}/>
+        <DeliveryTimeModal show={showDeliveryTimeModal} onClose={setShowDeliveryTimeModal}/>
         <GiftCardGuideModal 
             show={showGiftCardGuideModal} 
-            onClose={setShowGiftCardGuideModal} 
+            onClose={setShowGiftCardGuideModal}
             onClickTrue={handleGiftCardNumberModal}
         />
         <GiftCardNumberModal show={showGiftCardNumberModal} onClose={setShowGiftCardNumberModal}/>

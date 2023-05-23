@@ -8,7 +8,6 @@ import Text from "@/components/Text";
 import Text3Button from "../Text3Button";
 import { useRecoilState } from "recoil";
 import { totalPriceState } from "@/state/totalPriceState";
-import GiftCardGuideModal from "../GiftCardGuideModal";
 // import style from "./CustomImg.module.css";
 
 interface Props {
@@ -17,19 +16,13 @@ interface Props {
 
 const PaymentsLayout: React.FC<Props> = ({ children }) => {
   const [totalPrice, setTotalPrice] = useRecoilState(totalPriceState);
-  const [showGiftCardGuideModal, setShowGiftCardGuideModal] = useState<boolean>(false);
-
-  const handleGiftCardModal = () => {
-    console.log("handleGiftCardModal");
-    setShowGiftCardGuideModal(true);
-  };
 
   const buttons = [
     {
       src: "/images/creditCard.png",
       alt: "credit cart payment",
       text1: "신용/체크카드",
-      onClick: () => setShowGiftCardGuideModal(true)
+      onClick: () => console.log("btn 1"),
     },
     {
       src: "/images/mobilePayyy.png",
@@ -57,7 +50,6 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
 
   return (
     <>
-    <GiftCardGuideModal show={showGiftCardGuideModal} onClose={setShowGiftCardGuideModal} onClickTrue={handleGiftCardModal}/>
     <div>
       <Header />
       <Location />

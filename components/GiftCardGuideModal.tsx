@@ -7,7 +7,7 @@ import React from "react";
 
 export default function GiftCardGuideModal(props:{show:boolean,
     onClose:Dispatch<SetStateAction<boolean>>,
-    onClickTrue:()=>void
+    // onClickTrue:()=>void
 }) {
 
     // const [showGiftCardNumberModal,setShowGiftCardNumberModal] = React.useState<boolean>(false);
@@ -19,7 +19,8 @@ export default function GiftCardGuideModal(props:{show:boolean,
     // const handleGiftCardNumberModalClose = () => {
     //     setShowGiftCardNumberModal(false)
     // };
-    const { show, onClose, onClickTrue } = props;
+    
+    // const { show, onClose, onClickTrue } = props;
 
     if(!props.show) return null
 
@@ -48,7 +49,8 @@ export default function GiftCardGuideModal(props:{show:boolean,
                 </div>
 
                 <div className={style.footer}>
-                    <div onClick={onClickTrue}>
+                    <div>
+                    {/* <div onClick={onClickTrue}> */}
                     {/* <button onClick={() => { handleGiftCardNumberModal(); props.onClose(false); }}> */}
                         {/* <GiftCardNumberModal show={showGiftCardNumberModal} onClose={setShowGiftCardNumberModal}/> */}
                         <Image
@@ -58,7 +60,7 @@ export default function GiftCardGuideModal(props:{show:boolean,
                             width={28}
                             height={28}
                         />
-                        <p>예2</p>
+                        <p>예</p>
                     </div>
                 {/* </Link> */}
                 <Link href='/payments'>
