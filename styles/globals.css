@@ -105,3 +105,22 @@ a {
     color-scheme: light;
   }
 }
+/* react-simple-keyboard css */
+.simple-keyboard {
+  max-width: 1040px;
+}
+
+.simple-keyboard.hg-theme-default.myTheme {
+  border: 5px solid rgb(255, 0, 0, 0.7);
+  border-radius: 10px;
+  margin: 10px;
+  width: calc(100% - 20px);
+}
+
+.simple-keyboard.hg-layout-default .hg-button.hg-red {
+  background: rgb(255, 0, 0, 0.7);
+  color: white;
+}
+.simple-keyboard.hg-layout-default .hg-button.hg-space-btn {
+  width: 600px;
+}

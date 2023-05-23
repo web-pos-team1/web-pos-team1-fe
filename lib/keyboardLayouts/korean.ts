@@ -6,18 +6,18 @@ import { LayoutItem } from "../interfaces";
 export default <LayoutItem> {
   layout: {
     default: [
-      "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
-      "{tab} ㅂ ㅈ ㄷ ㄱ ㅅ ㅛ ㅕ ㅑ ㅐ ㅔ [ ] \\",
-      "{lock} ㅁ ㄴ ㅇ ㄹ ㅎ ㅗ ㅓ ㅏ ㅣ ; ' {enter}",
-      "{shift} ㅋ ㅌ ㅊ ㅍ ㅠ ㅜ ㅡ , . / {shift}",
-      ".com @ {space}",
+      "1 2 3 4 5 6 7 8 9 0 - ( ) {bksp}",
+      "ㅂ ㅈ ㄷ ㄱ ㅅ ㅛ ㅕ ㅑ ㅐ ㅔ",
+      "ㅁ ㄴ ㅇ ㄹ ㅎ ㅗ ㅓ ㅏ ㅣ",
+      "ㅋ ㅌ ㅊ ㅍ ㅠ ㅜ ㅡ , . /",
+      "{shift} {space} 한/영",
     ],
     shift: [
-      "~ ! @ # $ % ^ & * ( ) _ + {bksp}",
-      "{tab} ㅃ ㅉ ㄸ ㄲ ㅆ ㅛ ㅕ ㅑ ㅒ ㅖ { } |",
-      '{lock} ㅁ ㄴ ㅇ ㄹ ㅎ ㅗ ㅓ ㅏ ㅣ : " {enter}',
-      "{shift} ㅋ ㅌ ㅊ ㅍ ㅠ ㅜ ㅡ < > ? {shift}",
-      ".com @ {space}",
-    ]
+        "1 2 3 4 5 6 7 8 9 0 - {bksp}",
+        "ㅃ ㅉ ㄸ ㄲ ㅅ ㅛ ㅕ ㅑ ㅐ ㅔ",
+        "ㅁ ㄴ ㅇ ㄹ ㅎ ㅗ ㅓ ㅏ ㅣ",
+        "ㅋ ㅌ ㅊ ㅍ ㅠ ㅜ ㅡ , . /",
+        "{shift} {space} 한/영",
+      ],
   }
 }
