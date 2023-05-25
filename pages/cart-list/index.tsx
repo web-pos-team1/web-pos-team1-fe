@@ -31,30 +31,7 @@ const CartList : NextPageWithLayout = () => {
     const [recoilTotalPrice, setRecoilTotalPrice] = useRecoilState(totalPriceState);
     // const [cartList, setCartList] = useRecoilState(CartListState);
     // const recoilValue = useRecoilValue(CartListState);
-
-    const handlePayBtnClick = () => {
-        console.log("final cartList: ", cartList);
-        let data = []
-        for (let i = 0; i < cartList.length; i++) {
-            data.push({
-                "storeId": process.env.NEXT_PUBLIC_ENV_STORE_ID, 
-                "posId": process.env.NEXT_PUBLIC_ENV_POS_ID,
-                "productId": cartList[i].product_id,
-                "cartQty": cartList[i].cartQty
-            })
-        }
-        console.log("final response data(List<CartAddDTO>): ", data);
-        if (window.confirm("포인트 적립하시겠습니까?")) {
-            console.log("rm Recoil[cartList] ");
-            setCartList([]);
-            console.log("final totalPrice: ", totalPrice);
-            setRecoilTotalPrice(totalPrice);
-            console.log("---포인트 적립 step 페이지 이동---");
-            
-        } else {
-            console.log("---배송/선물 step 페이지 이동---");
-        }     
-    }
+    
     const handlePrevBtnClick = () => {
         console.log("CartList / handlePrevBtnClick!!!");
         localStorage.setItem("cartList", JSON.stringify(cartList));

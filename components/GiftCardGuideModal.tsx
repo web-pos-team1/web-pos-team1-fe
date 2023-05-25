@@ -10,11 +10,11 @@ export default function GiftCardGuideModal(props:{show:boolean,
     // onClickTrue:()=>void
 }) {
 
-    // const [showGiftCardNumberModal,setShowGiftCardNumberModal] = React.useState<boolean>(false);
+    const [showGiftCardNumberModal,setShowGiftCardNumberModal] = React.useState<boolean>(false);
 
-    // const handleGiftCardNumberModal = () => {
-    //     setShowGiftCardNumberModal(true)
-    // };
+    const handleGiftCardNumberModal = () => {
+        setShowGiftCardNumberModal(true)
+    };
 
     // const handleGiftCardNumberModalClose = () => {
     //     setShowGiftCardNumberModal(false)
@@ -26,8 +26,8 @@ export default function GiftCardGuideModal(props:{show:boolean,
 
     return (
         <div className={style.overlay}>
-            <div className={style.modal}>
-                
+            
+            <div className={style.modal}>    
                 <div className={style.cancel}>
                     <button  onClick={()=>props.onClose(false)}>
                         <Image
@@ -51,8 +51,9 @@ export default function GiftCardGuideModal(props:{show:boolean,
                 <div className={style.footer}>
                     <div>
                     {/* <div onClick={onClickTrue}> */}
-                    {/* <button onClick={() => { handleGiftCardNumberModal(); props.onClose(false); }}> */}
-                        {/* <GiftCardNumberModal show={showGiftCardNumberModal} onClose={setShowGiftCardNumberModal}/> */}
+                    <button onClick={() => { handleGiftCardNumberModal(); props.onClose(false); }}>
+                    <GiftCardNumberModal show={showGiftCardNumberModal} onClose={setShowGiftCardNumberModal}/>
+                        
                         <Image
                             src="/images/checkWhite.png"
                             alt="confirm"
@@ -61,6 +62,7 @@ export default function GiftCardGuideModal(props:{show:boolean,
                             height={28}
                         />
                         <p>예</p>
+                        </button>
                     </div>
                 {/* </Link> */}
                 <Link href='/payments'>

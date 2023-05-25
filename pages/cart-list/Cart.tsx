@@ -23,9 +23,11 @@ export default function Cart(
 
   
     const handleDelCartBtnClick = () => {
-        if (window.confirm("장바구니에서 삭제하시겠습니까?")) {
-            props.setDelProductId(props.item.product_id);
-        }
+        alert("장바구니에서 삭제하시겠습니까?")
+        props.setDelProductId(props.item.product_id);
+        // if (window.confirm("장바구니에서 삭제하시겠습니까?")) {
+        //     props.setDelProductId(props.item.product_id);
+        // }
     }
     useEffect(() => {
         console.log("props: ", props);
