@@ -6,12 +6,17 @@ import Link from 'next/link'
 import React from 'react'
 import Layout from '@/components/layouts/layout'
 import { NextPageWithLayout } from './_app'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
 const Home: NextPageWithLayout = () => {
   return (
     <>
+    {/* JQuery */}
+    <Script src="https://code.jquery.com/jquery-1.12.4.min.js" strategy="beforeInteractive"/>
+    {/* iamport-payment */}
+    <Script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js" strategy="beforeInteractive" />
     <Link href="/products">
       <Head>
         <title>POS main</title>

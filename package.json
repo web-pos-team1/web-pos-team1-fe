@@ -1,6 +1,6 @@
 {
   "name": "web-pos-team1-fe",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -18,7 +18,8 @@
     "hangul-js": "^0.2.6",
     "hangul-virtual-keyboard": "^1.0.2",
     "http-proxy-middleware": "^2.0.6",
-    "next": "13.3.2",
+    "iamport-typings": "^1.3.1",
+    "next": "13.1.6",
     "next-http-proxy-middleware": "^1.2.5",
     "qrcode": "^1.5.3",
     "react": "18.2.0",
@@ -32,6 +33,6 @@
     "recoil-persist": "^4.2.0",
     "simple-keyboard": "^3.5.62",
     "simple-keyboard-layouts": "^3.1.325",
-    "typescript": "5.0.4"
+    "typescript": "^4.9.5"
   }
 }

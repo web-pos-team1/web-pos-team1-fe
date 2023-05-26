@@ -1,30 +1,42 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import Image from 'next/image';
 import style from './NumberInput.module.css'
 
-const GiftCardNumberInput: React.FC = () => {
+interface Props {
+  serialNumber: string,
+  setSerialNumber: Dispatch<SetStateAction<string>>
+}
+
+const GiftCardNumberInput: React.FC<Props> = ({serialNumber, setSerialNumber}) => {
     const [inputValue, setInputValue] = useState<string>('');
   
     const handleNumberClick = (value: number) => {
-      if (inputValue.length < 12) {
-        const newValue = inputValue + value;
+
+      if (inputValue.length < 16) {
+        // const newValue = inputValue + value;
+        const newValue = serialNumber + value;
+        setSerialNumber(newValue);
         setInputValue(newValue);
       }
     };
   
     const handleClearClick = () => {
       setInputValue('');
+      setSerialNumber('');
     };
   
     const handleDeleteClick = () => {
       setInputValue((prevValue) => prevValue.slice(0, -1));
+      setSerialNumber((prevValue) => prevValue.slice(0, -1));
     };
 
     return (
       <div className={style.phoneWrap}>
-        <input type="text" value={inputValue} readOnly 
-     //   placeholder='모바일 쿠폰 번호를 입력해 주세요'
+        {/* <input type="text" value={inputValue} readOnly  placeholder='모바일 쿠폰 번호를 입력해 주세요 />*/}
+        <input type='text' value={serialNumber} readOnly 
+          placeholder='모바일 쿠폰 번호를 입력해 주세요'
         />
+
         <div className={style.NumberPad}>
           <button onClick={() => handleNumberClick(1)}>1</button>
           <button onClick={() => handleNumberClick(2)}>2</button>
