@@ -11,6 +11,7 @@ import style from "../components/layouts/shoppingBagLayout.module.css"
 import React from 'react'
 import DeliveryServiceModal from '@/components/DeliveryServiceModal'
 import { UserLoginState } from '@/state/UserLoginState'
+import GiftModal from '@/components/GiftModal'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,6 +19,7 @@ const SsgService: NextPageWithLayout = () => {
 
   const [isOpen, setIsOpen] = React.useState<boolean>(false)
   const [isMemberOpen, setIsMemberOpen] = React.useState<boolean>(false);
+  const [isGiftOpen, setIsGiftOpen] = React.useState<boolean>(false);
 
   // const [useLoginState, setUseLoginState] = React.useState<boolean>(false);
   const [userLoginState, setUserLoginState] = useRecoilState(UserLoginState)
@@ -32,7 +34,6 @@ const SsgService: NextPageWithLayout = () => {
       setIsOpen(true)
     }
 }
-
 
   return (
     <>
@@ -55,6 +56,10 @@ const SsgService: NextPageWithLayout = () => {
         setIsOpen={setIsMemberOpen}
       /> */}
 
+      <GiftModal 
+        show={isGiftOpen}
+        onClose={setIsGiftOpen}/>
+
       <Text text="이용하실 SSG service를 선택해 주세요" />
             <div className={style.upperBtn}>
                 <Link href="/shoppingBag">
@@ -63,7 +68,7 @@ const SsgService: NextPageWithLayout = () => {
             </div>
             <div className={style.lowerBtn}>
                 <Button src="/images/deliveryService.png" alt="purchase recycling bag" text="배송" onClick={()=>handleMemberChecker()}/>
-                <Button src="/images/giftService.png" alt="pass this step" text="선물" onClick={() => console.log('btn 3')}/>
+                <Button src="/images/giftService.png" alt="pass this step" text="선물" onClick={() => setIsGiftOpen(true)}/>
             </div>
 
 
