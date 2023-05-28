@@ -45,7 +45,7 @@ export default function PointGuideModal(props:{show:boolean, onClose:Dispatch<Se
                         <p>예</p>
                     </button>
                 </Link>
-                <Link href='/ssgService'>
+                <Link href='/ssg-service'>
                     <button>
                         <Image
                             src="/images/nopeWhite.png"

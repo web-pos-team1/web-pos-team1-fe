@@ -4,19 +4,36 @@ import { Inter } from 'next/font/google'
 import Link from 'next/link'
 import SsgServiceLayout from '@/components/layouts/ssgServiceLayout'
 import { NextPageWithLayout } from './_app'
-import { RecoilRoot } from 'recoil'
+import { RecoilRoot, useRecoilState } from 'recoil'
 import Button from "@/components/Button";
 import Text from "@/components/Text";
 import style from "../components/layouts/shoppingBagLayout.module.css"
 import React from 'react'
 import DeliveryServiceModal from '@/components/DeliveryServiceModal'
+import { UserLoginState } from '@/state/UserLoginState'
 
 const inter = Inter({ subsets: ['latin'] })
 
 const SsgService: NextPageWithLayout = () => {
 
-  const [isOpen, setIsOpen] = React.useState(false)
+  const [isOpen, setIsOpen] = React.useState<boolean>(false)
+  const [isMemberOpen, setIsMemberOpen] = React.useState<boolean>(false);
+
+  // const [useLoginState, setUseLoginState] = React.useState<boolean>(false);
+  const [userLoginState, setUserLoginState] = useRecoilState(UserLoginState)
   
+  const handleMemberChecker = () => {
+    console.log("enter handleMemberChecker()");
+    if (userLoginState) {
+      console.log("user Logined!!");
+      setIsMemberOpen(true)
+    } else {
+      console.log("user not Logined!!");
+      setIsOpen(true)
+    }
+}
+
+
   return (
     <>
       <Head>
@@ -27,9 +44,16 @@ const SsgService: NextPageWithLayout = () => {
       </Head>
       <main className={style.main}>
 
+      {/* 비회원 */}
       <DeliveryServiceModal
         isOpen={isOpen}
-        setIsOpen={setIsOpen}/>
+        setIsOpen={setIsOpen}
+      />
+      {/* 회원 */}
+      {/* < MemberDeliveryServiceModal
+        isOpen={isMemberOpen}
+        setIsOpen={setIsMemberOpen}
+      /> */}
 
       <Text text="이용하실 SSG service를 선택해 주세요" />
             <div className={style.upperBtn}>
@@ -38,7 +62,7 @@ const SsgService: NextPageWithLayout = () => {
                 </Link>
             </div>
             <div className={style.lowerBtn}>
-                <Button src="/images/deliveryService.png" alt="purchase recycling bag" text="배송" onClick={() => setIsOpen(true)}/>
+                <Button src="/images/deliveryService.png" alt="purchase recycling bag" text="배송" onClick={()=>handleMemberChecker()}/>
                 <Button src="/images/giftService.png" alt="pass this step" text="선물" onClick={() => console.log('btn 3')}/>
             </div>
 

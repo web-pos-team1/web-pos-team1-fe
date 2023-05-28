@@ -22,7 +22,7 @@ export default function PhoneMatch(props:{show:boolean, onClose:Dispatch<SetStat
                     <p>고객님 반갑습니다</p>
                 </div>
                 <div className={style.footer}>
-                    <Link href="/ssgService">
+                    <Link href="/ssg-service">
                         <button>
                             <Image
                                 src="/images/checkPurple.png"

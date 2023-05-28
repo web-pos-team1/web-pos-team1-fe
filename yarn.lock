@@ -176,6 +176,11 @@
   dependencies:
     tslib "^2.4.0"
 
+"@types/daum-postcode@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/daum-postcode/-/daum-postcode-2.0.0.tgz#26ac1bd033d845e90e6bd6ddba398be806717e3f"
+  integrity sha512-QIbzoOpwD/+AjwB0pq1L6kwjPkzDMQFCM+BTTZv+oNyxf245BQIc3wjKfd+KH629jNvuy+Dugqq5DsiTdeET4Q==
+
 "@types/http-proxy@1.17.3":
   version "1.17.3"
   resolved "https://registry.npmjs.org/@types/http-proxy/-/http-proxy-1.17.3.tgz"
@@ -240,10 +245,9 @@
   version "5.59.5"
   resolved "https://registry.npmjs.org/@typescript-eslint/scope-manager/-/scope-manager-5.59.5.tgz"
   integrity sha512-jVecWwnkX6ZgutF+DovbBJirZcAxgxC0EOHYt/niMROf8p4PwxxG32Qdhj/iIQQIuOflLjNkxoXyArkcIP7C3A==
-
   dependencies:
-    "@typescript-eslint/types" "5.59.6"
-    "@typescript-eslint/visitor-keys" "5.59.6"
+    "@typescript-eslint/types" "5.59.5"
+    "@typescript-eslint/visitor-keys" "5.59.5"
 
 "@typescript-eslint/types@5.59.5":
   version "5.59.5"
@@ -1366,6 +1370,11 @@ inherits@2, inherits@^2.0.3, inherits@^2.0.4:
   resolved "https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
+install@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/install/-/install-0.13.0.tgz#6af6e9da9dd0987de2ab420f78e60d9c17260776"
+  integrity sha512-zDml/jzr2PKU9I8J/xyZBQn8rPCAY//UOYNmR01XwNwyfhEWObo2SWfSl1+0tm1u6PhxLwDnfsT/6jB7OUxqFA==
+
 internal-slot@^1.0.3, internal-slot@^1.0.4, internal-slot@^1.0.5:
   version "1.0.5"
   resolved "https://registry.npmjs.org/internal-slot/-/internal-slot-1.0.5.tgz"
@@ -1416,7 +1425,6 @@ is-core-module@^2.11.0, is-core-module@^2.9.0:
   version "2.12.0"
   resolved "https://registry.npmjs.org/is-core-module/-/is-core-module-2.12.0.tgz"
   integrity sha512-RECHCBCd/viahWmwj6enj19sKbHfJrddi/6cBDsNTKbNq0f7VeaUkBo60BqzvPqo/W54ChS62Z5qyun7cfOMqQ==
-
   dependencies:
     has "^1.0.3"
 
@@ -2074,10 +2082,10 @@ react-router@6.11.1:
   dependencies:
     "@remix-run/router" "1.6.1"
 
-react-simple-keyboard@^3.5.75:
-  version "3.5.75"
-  resolved "https://registry.npmjs.org/react-simple-keyboard/-/react-simple-keyboard-3.5.75.tgz"
-  integrity sha512-I2bBBW/sALwKCuCgmHwMzhNxFjMDoLYJh3TxadOOBUj9xy0lyM7gH4QYdVCYe32yC1f1zbUe42q+H9vSljqVIg==
+react-simple-keyboard@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/react-simple-keyboard/-/react-simple-keyboard-3.6.1.tgz#5bdad3c13e890e29cb2edbe2039966aac68040ba"
+  integrity sha512-SuW+fjFH/YVhjWvhohfYevHwTxR5+XGM+gYc9/HZ1cHlQR+zBGF3T74ZJwsYzjCNt/rDBy/1/7zlS2Kq+oq0yw==
 
 react@18.2.0:
   version "18.2.0"
@@ -2215,7 +2223,6 @@ semver@^7.3.7:
   version "7.5.0"
   resolved "https://registry.npmjs.org/semver/-/semver-7.5.0.tgz"
   integrity sha512-+XC0AD/R7Q2mPSRuy2Id0+CGTZ98+8f+KvwirxOKIEyid+XSx6HbC63p+O4IndTHuX5Z+JxQ0TghCkO5Cg/2HA==
-
   dependencies:
     lru-cache "^6.0.0"
 

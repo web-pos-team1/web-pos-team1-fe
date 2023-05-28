@@ -40,7 +40,7 @@ export default function PointsLayout(props:{children:React.ReactNode}) {
             src: "/images/forbiden.png", 
             alt: "pass this step", 
             text: "적립 안함",
-            link: "/ssgService",
+            link: "/ssg-service",
             onClick: () => console.log('btn 4')
         }
     ];
