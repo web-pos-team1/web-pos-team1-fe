@@ -11,7 +11,7 @@ export default function GiftCardUsed(props:{show:boolean, onClose:Dispatch<SetSt
         <div className={style.overlay}>
             <div className={style.modal}>
                 <div className={style.body}>
-                    <p>입력 완료되었습니다</p>
+                    <p>이미 사용된 쿠폰입니다</p>
                 </div>
                 <div className={style.footer}>
                     <button onClick={()=>props.onClose(false)}>
@@ -23,7 +23,7 @@ export default function GiftCardUsed(props:{show:boolean, onClose:Dispatch<SetSt
                             height={28}
                         />
                         <p>확인</p>
-                        </button>
+                    </button>
                 </div>
             </div>
         </div>
