@@ -31,7 +31,7 @@ export const transeData = [
   },
   {
     id: 7,
-    key: "/ssgService",
+    key: "/ssg-service",
     value: "배송/선물"
   },
   {

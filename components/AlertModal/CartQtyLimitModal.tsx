@@ -1,13 +1,20 @@
 import { Dispatch, SetStateAction } from "react";
-import style from "./PointGuideModal.module.css";
+import style from "./CartQtyLimitModal.module.css";
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function PointGuideModal(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
-
+export default function CartQtyLimitModal(props:
+    { show:boolean, 
+      onClose:Dispatch<SetStateAction<boolean>>,
+      setQtyLimitState: Dispatch<SetStateAction<boolean>>
+    }) {
 
     if(!props.show) return null
-    
+    const handleConfirmClick = () => {
+        props.setQtyLimitState(true);
+        props.onClose(false);
+    }
+
     return (
         <div className={style.overlay}>
             <div className={style.modal}>
@@ -25,15 +32,15 @@ export default function PointGuideModal(props:{show:boolean, onClose:Dispatch<Se
                 </div>
                 
                 <div className={style.title}>
-                    <p>포인트 적립</p>    
+                    <p>최소 수량</p>    
                 </div>
 
                 <div className={style.body}>
-                    <p>신세계포인트를 적립하시겠습니까?</p>
+                    <p>최소 수량은 1개 입니다</p>
                 </div>
 
                 <div className={style.footer}>
-                <Link href='/points'>
+                
                     <button>
                         <Image
                             src="/images/checkWhite.png"
@@ -42,21 +49,10 @@ export default function PointGuideModal(props:{show:boolean, onClose:Dispatch<Se
                             width={28}
                             height={28}
                         />
-                        <p>예</p>
+                        <p onClick={handleConfirmClick}>
+                            확인
+                        </p>
                     </button>
-                </Link>
-                <Link href='/ssg-service'>
-                    <button>
-                        <Image
-                            src="/images/nopeWhite.png"
-                            alt="confirm"
-                            className={style.reject}
-                            width={28}
-                            height={28}
-                        />
-                        <p>아니오</p>
-                    </button>
-                </Link>
 
                 </div>
             </div>

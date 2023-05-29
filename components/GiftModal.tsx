@@ -28,24 +28,29 @@ export default function GiftModal(props:{show:boolean, onClose:Dispatch<SetState
         </div>
 
         <div className={style.body}>
-          <p>선물 받을 분의 정보를 입력해 주세요</p>
+          <p>정보를 입력해 주세요</p>
+        </div>
+
+        <div className={style.senderInputBox}>
+          <p>보내는 분</p>
+          <input type="text" placeholder='이름을 입력해주세요'/>
         </div>
 
         <div className={style.inputBox}>
-          <p>이름</p>
-          <input type="text" />
+          <p>받는 분</p>
+          <input type="text" placeholder='이름을 입력해주세요'/>
         </div>
 
         <div className={style.PhoneInputBox}>
         {/* <div className={style.inputBox}> */}
-          <p>연락처</p>
-          <input type="text" />
+          <p>받는 분 연락처</p>
+          <input type="text" placeholder='01012345678' />
         </div>
 
       <Link href="/payments">
         <div className={style.confirmBtn}>
           <Image 
-            src="/images/checkPurple.png"
+            src="/images/checkWhite.png"
             alt="confirm button"
             width={30}
             height={30}

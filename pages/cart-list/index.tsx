@@ -29,7 +29,7 @@ const CartList : NextPageWithLayout = () => {
         return cList !== null ? JSON.parse(cList) : [];
     });
     const [recoilTotalPrice, setRecoilTotalPrice] = useRecoilState(totalPriceState);
-    // const [cartList, setCartList] = useRecoilState(CartListState);
+    // const [cartList, setCartList] = useRecoilState();
     // const recoilValue = useRecoilValue(CartListState);
     
     const handlePrevBtnClick = () => {
