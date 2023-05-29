@@ -7,7 +7,11 @@ interface Props {
   setSerialNumber: Dispatch<SetStateAction<string>>
 }
 
-const GiftCardNumberInput: React.FC<Props> = ({serialNumber, setSerialNumber}) => {
+const GiftCardNumberInput: React.FC<Props> = (
+  {
+    serialNumber, 
+    setSerialNumber
+  }) => {
     const [inputValue, setInputValue] = useState<string>('');
   
     const handleNumberClick = (value: number) => {

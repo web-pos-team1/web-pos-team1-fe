@@ -15,18 +15,18 @@ export default function GiftCardMatch(props:{show:boolean, onClose:Dispatch<SetS
                     <p>입력 완료되었습니다</p>
                 </div>
                 <div className={style.footer}>
-                <Link href="/payments">
-                    <button>
-                        <Image
-                            src="/images/checkPurple.png"
-                            alt="confirm"
-                            className={style.conirm}
-                            width={28}
-                            height={28}
-                        />
-                        <p onClick={()=>props.onClose(false)}>확인</p>
+                    <Link href="/payments">
+                        <button>
+                            <Image
+                                src="/images/checkPurple.png"
+                                alt="confirm"
+                                className={style.conirm}
+                                width={28}
+                                height={28}
+                            />
+                            <p onClick={()=>props.onClose(false)}>확인</p>
                         </button>
-                        </Link>
+                    </Link>
                 </div>
             </div>
         </div>

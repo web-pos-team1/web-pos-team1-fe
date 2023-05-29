@@ -5,10 +5,11 @@ import Link from 'next/link';
 import GiftCardNumberModal from "./GiftCardNumberModal";
 import React from "react";
 
-export default function GiftCardGuideModal(props:{show:boolean,
-    onClose:Dispatch<SetStateAction<boolean>>,
-    // onClickTrue:()=>void
-}) {
+export default function GiftCardGuideModal(
+    props:
+        {   show:boolean,
+            onClose:()=>void
+    }) {
 
     const [showGiftCardNumberModal,setShowGiftCardNumberModal] = React.useState<boolean>(false);
 
@@ -29,7 +30,7 @@ export default function GiftCardGuideModal(props:{show:boolean,
             
             <div className={style.modal}>    
                 <div className={style.cancel}>
-                    <button  onClick={()=>props.onClose(false)}>
+                    <button  onClick={()=>props.onClose()}>
                         <Image
                             src="/images/cancel.png"
                             alt="cancel"
@@ -51,8 +52,12 @@ export default function GiftCardGuideModal(props:{show:boolean,
                 <div className={style.footer}>
                     <div>
                     {/* <div onClick={onClickTrue}> */}
-                    <button onClick={() => { handleGiftCardNumberModal(); props.onClose(false); }}>
-                    <GiftCardNumberModal show={showGiftCardNumberModal} onClose={setShowGiftCardNumberModal}/>
+                    <button>
+                    {/* <button onClick={() => { 
+                        // handleGiftCardNumberModal(); 
+                        props.onClose(); 
+                    }}> */}
+                    {/* <GiftCardNumberModal show={showGiftCardNumberModal} onClose={setShowGiftCardNumberModal}/> */}
                         
                         <Image
                             src="/images/checkWhite.png"
@@ -61,8 +66,11 @@ export default function GiftCardGuideModal(props:{show:boolean,
                             width={28}
                             height={28}
                         />
-                        <p>예</p>
-                        </button>
+                        <p onClick={() => props.onClose()}>
+                            예
+                        </p>
+                        {/* </button> */}
+                    </button>
                     </div>
                 {/* </Link> */}
                 <Link href='/payments'>
