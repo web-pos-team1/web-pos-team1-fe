@@ -6,7 +6,14 @@ import GiftCardNumber from "./GiftCardNumber";
 import React from "react";
 import { mapToBE } from "./globalfunctions/mapToBE";
 
-export default function GiftCardNumberModal(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
+export default function GiftCardNumberModal(
+    props: {
+        show:boolean, 
+        onClose:Dispatch<SetStateAction<boolean>>,
+        serialNumber: string,
+        setSerialNumber: Dispatch<SetStateAction<string>>,
+        handleCheckGiftCardNumber: ()=>void
+    }) {
 
     if(!props.show) return null
     
@@ -28,7 +35,11 @@ export default function GiftCardNumberModal(props:{show:boolean, onClose:Dispatc
                 
 
                 <div className={style.body}>
-                    <GiftCardNumber />
+                    <GiftCardNumber 
+                        serialNumber={props.serialNumber}
+                        setSerialNumber={props.setSerialNumber}
+                        handleCheckGiftCardNumber={props.handleCheckGiftCardNumber}
+                    />
                 </div>
 
                 

@@ -23,7 +23,7 @@ export default function GiftCardOverPrice(props:{show:boolean, onClose:Dispatch<
                             height={28}
                         />
                         <p onClick={()=>props.onClose(false)}>확인</p>
-                        </button>
+                    </button>
                 </div>
             </div>
         </div>

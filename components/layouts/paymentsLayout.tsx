@@ -16,12 +16,12 @@ interface Props {
 }
 
 const initialState: RequestPayParams = {
-  pay_method: "card",
-  pg: "nice",
+  pay_method: "card", // card, samsung(kcp일 경우)
+  pg: "nice", // nice(신용카드), kcp(samsung pay 가능), kakaopay
   merchant_uid: process.env.NEXT_PUBLIC_ENV_STORE_ID ?? "1234",
   name: 'test-payment', // ex. 사과외 2건
-  amount: 1, // 결제금액
-  buyer_tel: "010-0000-0000",
+  amount: 1000, // 결제금액
+  buyer_tel: "010-0000-0000"
 };
 const IMP_UID = process.env.NEXT_PUBLIC_ENV_IMP_UID ?? "imptest9298";
 
@@ -99,13 +99,15 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
     setResult(res);
     if (res.success) {
         let data = {
-            'posId': process.env.NEXT_PUBLIC_ENV_POS_ID,
+            'posId' : process.env.NEXT_PUBLIC_ENV_POS_ID,
             'storeId': process.env.NEXT_PUBLIC_ENV_STORE_ID,
-            'success': true
-        }
+            'success': true,
+            'error_msg': "결제 성공했습니다.",
+            'img_uid': IMP_UID,
+        };
         const url = `http://localhost:8080/api/v1/payment/callback-receive`;
         const headers = {
-        'content-type': 'application/json'
+            'content-type': 'application/json'
         };
         axios(
         url,
