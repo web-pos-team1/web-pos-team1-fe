@@ -33,12 +33,12 @@ export default function GiftModal(props:{show:boolean, onClose:Dispatch<SetState
 
         <div className={style.senderInputBox}>
           <p>보내는 분</p>
-          <input type="text" placeholder='신세계'/>
+          <input type="text" placeholder='이름을 입력해주세요'/>
         </div>
 
         <div className={style.inputBox}>
           <p>받는 분</p>
-          <input type="text" placeholder='정용진'/>
+          <input type="text" placeholder='이름을 입력해주세요'/>
         </div>
 
         <div className={style.PhoneInputBox}>

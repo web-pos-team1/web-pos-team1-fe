@@ -55,7 +55,7 @@
     background: center;
     backdrop-filter: blur(5px);
     background: rgba(0, 0, 0, 0.5);
-    
+    margin-left: -31.5px;
 }
 
 .body {
