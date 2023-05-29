@@ -6,6 +6,7 @@ import Image from "next/image";
 import style from "./CartItem.module.css";
 import { ProductType } from "@/types/ProductType";
 import CartDelModal from "@/components/AlertModal/CartDelModal";
+import CartQtyLimitModal from "@/components/AlertModal/CartQtyLimitModal";
 
 export default function CartItem(
     props: {
@@ -22,10 +23,13 @@ export default function CartItem(
     const [cartQty, setCartQty] = useState<number>(props.item.cartQty);
     const [showCartDelModal, setShowCartDelModal] = useState<boolean>(false);
     const [delState, setDelState] = useState<boolean>(false);
+    const [qtyLimitState, setQtyLimitState] = useState<boolean>(false);
+    const [showcartQtyLimitModal, setShowCartQtyLimitModal] = useState<boolean>(false);
 
     const minusCount = () => {
         if (cartQty === 1) {
-            alert("최소 수량은 1개입니다.");
+            setShowCartQtyLimitModal(true);
+            // alert("최소 수량은 1개입니다.");
             return;
         }
         console.log("before cartQty: ", cartQty);
@@ -75,6 +79,12 @@ export default function CartItem(
                 onClose={setShowCartDelModal}
                 setDelState={setDelState}
             />
+            <CartQtyLimitModal
+                show={showcartQtyLimitModal}
+                onClose={setShowCartQtyLimitModal}
+                setQtyLimitState={setQtyLimitState}
+            />
+
             <tr className={style.cartItemRow}>
                 <td className={style.cartItemName}>
                     <Image 

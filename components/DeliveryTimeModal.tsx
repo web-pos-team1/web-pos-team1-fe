@@ -3,10 +3,7 @@ import Image from 'next/image';
 import style from './DeliveryTimeModal.module.css'
 import Link from 'next/link';
 import { deliveryTimeList } from '@/data/deliveryTimeList';
-import { time } from 'console';
 import { DeliveryTimeType } from '@/types/DeliveryTimeType';
-import GiftCardGuideModal from './GiftCardGuideModal';
-import { title } from 'process';
 
 export default function DeliveryTimeModal(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
 
@@ -28,7 +25,7 @@ export default function DeliveryTimeModal(props:{show:boolean, onClose:Dispatch<
     <div className={style.overlay}>
       <div className={style.modal}>
         <div className={style.cancel}>
-          <button  onClick={()=>props.onClose(false)}>
+          <button onClick={()=>props.onClose(false)}>
             <Image
               src="/images/cancel.png"
               alt="cancel"

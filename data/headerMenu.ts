@@ -12,7 +12,7 @@ export const GnbMenu = [
     {
         id: 3,
         name: '3 배송/선물',
-        path: ['/ssgService', '/shoppingBag' ]
+        path: ['/ssg-service', '/shoppingBag' ]
     },
     {
         id: 4,
