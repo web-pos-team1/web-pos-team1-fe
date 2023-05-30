@@ -25,3 +25,14 @@ export const GnbMenu = [
         path: ['/last']
     },
 ]
+
+export const PointMenu = [
+    {
+        id: 1,
+        name: '사용 안함',
+    },
+    {
+        id: 2,
+        name: '사용',
+    }
+]

@@ -20,6 +20,7 @@ import GiftCardOverPrice from '@/components/AlertModal/GiftCardOverPrice'
 import GiftCardUsed from '@/components/AlertModal/GiftCardUsed'
 import axios from 'axios';
 import { totalPriceState } from '@/state/totalPriceState'
+import { mapToBE } from '@/components/globalfunctions/mapToBE'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -86,8 +87,8 @@ const Shoppingbag: NextPageWithLayout = () => {
   
   const handleCheckGiftCardNumber = () => {
     console.log("serialNumber: ", serialNumber);
-    // let url = mapToBE(`/api/v1/gift-card/valid`);
-    let url = `http://localhost:8080/api/v1/gift-card/valid`;
+    let url = mapToBE(`/api/v1/gift-card/valid`);
+    // let url = `http://localhost:8080/api/v1/gift-card/valid`;
     let reqData = {
       'storeId': process.env.NEXT_PUBLIC_ENV_STORE_ID,
       'posId': process.env.NEXT_PUBLIC_ENV_POS_ID,
