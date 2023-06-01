@@ -21,7 +21,8 @@
     margin-left: 45px;
 }
 
-.pointsBtn {
+.selected {
+    border: solid 5px #5D436C;
     width: 200px;
     height: 221.53px;
     border-radius: 30px;
@@ -36,17 +37,37 @@
     margin-bottom: 30px;
 }
 
-.pointsBtn li {
+.selected li {
     list-style: none;
 }
 
-/* .pointsBtn li.active {
-    border: solid 5px #5D436C;
+.notSelected {
+    border: solid 5px #D4D8DB;
+    width: 200px;
+    height: 221.53px;
+    border-radius: 30px;
+    font-size: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #5D436C;
+    display: flex;
+    margin-left: 35px;
+    margin-bottom: 30px;
 }
 
-.pointsBtn li.detective {
-    border: solid 5px #D4D8DB;
-} */
+.notSelected li {
+    list-style: none;
+}
+
+.points img {
+    margin-bottom: 20px;
+}
+
+.points span {
+    padding-left: 30px;
+}
 
 .points {
     display: flex;

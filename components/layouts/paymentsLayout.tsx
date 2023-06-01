@@ -32,12 +32,26 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
 
   const [params, setParams] = useState<RequestPayParams>(initialState);
   const [result, setResult] = useState<RequestPayResponse>();
-  
+  const [showUsePointsNumberModal, setShowUsePointsNumberModal] = useState<boolean>(false);
+  const [usePoints, setUsePoints] = useState<boolean>(false);
   const [finalTotalPrice, setFinalTotalPrice] = useRecoilState<number>(totalPriceState);
 
   const { IMP } = window;
 
   let payData = initialState;
+
+  const handleUsePointsOff = () => {
+    setUsePoints(false);
+  };
+  
+  const handleUsePointsOn = () => {
+    setUsePoints(true);
+  };
+
+  const handleModal = () => {
+    setShowUsePointsNumberModal(true)
+  }
+  
 
   const handleCreditCartBtnClick = () => {
     console.log("0. 신용/체크카드 선택");
@@ -155,6 +169,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
 
   return (
     <>
+    {/* <UsePointsNumberModal show={showUsePointsNumberModal} onClose={setShowUsePointsNumberModal} /> */}
     <div>
       <Header />
       <Location />
@@ -165,7 +180,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       </div>
 
       <div className={style.points}>
-        <div className={style.pointsBtn}>
+        <div onClick={handleUsePointsOff} className={!usePoints ? style.selected : style.notSelected}>
           <ul>
             <li>
               <span>
@@ -182,7 +197,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
             </ul>
           </div>
 
-          <div className={style.pointsBtn}>
+          <div onClick={handleUsePointsOn} className={usePoints ? style.selected : style.notSelected}>
             <ul>
               <li>
               <Image
