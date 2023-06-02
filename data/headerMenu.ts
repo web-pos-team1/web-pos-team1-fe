@@ -12,7 +12,7 @@ export const GnbMenu = [
     {
         id: 3,
         name: '3 배송/선물',
-        path: ['/ssg-service', '/shoppingBag' ]
+        path: ['/ssg-service', '/shopping-bag' ]
     },
     {
         id: 4,
@@ -24,4 +24,15 @@ export const GnbMenu = [
         name: '5 완료',
         path: ['/last']
     },
+]
+
+export const PointMenu = [
+    {
+        id: 1,
+        name: '사용 안함',
+    },
+    {
+        id: 2,
+        name: '사용',
+    }
 ]

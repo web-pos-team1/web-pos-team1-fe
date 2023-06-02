@@ -10,6 +10,9 @@ import { useRecoilState } from "recoil";
 import { totalPriceState } from "@/state/totalPriceState"; 
 import axios from 'axios';
 import { RequestPayParams, RequestPayResponse } from "iamport-typings";
+import style  from "./paymentsLayout.module.css";
+import Image from 'next/image';
+import UsePointsNumberModal from "../UsePointsNumberModal";
 
 interface Props {
   children: React.ReactNode;
@@ -30,12 +33,26 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
 
   const [params, setParams] = useState<RequestPayParams>(initialState);
   const [result, setResult] = useState<RequestPayResponse>();
-
+  const [showUsePointsNumberModal, setShowUsePointsNumberModal] = useState<boolean>(false);
+  const [usePoints, setUsePoints] = useState<boolean>(false);
   const [finalTotalPrice, setFinalTotalPrice] = useRecoilState<number>(totalPriceState);
 
   const { IMP } = window;
 
   let payData = initialState;
+
+  const handleUsePointsOff = () => {
+    setUsePoints(false);
+  };
+  
+  const handleUsePointsOn = () => {
+    setUsePoints(true);
+  };
+
+  const handleModal = () => {
+    setShowUsePointsNumberModal(true)
+  }
+  
 
   const handleCreditCartBtnClick = () => {
     console.log("0. 신용/체크카드 선택");
@@ -73,7 +90,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
     
   }
   const handleSimplePayBtnClick = () => {
-    console.log("2. SSG, 카카오, 스마일 페이 선택");
+    console.log("2. 카카오 페이 선택");
     if (IMP) {
       IMP.init(IMP_UID);
       console.log("[simplePay] success to init IMP: ", IMP);
@@ -89,10 +106,6 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
     }
   }
 
-  const handleForignPayBtnClick = () => {
-    console.log("3. 은련카드, 위쳇페이, 알리페이 선택");
-    alert("서비스 준비중입니다.");
-  }
   
   const onPaymentAccepted = (res: RequestPayResponse) => {
     console.log("res after request_pay: ", res);
@@ -144,20 +157,8 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
     {
       src: "/images/barcode.png",
       alt: "sensing barcode payments",
-      text1: "SSGPAY",
-      text2: "카카오페이",
-      text3: "스마일페이",
+      text1: "카카오페이",
       onClick: () => handleSimplePayBtnClick(),
-    },
-    {
-      src: "/images/internationalPayments.png",
-      alt: "international payments",
-      text1: "은련카드",
-      text2: "위챗페이",
-      text3: "알리페이",
-    //   text: "은련카드\n위챗페이\n알리페이",
-      onClick: () => handleForignPayBtnClick(),
-    //   className: style.image
     },
   ];
   useEffect(() => {
@@ -169,31 +170,83 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
 
   return (
     <>
+    <UsePointsNumberModal show={showUsePointsNumberModal} onClose={setShowUsePointsNumberModal} />
     <div>
       <Header />
       <Location />
       {children}
-      <Text text="결제 방식을 선택해 주세요" />
+      <div className={style.text}>
+      <div className={style.step}>STEP01</div>
+      <p>신세계포인트를 사용여부를 선택해 주세요</p>
+      </div>
+
+      <div className={style.points}>
+        <div onClick={handleUsePointsOff} className={!usePoints ? style.selected : style.notSelected}>
+          <ul>
+            <li>
+              <span>
+                <Image
+                  src="/images/pointDefault.png"
+                  alt="use point default"
+                  className={style.default}
+                  width={70}
+                  height={70}
+                  />
+              </span>
+              </li>
+              <li>사용 안함</li>
+            </ul>
+          </div>
+
+          <div onClick={handleUsePointsOn} className={usePoints ? style.selected : style.notSelected}>
+            <ul onClick={handleModal}>
+              <li>
+              <Image
+                src="/images/mainLogo.png"
+                alt="use point"
+                className={style.usePoint}
+                width={70}
+                height={70}
+                />
+                </li>
+                <li>사용</li>
+              </ul>
+          </div>
+      </div>
+
+      <div className={style.text}>
+      <div className={style.step}>STEP02</div>
+      <p>결제 방식을 선택해 주세요</p>
+      </div>
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(2, 1fr)",
-          gridGap: "82px",
-          margin: "90px 180px 160px 180px",
+          display: "flex",
+          justifyContent: "space-between",
+          padding: "40px",
+          marginTop: "20px",
+          marginBottom: "52px",
         }}
       >
         {buttons.map((button, index) => (
-          <Text3Button
+          <Button
             key={index}
             src={button.src}
             alt={button.alt}
-            text1={button.text1}
-            text2={button.text2}
-            text3={button.text3}
+            text={button.text1}
             onClick={button.onClick}
           />
         ))}
       </div>
+
+      <div className={style.discount}>
+        <ul>
+          <li>총 주문 금액</li>
+          <li><span>₩ 12,000</span></li>
+          <li>총 할인 금액</li>
+          <li><span>₩ 950</span></li>
+        </ul>
+      </div>
+
         <Footer 
           totalPrice={totalPrice}
         />

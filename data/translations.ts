@@ -26,7 +26,7 @@ export const transeData = [
   },
   {
     id: 6,
-    key: "/shoppingBag",
+    key: "/shopping-bag",
     value: "쇼핑백 구매"
   },
   {

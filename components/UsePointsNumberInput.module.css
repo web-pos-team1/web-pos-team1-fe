@@ -1,0 +1,61 @@
+.phoneWrap {
+    position: relative;
+}
+
+.phoneWrap input{
+    border: none;
+    margin: 15px auto;
+    display: flex;
+    font-size: 40px;
+    text-align: center;
+    color: #4C304F;
+    background-color: #D4D8DB;
+    outline: none;
+}
+
+.phoneWrap input::placeholder {
+    color : #989DA1;
+}
+
+.useAll {
+    position: absolute;
+    left: 25%;
+    top: 1%;
+}
+
+.useAll button {
+    font-size: 24px;
+    width: 100px;
+    height: 35px;
+    border-radius: 30px;
+    border: none;
+    color: #4C304F;
+    font-weight: bold;
+}
+
+.NumberPad {
+    display: grid; 
+    grid-gap: 25px;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 10px 350px;
+    padding-bottom: 10px;
+}
+
+.NumberPad button {
+    background-color: #4C304F;
+    color: #ffffff;
+    font-size: 38px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: none;
+}
+
+.NumberPad button:nth-child(10){
+    background-color: #ffffff;
+    color: #4C304F;
+}
+
+.NumberPad button:last-child {
+    background-color: #ffffff;
+}
