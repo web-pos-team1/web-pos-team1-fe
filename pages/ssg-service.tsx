@@ -62,7 +62,7 @@ const SsgService: NextPageWithLayout = () => {
 
       <Text text="이용하실 SSG service를 선택해 주세요" />
             <div className={style.upperBtn}>
-                <Link href="/shoppingBag">
+                <Link href="/shopping-bag">
                     <Button src="/images/pickUp.png" alt="purchase paper bag" text="픽업" onClick={() => console.log('btn 1')}/>
                 </Link>
             </div>
