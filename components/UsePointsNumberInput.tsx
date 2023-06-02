@@ -33,12 +33,19 @@ const UsePointsNumberInput: React.FC<Props> = (
       setUsePointsNumber((prevValue) => prevValue.slice(0, -1));
     };
   
+    const handleUsePointsAll = () => {
+      setInputValue('전체사용');
+      setUsePointsNumber('전체사용');
+    };
+
     return (
       <div className={style.phoneWrap}>
         <input type="text" value={inputValue} readOnly 
         placeholder='사용포인트 입력'
         />
-        <div>전체사용</div>
+        <div className={style.useAll}>
+          <button onClick={() => handleUsePointsAll()}>전체사용</button>
+          </div>
         <div className={style.NumberPad}>
           <button onClick={() => handleNumberClick(1)}>1</button>
           <button onClick={() => handleNumberClick(2)}>2</button>

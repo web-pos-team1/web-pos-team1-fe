@@ -12,6 +12,7 @@ import axios from 'axios';
 import { RequestPayParams, RequestPayResponse } from "iamport-typings";
 import style  from "./paymentsLayout.module.css";
 import Image from 'next/image';
+import UsePointsNumberModal from "../UsePointsNumberModal";
 
 interface Props {
   children: React.ReactNode;
@@ -169,7 +170,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
 
   return (
     <>
-    {/* <UsePointsNumberModal show={showUsePointsNumberModal} onClose={setShowUsePointsNumberModal} /> */}
+    <UsePointsNumberModal show={showUsePointsNumberModal} onClose={setShowUsePointsNumberModal} />
     <div>
       <Header />
       <Location />
@@ -198,7 +199,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
           </div>
 
           <div onClick={handleUsePointsOn} className={usePoints ? style.selected : style.notSelected}>
-            <ul>
+            <ul onClick={handleModal}>
               <li>
               <Image
                 src="/images/mainLogo.png"

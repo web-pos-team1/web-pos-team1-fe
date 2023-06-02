@@ -1,21 +1,36 @@
+.phoneWrap {
+    position: relative;
+}
+
 .phoneWrap input{
     border: none;
-    margin: 0 auto;
+    margin: 15px auto;
     display: flex;
     font-size: 40px;
     text-align: center;
     color: #4C304F;
     background-color: #D4D8DB;
-    margin-bottom: 35px;
     outline: none;
 }
 
-/* .phoneWrap input:focus-within {
-    border: 1px solid #4C304F;
-} */
-
 .phoneWrap input::placeholder {
-    color : #4C304F;
+    color : #989DA1;
+}
+
+.useAll {
+    position: absolute;
+    left: 25%;
+    top: 1%;
+}
+
+.useAll button {
+    font-size: 24px;
+    width: 100px;
+    height: 35px;
+    border-radius: 30px;
+    border: none;
+    color: #4C304F;
+    font-weight: bold;
 }
 
 .NumberPad {
@@ -23,7 +38,7 @@
     grid-gap: 25px;
     grid-template-columns: repeat(3, 1fr);
     margin: 10px 350px;
-    padding-bottom: 50px;
+    padding-bottom: 10px;
 }
 
 .NumberPad button {
