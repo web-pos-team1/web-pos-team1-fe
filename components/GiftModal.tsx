@@ -12,7 +12,7 @@ export default function GiftModal(props:{show:boolean, onClose:Dispatch<SetState
     <div className={style.overlay}>
       <div className={style.modal}>
         <div className={style.cancel}>
-          <button  onClick={()=>props.onClose(false)}>
+          <button onClick={()=>props.onClose(false)}>
             <Image
               src="/images/cancel.png"
               alt="cancel"

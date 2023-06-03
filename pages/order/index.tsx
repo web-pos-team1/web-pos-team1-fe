@@ -1,10 +1,12 @@
 import { CartListState } from "@/state/CartListState";
+import { PayObjectState } from "@/state/PayObjectState";
 import { CartType } from "@/types/CartType";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 export default function Order() {
     const [cartList, setCartList] = useRecoilState(CartListState);
+    const [payObjectState, setPayObjectState] = useRecoilState(PayObjectState);
     useEffect(() => {
         let cartListFromLocalStorage = localStorage.getItem("cartList");
         let list = JSON.parse(cartListFromLocalStorage ? cartListFromLocalStorage : "[]");

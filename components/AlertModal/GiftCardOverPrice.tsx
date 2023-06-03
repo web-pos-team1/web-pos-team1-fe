@@ -1,10 +1,19 @@
 import { Dispatch, SetStateAction } from "react";
-import style from "./AlertModal.module.css";
+// import style from "./AlertModal.module.css";
+import style from './GiftCardValidAlertModal.module.css';
 import Image from 'next/image';
 
-export default function GiftCardOverPrice(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
+export default function GiftCardOverPrice(
+    props: {
+        show: boolean, 
+        onClose: Dispatch<SetStateAction<boolean>>,
+        setSerialNumber: Dispatch<SetStateAction<string>>,
+    }) {
 
-
+    const handleOverPriceAlertModalConfirmBtnClick = () => {
+        props.onClose(false);
+        props.setSerialNumber('');
+    }
     if(!props.show) return null
     
     return (
@@ -22,7 +31,7 @@ export default function GiftCardOverPrice(props:{show:boolean, onClose:Dispatch<
                             width={28}
                             height={28}
                         />
-                        <p onClick={()=>props.onClose(false)}>확인</p>
+                        <p onClick={handleOverPriceAlertModalConfirmBtnClick}>확인</p>
                     </button>
                 </div>
             </div>

@@ -1,9 +1,18 @@
 import { Dispatch, SetStateAction } from "react";
-import style from "./AlertModal.module.css";
+// import style from "./AlertModal.module.css";
+import style from './GiftCardValidAlertModal.module.css';
 import Image from 'next/image';
 
-export default function GiftCardUsed(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
-
+export default function GiftCardUsed(
+    props: {
+        show: boolean, 
+        onClose: Dispatch<SetStateAction<boolean>>,
+        setSerialNumber: Dispatch<SetStateAction<string>>,
+    }) {
+    const handleUsedAlertModalConfirmBtnClick = () => {
+        props.onClose(false);
+        props.setSerialNumber('');
+    }
 
     if(!props.show) return null
     
@@ -14,7 +23,7 @@ export default function GiftCardUsed(props:{show:boolean, onClose:Dispatch<SetSt
                     <p>이미 사용된 쿠폰입니다</p>
                 </div>
                 <div className={style.footer}>
-                    <button onClick={()=>props.onClose(false)}>
+                    <button>
                         <Image
                             src="/images/checkPurple.png"
                             alt="confirm"
@@ -22,7 +31,9 @@ export default function GiftCardUsed(props:{show:boolean, onClose:Dispatch<SetSt
                             width={28}
                             height={28}
                         />
-                        <p>확인</p>
+                        <p onClick={handleUsedAlertModalConfirmBtnClick}>
+                            확인
+                        </p>
                     </button>
                 </div>
             </div>

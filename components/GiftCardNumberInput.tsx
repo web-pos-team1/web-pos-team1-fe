@@ -38,7 +38,7 @@ const GiftCardNumberInput: React.FC<Props> = (
       <div className={style.phoneWrap}>
         {/* <input type="text" value={inputValue} readOnly  placeholder='모바일 쿠폰 번호를 입력해 주세요 />*/}
         <input type='text' value={serialNumber} readOnly 
-          placeholder='모바일 쿠폰 번호를 입력해 주세요'
+          placeholder=''
         />
 
         <div className={style.NumberPad}>
