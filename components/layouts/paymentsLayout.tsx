@@ -6,10 +6,12 @@ import Link from "next/link";
 import Button from "@/components/Button";
 import Text from "@/components/Text";
 import Text3Button from "../Text3Button";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { totalPriceState } from "@/state/totalPriceState"; 
 import axios from 'axios';
 import { RequestPayParams, RequestPayResponse } from "iamport-typings";
+import { mapToBE } from "../globalfunctions/mapToBE";
+import { PayObjectState } from "@/state/PayObjectState";
 
 interface Props {
   children: React.ReactNode;
@@ -23,6 +25,7 @@ const initialState: RequestPayParams = {
   amount: 1000, // 결제금액
   buyer_tel: "010-0000-0000"
 };
+
 const IMP_UID = process.env.NEXT_PUBLIC_ENV_IMP_UID ?? "imptest9298";
 
 const PaymentsLayout: React.FC<Props> = ({ children }) => {
@@ -32,6 +35,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
   const [result, setResult] = useState<RequestPayResponse>();
 
   const [finalTotalPrice, setFinalTotalPrice] = useRecoilState<number>(totalPriceState);
+  const payObjectState = useRecoilValue(PayObjectState);
 
   const { IMP } = window;
 
@@ -46,10 +50,14 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       
       payData['pg'] = "nice";
       payData['pay_method'] = "card";
+      payData['amount'] = totalPrice;
       
       console.log("payData: ", payData);
+      
+      // 결제 가이드 로띠().then()
 
-      IMP.request_pay(payData, onPaymentAccepted);
+      IMP.request_pay(payData, onPaymentAccepted); // 이니시스 결제 모달
+
     } else {
       alert("결제를 진행할 수 없습니다. 다시 시도해주시기 바랍니다.");
     }
@@ -61,8 +69,11 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       IMP.init(IMP_UID);
       console.log("[mobilePay] success to init IMP: ", IMP);
       console.log("==start to request pay==")
+
       payData['pg'] = "kcp";
       payData['pay_method'] = "samsung";
+      payData['amount'] = totalPrice;
+
       console.log("payData: ", payData);
       IMP.request_pay(payData, onPaymentAccepted);
 
@@ -80,7 +91,8 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       console.log("==start to request pay==");
       payData['pg'] = "kakaopay";
       payData['pay_method'] = "card";
-      
+      payData['amount'] = totalPrice;
+
       console.log("payData: ", payData);
 
       IMP.request_pay(payData, onPaymentAccepted);
@@ -105,6 +117,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
             'error_msg': "결제 성공했습니다.",
             'img_uid': IMP_UID,
         };
+        // const url = mapToBE(`/api/v1/payment/callback-receive`);
         const url = `http://localhost:8080/api/v1/payment/callback-receive`;
         const headers = {
             'content-type': 'application/json'
@@ -125,9 +138,25 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
         })
     } else {
         alert("결제 실패했습니다. 다시 시도해주시기 바랍니다.");
+        payData['merchant_uid'] = makeUID();
     }
   }
-
+  const makeUID = () => {
+    const date = new Date();
+    let storeId = process.env.NEXT_PUBLIC_ENV_STORE_ID;
+    if (storeId && Number(storeId) < 10) {
+      storeId = '0' + storeId;
+    };
+    let posId = process.env.NEXT_PUBLIC_ENV_POS_ID;
+    if (posId && Number(posId) < 10) {
+      posId = '0' + posId;
+    }
+    let timeList = date.toTimeString().split(' ')[0].split(':'); // ['13', '56', '15'] -> [시, 분, 초]
+    const retUID = 
+    date.getFullYear() + "" + Number(date.getMonth()) + 1 + "" + date.getDate() + "" + timeList[0] + timeList[1] + timeList[2] + "" + storeId + posId
+    
+    return retUID;
+  }
   const buttons = [
     {
       src: "/images/creditCard.png",
@@ -163,8 +192,8 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     console.log("paymentLayouts / useEffect()");
     setParams({...params, amount: finalTotalPrice});
-    // 이름은 recoil에 장바구니 찾아서  list.size()참고해서 짜자
-
+    // ** 이름은 recoil에 장바구니 찾아서  list.size()참고해서 짜자 **  
+    payData['merchant_uid'] = makeUID();
   }, [])
 
   return (

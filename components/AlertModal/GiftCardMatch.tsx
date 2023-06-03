@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
-import style from "./AlertModal.module.css";
+// import style from "./AlertModal.module.css";
+import style from "./GiftCardValidAlertModal.module.css";
 import Image from 'next/image';
 import Link from "next/link";
 

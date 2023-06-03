@@ -2,10 +2,10 @@
     background-color: #D4D8DB;
     width: 756px;
     height: 900px;
-    border-radius: 30px;
+    border-radius: 45px;
     padding: 25px;
     position: relative;
-    z-index: 200;
+    z-index: 100;
     box-sizing: border-box;
     
 }

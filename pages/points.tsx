@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import { Inter } from '@next/font/google'
 import styles from '@/styles/Points.module.css'
 import Link from 'next/link'
 import { NextPageWithLayout } from './_app'
