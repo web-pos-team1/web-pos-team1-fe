@@ -12,7 +12,6 @@ export default function GiftCardNumberModal(
         onClose:Dispatch<SetStateAction<boolean>>,
         serialNumber: string,
         setSerialNumber: Dispatch<SetStateAction<string>>,
-        handleCheckGiftCardNumber: ()=>void
     }) {
 
     if(!props.show) return null
@@ -38,7 +37,6 @@ export default function GiftCardNumberModal(
                     <GiftCardNumber 
                         serialNumber={props.serialNumber}
                         setSerialNumber={props.setSerialNumber}
-                        handleCheckGiftCardNumber={props.handleCheckGiftCardNumber}
                     />
                 </div>
 

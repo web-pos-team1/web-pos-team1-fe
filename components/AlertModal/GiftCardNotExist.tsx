@@ -1,9 +1,19 @@
 import { Dispatch, SetStateAction } from "react";
-import style from "./AlertModal.module.css";
+// import style from "./AlertModal.module.css";
+import style from './GiftCardValidAlertModal.module.css';
 import Image from 'next/image';
 
-export default function GiftCardNotExist(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
+export default function GiftCardNotExist(
+    props: {
+        show: boolean, 
+        onClose: Dispatch<SetStateAction<boolean>>,
+        setSerialNumber: Dispatch<SetStateAction<string>>,
+    }) {
 
+    const handleNotExistAlertModalConfirmBtnClick = () => {
+        props.onClose(false);
+        props.setSerialNumber('');
+    }
 
     if(!props.show) return null
     
@@ -22,7 +32,7 @@ export default function GiftCardNotExist(props:{show:boolean, onClose:Dispatch<S
                             width={28}
                             height={28}
                         />
-                        <p onClick={()=>props.onClose(false)}>확인</p>
+                        <p onClick={handleNotExistAlertModalConfirmBtnClick}>확인</p>
                         </button>
                 </div>
             </div>

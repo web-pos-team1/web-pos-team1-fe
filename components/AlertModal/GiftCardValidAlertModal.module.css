@@ -1,11 +1,14 @@
 .modal {
     background-color: #4C304F;
-    width: 600px;
+    width: 750px;
     height: 300px;
     border-radius: 30px;
     padding: 30px;
-    z-index: 1100;
-    box-sizing: border-box;
+    z-index: 1080;
+    /* box-sizing: border-box; */
+    margin-left: 20px;
+    
+
 }
 
 .footer {
@@ -27,14 +30,18 @@
 }
 
 .footer button p {
-    padding-left: 10px;
+    padding-left: 15px;
+    padding-top: 38px;
 }
 
 .overlay {
-    position: absolute;
+    position:absolute;
     top: 0;
-    width: 100%;
+    width: 756px;
     height: 100%;
+    margin-left: 117.5px;
+    padding-right: 85px;
+    padding-left: 66px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,6 +54,7 @@
 .body {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .body p {

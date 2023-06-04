@@ -19,7 +19,8 @@ import CartItem from "../cart-list/CartItem";
 import { NextPageWithLayout } from "../_app";
 import FooterPreBtn from "@/components/FooterPreBtn";
 import FooterCheckCartBtn from "@/components/FooterCheckCartBtn";
-import { RecoilRoot } from "recoil";
+import { RecoilRoot, useRecoilValue } from "recoil";
+import { PayObjectState } from "@/state/PayObjectState";
 
 const Products : NextPageWithLayout = () => {
     const router = useRouter();
@@ -36,6 +37,7 @@ const Products : NextPageWithLayout = () => {
     const [cartId, setCartId] = useState();
     const [categoryIndex, setCategoryIndex] = useState<number>(0);
 
+    const payObjectState = useRecoilValue(PayObjectState);
 
     const category_map : {[key: string] : number} = {
         "과일": 0,
@@ -74,12 +76,8 @@ const Products : NextPageWithLayout = () => {
         }
         let url = ''
         Object.entries(category_map).map(([key, value]) => {
-            console.log("key: ", key);
-            console.log("value: ", value);
             if (value === id) {
-                console.log("finded key: ", key);
                 url = `/products/` + key;
-                console.log('router url: ', url);
             }
         })
         
@@ -102,7 +100,6 @@ const Products : NextPageWithLayout = () => {
         setCartList([...cartList, cart]);
     }
 
-    console.log("Procuts / router.query.[category]: ", router.query.category);
     const convertProductToCart = (product : ProductType, cartQty: number) => {
         let cart : CartType = {
             product_id: product.product_id,
@@ -130,8 +127,7 @@ const Products : NextPageWithLayout = () => {
         console.log("process.env:", process.env);
         console.log("process.env.NEXT_PUBLIC_ENV_POSID:", process.env.NEXT_PUBLIC_ENV_POS_ID);
         let url_products = mapToBE(`/api/v1/products/${router.query.category}`);
-        // url_products = `http://localhost:3001/products`;
-        console.log("url_porducts: ", url_products);
+        // let url_products = `http://localhost:3001/products`;
 
         axios(
             url_products,
@@ -162,6 +158,7 @@ const Products : NextPageWithLayout = () => {
         }
         // setItemList(res.data)
         // setCartList(carts);
+        console.log("[category].tsx/useEffect()/payObjectState: ", payObjectState);
     }, [router.query.category, delProductId])
 
 

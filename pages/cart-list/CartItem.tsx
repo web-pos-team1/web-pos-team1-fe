@@ -32,9 +32,7 @@ export default function CartItem(
             // alert("최소 수량은 1개입니다.");
             return;
         }
-        console.log("before cartQty: ", cartQty);
         setCartQty(cartQty - 1);
-        console.log("after cartQty: ", cartQty);
         for (let i = 0; i < props.cartList.length; i++) {
             if (props.cartList[i].product_id === props.item.product_id) {
                 props.cartList[i].cartQty -= 1;
@@ -45,9 +43,7 @@ export default function CartItem(
         props.setTotalPrice(props.totalPrice - props.item.price);
     }
     const plusCount = () => {
-        console.log("before cartQty: ", cartQty);
         setCartQty(cartQty + 1);
-        console.log("after cartQty: ", cartQty);
         for (let i = 0; i < props.cartList.length; i++) {
             if (props.cartList[i].product_id === props.item.product_id) {
                 props.cartList[i].cartQty += 1;

@@ -27,7 +27,6 @@ export default function GiftCardGuideModal(
 
     return (
         <div className={style.overlay}>
-            
             <div className={style.modal}>    
                 <div className={style.cancel}>
                     <button  onClick={()=>props.onClose()}>

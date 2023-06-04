@@ -1,16 +1,20 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '@/components/layouts/layout'
 import { NextPageWithLayout } from './_app'
 import Script from 'next/script'
+import { useRecoilState } from 'recoil'
+import { PayObjectState } from '@/state/PayObjectState'
 
 const inter = Inter({ subsets: ['latin'] })
 
+
 const Home: NextPageWithLayout = () => {
+  
   return (
     <>
     {/* JQuery */}

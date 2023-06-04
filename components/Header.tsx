@@ -14,6 +14,7 @@ import DeliveryModal from './DeliveryModal';
 import { useRecoilState } from 'recoil';
 import { LanguageIndexState } from '@/state/LanguageIndexState';
 import { countryImg } from '@/data/countryImg';
+import { PayObjectState } from '@/state/PayObjectState';
 
 type Button = {
   id: number,
