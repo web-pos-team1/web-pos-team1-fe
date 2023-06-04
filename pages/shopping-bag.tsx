@@ -23,6 +23,7 @@ import { totalPriceState } from '@/state/totalPriceState'
 import { mapToBE } from '@/components/globalfunctions/mapToBE'
 import React from 'react'
 import PaperBagModal from '@/components/PaperBagModal'
+import RecyclingBagModal from '@/components/RecyclingBagModal'
 
 const ibmPlexSansKR = IBM_Plex_Sans_KR({
   subsets: ['latin'],
@@ -151,6 +152,7 @@ const Shoppingbag: NextPageWithLayout = () => {
       </Head>
       <main className={styles.main}>
       <PaperBagModal show={isPaperbagOpen} onClose={setIsPaperbagOpen}/>
+      <RecyclingBagModal show={isRecyclingbagOpen} onClose={setIsRecyclingbagOpen}/>
         {/* 상품권 사용하시겠습니까 -> 예/아니오  */}
       <GiftCardGuideModal show={showGiftCardGuideModal} onClose={handleCloseGiftCardGuideModal} />
         {/* 상품권 번호 입력 */}

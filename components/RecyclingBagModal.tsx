@@ -5,13 +5,13 @@ import Link from 'next/link';
 import { useRecoilState } from "recoil";
 import { totalPriceState } from "@/state/totalPriceState";
 
-export default function PaperBagModal(props:{
+export default function RecyclingBagModal(props:{
     show:boolean, 
     onClose:Dispatch<SetStateAction<boolean>>
     }) {
 
     const [quantity, setQuantity] = useState(1);
-    const [price, setPrice] = useState(100);
+    const [price, setPrice] = useState(850);
     const [totalPrice, setTotalPrice] = useRecoilState(totalPriceState);
 
     if(!props.show) return null
@@ -19,13 +19,13 @@ export default function PaperBagModal(props:{
     const handleDeclineQty = () => {
         if (quantity > 1) {
         setQuantity(quantity - 1);
-        setPrice(price - 100);
+        setPrice(price - 850);
         }
       };
     
       const handleIncreaseQty = () => {
         setQuantity(quantity + 1);
-        setPrice(price + 100);
+        setPrice(price + 850);
       };
 
       const handleConfirm = () => {
@@ -50,11 +50,11 @@ export default function PaperBagModal(props:{
                 </div>
                 
                 <div className={style.title}>
-                    <p>종이봉투 구매</p>    
+                    <p>종량제봉투 구매</p>    
                 </div>
 
                 <div className={style.body}>
-                    <p>종이봉투 수량을 입력해 주세요</p>
+                    <p>종량제봉투 수량을 입력해 주세요</p>
                 </div>
 
                 <div className={style.handler}>
