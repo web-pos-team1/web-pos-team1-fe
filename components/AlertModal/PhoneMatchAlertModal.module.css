@@ -17,7 +17,7 @@
     background-color: #ffffff;
     width: 169px;
     height: 44px;
-    border-radius: 24px;
+    border-radius: 140px;
     font-size: 25px;
     color: #4C304F;
     border-style: none;
@@ -41,6 +41,7 @@
     background: center;
     backdrop-filter: blur(5px);
     background: rgba(0, 0, 0, 0.5);
+    border-radius: 31px;
 }
 
 .body {

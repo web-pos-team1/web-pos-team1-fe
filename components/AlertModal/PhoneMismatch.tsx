@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import style from "./AlertModal.module.css";
+import style from "./PhoneMatchAlertModal.module.css";
 import Image from 'next/image';
 
 export default function PhoneMismatch(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
