@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import { IBM_Plex_Sans_KR, Inter } from 'next/font/google'
 import Link from 'next/link'
 import SsgServiceLayout from '@/components/layouts/ssgServiceLayout'
 import { NextPageWithLayout } from './_app'
@@ -13,7 +13,10 @@ import DeliveryServiceModal from '@/components/DeliveryServiceModal'
 import { UserLoginState } from '@/state/UserLoginState'
 import GiftModal from '@/components/GiftModal'
 
-const inter = Inter({ subsets: ['latin'] })
+const ibmPlexSansKR = IBM_Plex_Sans_KR({
+  subsets: ['latin'],
+  weight: '400',
+})
 
 const SsgService: NextPageWithLayout = () => {
 

@@ -11,6 +11,7 @@ export default function MainLayout(props:{children:React.ReactNode}) {
             </RecoilRoot>
             <Location />
             {props.children}
+            
         </div>
     )
 }

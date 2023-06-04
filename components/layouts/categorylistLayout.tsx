@@ -5,6 +5,7 @@ import Button from "@/components/Button";
 import Text from "@/components/Text";
 import { RecoilRoot, useRecoilState } from "recoil";
 import { LanguageIndexState } from "@/state/LanguageIndexState";
+import { IBM_Plex_Sans_KR } from "next/font/google";
 
 export default function CategorylistLayout(props:{children:React.ReactNode}) {
     const [languageIndex, setLanguageIndex] = useRecoilState(LanguageIndexState);

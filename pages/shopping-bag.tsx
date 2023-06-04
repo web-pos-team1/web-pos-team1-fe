@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import { IBM_Plex_Sans_KR, Inter } from 'next/font/google'
 import styles from '@/styles/ShoppingBag.module.css'
 import Link from 'next/link'
 import ShoppingBagLayout from '@/components/layouts/shoppingBagLayout'
@@ -21,14 +21,23 @@ import GiftCardUsed from '@/components/AlertModal/GiftCardUsed'
 import axios from 'axios';
 import { totalPriceState } from '@/state/totalPriceState'
 import { mapToBE } from '@/components/globalfunctions/mapToBE'
+import React from 'react'
+import PaperBagModal from '@/components/PaperBagModal'
 
-const inter = Inter({ subsets: ['latin'] })
+const ibmPlexSansKR = IBM_Plex_Sans_KR({
+  subsets: ['latin'],
+  weight: '400',
+})
 
 const Shoppingbag: NextPageWithLayout = () => {
 
   const [showGiftCardGuideModal, setShowGiftCardGuideModal] = useState<boolean>(false);
   const [showGiftCardGuideNumberModal, setShowGiftCardGuideNumberModal] = useState<boolean>(false);
   const [serialNumber, setSerialNumber] = useState<string>('');
+
+  const [isPaperbagOpen, setIsPaperbagOpen] = useState<boolean>(false);
+  const [isRecyclingbagOpen, setIsRecyclingbagOpen] = useState<boolean>(false);
+
 
   const [giftCardMatchShow, setGiftCardMatchShow] = useState<boolean>(false);
   const [giftCardExpiredShow, setGiftCardExpiredShow] = useState<boolean>(false);
@@ -42,12 +51,14 @@ const Shoppingbag: NextPageWithLayout = () => {
     setShowGiftCardGuideModal(true);
   };
   const handlePaperBagClick = () => {
-    console.log("===종이백 선택했음===");
-    alert("종이백 수량 입력하는 모달뜨기");
+    setIsPaperbagOpen(true)
+    // console.log("===종이백 선택했음===");
+    // alert("종이백 수량 입력하는 모달뜨기");
   }
   const handleRecyclingBagClick = () => {
-    console.log("===재활용 가방 선택했음===");
-    alert("재활용백 수량 입력하는 모달뜨기");
+    setIsRecyclingbagOpen(true)
+    // console.log("===재활용 가방 선택했음===");
+    // alert("재활용백 수량 입력하는 모달뜨기");
   }
   const handleNoClick = () => {
     console.log("===필요없음 선택했음===")
@@ -139,6 +150,7 @@ const Shoppingbag: NextPageWithLayout = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+      <PaperBagModal show={isPaperbagOpen} onClose={setIsPaperbagOpen}/>
         {/* 상품권 사용하시겠습니까 -> 예/아니오  */}
       <GiftCardGuideModal show={showGiftCardGuideModal} onClose={handleCloseGiftCardGuideModal} />
         {/* 상품권 번호 입력 */}

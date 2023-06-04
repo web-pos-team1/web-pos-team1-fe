@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@aws-amplify/cli": "^11.1.1",
+    "@next/font": "13.1.5",
     "@types/node": "18.16.3",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.1",
+    "chart.js": "2.9.4",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.2",
     "fs": "^0.0.1-security",
@@ -36,6 +38,7 @@
     "recoil-persist": "^4.2.0",
     "simple-keyboard": "^3.5.62",
     "simple-keyboard-layouts": "^3.1.325",
+    "sse": "^0.0.8",
     "tls": "^0.0.1",
     "typescript": "5.0.4"
   }
