@@ -28,12 +28,10 @@ export default function Test() {
     }, [languageIndex])
     return(
         <div>
-            <RecoilRoot>
                 <Header 
                     languageIndex={languageIndex}
                     setLanguageIndex={setLanguageIndex}
                 />    
-            </RecoilRoot>
             <h1 style={{ textAlign: "center"}}>
                 {
                     globalText

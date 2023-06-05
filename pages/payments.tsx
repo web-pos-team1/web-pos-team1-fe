@@ -30,11 +30,9 @@ const Payments: NextPageWithLayout = () => {
 Payments.getLayout = function getLayout(page: React.ReactNode) {
   return(
     <>
-    <RecoilRoot>
       <PaymentsLayout>
         {page}
       </PaymentsLayout>
-    </RecoilRoot>
     </>
   )
 }

@@ -31,11 +31,10 @@ const Points: NextPageWithLayout = () => {
 Points.getLayout = function getLayout(page: React.ReactNode) {
   return(
     <>
-      <RecoilRoot>
         <PointsLayout>
           {page}
         </PointsLayout>
-      </RecoilRoot>
+      
     </>
   )
 }

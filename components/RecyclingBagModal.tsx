@@ -20,16 +20,19 @@ export default function RecyclingBagModal(props:{
         if (quantity > 1) {
         setQuantity(quantity - 1);
         setPrice(price - 850);
+        setTotalPrice(totalPrice - 850);
         }
       };
     
       const handleIncreaseQty = () => {
         setQuantity(quantity + 1);
         setPrice(price + 850);
+        setTotalPrice(totalPrice + 850);
       };
 
       const handleConfirm = () => {
-        // props.setTotalPrice(price);
+        console.log("price: ", price);
+        setTotalPrice(totalPrice + price);
         props.onClose(false);
       };
     

@@ -15,17 +15,20 @@ export default function PaperBagModal(props:{
     const [totalPrice, setTotalPrice] = useRecoilState(totalPriceState);
 
     if(!props.show) return null
+    console.log("totalPrice: ", totalPrice)
 
     const handleDeclineQty = () => {
         if (quantity > 1) {
         setQuantity(quantity - 1);
         setPrice(price - 100);
+        setTotalPrice(totalPrice - 100);
         }
       };
     
       const handleIncreaseQty = () => {
         setQuantity(quantity + 1);
         setPrice(price + 100);
+        setTotalPrice(totalPrice + 100);
       };
 
       const handleConfirm = () => {
@@ -33,10 +36,6 @@ export default function PaperBagModal(props:{
         setTotalPrice(totalPrice + price);
         props.onClose(false);
       };
-
-    // useEffect(() => {
-    //     console.log("totalPrice: ", totalPriceState)
-    // }, [totalPriceState])
     
     return (
         <div className={style.overlay}>
