@@ -8,6 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 150px;
 }
 
 .font {
@@ -15,6 +16,6 @@
   justify-content: center;
   margin-top: -100px;
   color: #4C304F;
-  font-size: 21px;
+  font-size: 20px;
   font-weight: 1
 }

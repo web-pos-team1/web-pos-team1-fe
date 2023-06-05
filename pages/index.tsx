@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
@@ -9,12 +8,17 @@ import { NextPageWithLayout } from './_app'
 import Script from 'next/script'
 import { useRecoilState } from 'recoil'
 import { PayObjectState } from '@/state/PayObjectState'
+import { IBM_Plex_Sans_KR } from 'next/font/google'
+import { NextFont } from 'next/dist/compiled/@next/font'
 
-const inter = Inter({ subsets: ['latin'] })
+const ibmPlexSansKR = IBM_Plex_Sans_KR({
+  subsets: ['latin'],
+  weight: '400',
+});
 
 
 const Home: NextPageWithLayout = () => {
-  
+
   return (
     <>
     {/* JQuery */}
@@ -28,7 +32,7 @@ const Home: NextPageWithLayout = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <main className={ibmPlexSansKR.className}>
         <div className={styles.center}>
             <Image
               className={styles.logo}

@@ -1,12 +1,19 @@
 import Head from 'next/head'
 import Image from 'next/image'
+<<<<<<< HEAD
 import { Inter } from '@next/font/google'
+=======
+import { IBM_Plex_Sans_KR, Inter } from 'next/font/google'
+>>>>>>> font
 import styles from '@/styles/Last.module.css'
 import Link from 'next/link'
 import { NextPageWithLayout } from './_app'
 import LastLayout from '@/components/layouts/lastLayout'
 
-const inter = Inter({ subsets: ['latin'] })
+const ibmPlexSansKR = IBM_Plex_Sans_KR({
+  subsets: ['latin'],
+  weight: '400',
+})
 
 const Last: NextPageWithLayout = () => {
   return (

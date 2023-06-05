@@ -15,6 +15,7 @@ import { PayObjectState } from "@/state/PayObjectState";
 import style  from "./paymentsLayout.module.css";
 import Image from 'next/image';
 import UsePointsNumberModal from "../UsePointsNumberModal";
+import { IBM_Plex_Sans_KR } from "next/font/google";
 
 interface Props {
   children: React.ReactNode;
@@ -199,6 +200,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
 
   return (
     <>
+    <div>
     <UsePointsNumberModal show={showUsePointsNumberModal} onClose={setShowUsePointsNumberModal} />
     <div>
       <Header />
@@ -279,6 +281,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
         <Footer 
           totalPrice={totalPrice}
         />
+    </div>
     </div>
     </>
   );

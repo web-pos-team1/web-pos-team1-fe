@@ -1,0 +1,114 @@
+.modal {
+    background-color: #D4D8DB;
+    width: 461px;
+    height: 521px;
+    border-radius: 30px;
+    padding: 20px;
+    position: relative;
+    z-index: 200;
+    box-sizing: border-box;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+}
+
+.footer a {
+    padding-left: 20px;
+}
+
+.handler ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.handler li {
+    list-style: none;
+    padding: 0 30px;
+    font-size: 40px;
+    color: #4C304F;
+    margin-bottom: 15px;
+}
+
+.handler li:nth-child(2) {
+    padding-bottom: 20px;
+}
+
+.amount {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    width: 296px;
+    height: 82px;
+    background-color: #4C304F;
+    border-radius: 20px;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+.footer button {
+    background-color: #FFFFFF;
+    width: 169px;
+    height: 60px;
+    border-radius: 24px;
+    font-size: 30px;
+    color: #4C304F;
+    border-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 35px;
+}
+
+.footer button p {
+    padding-left: 10px;
+}
+
+.title {
+    color : #4C304F;
+    font-size: 38px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: center;
+    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.body {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.body p {
+    font-size: 30px;
+    padding-top: 15px;
+    padding-bottom: 30px;
+}
+
+.cancel {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cancel button {
+    background-color: #D4D8DB;
+    border: none;
+}
+
+
+
