@@ -131,8 +131,8 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
             'error_msg': "결제 성공했습니다.",
             'img_uid': IMP_UID,
         };
-        // const url = mapToBE(`/api/v1/payment/callback-receive`);
-        const url = `http://localhost:8080/api/v1/payment/callback-receive`;
+        const url = mapToBE(`/api/v1/payment/callback-receive`);
+        // const url = `http://localhost:8080/api/v1/payment/callback-receive`;
         const headers = {
             'content-type': 'application/json'
         };
