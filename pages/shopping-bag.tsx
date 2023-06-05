@@ -9,7 +9,7 @@ import Text2Button from "@/components/Text2Button";
 import Text from "@/components/Text";
 import style from "../components/layouts/shoppingBagLayout.module.css"
 import GiftCardGuideModal from '@/components/GiftCardGuideModal'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { RecoilRoot, useRecoilState } from 'recoil'
 import GiftCardNumber from '@/components/GiftCardNumber'
 import GiftCardNumberModal from '@/components/GiftCardNumberModal'
@@ -141,6 +141,9 @@ const Shoppingbag: NextPageWithLayout = () => {
       }
     })
   }
+  // useEffect(() => {
+  //   console.log("shopping-bag/useEffect()/totalPrice: ", totalPrice);
+  // }, [totalPrice])
 
   return (
     <>
@@ -151,7 +154,10 @@ const Shoppingbag: NextPageWithLayout = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-      <PaperBagModal show={isPaperbagOpen} onClose={setIsPaperbagOpen}/>
+      <PaperBagModal 
+        show={isPaperbagOpen} 
+        onClose={setIsPaperbagOpen}
+        />
       <RecyclingBagModal show={isRecyclingbagOpen} onClose={setIsRecyclingbagOpen}/>
         {/* 상품권 사용하시겠습니까 -> 예/아니오  */}
       <GiftCardGuideModal show={showGiftCardGuideModal} onClose={handleCloseGiftCardGuideModal} />

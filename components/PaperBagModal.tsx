@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import style from "./PaperBagModal.module.css";
 import Image from 'next/image';
 import Link from 'next/link';
@@ -29,9 +29,14 @@ export default function PaperBagModal(props:{
       };
 
       const handleConfirm = () => {
-        props.setTotalPrice(price);
+        console.log("price: ", price);
+        setTotalPrice(totalPrice + price);
         props.onClose(false);
       };
+
+    // useEffect(() => {
+    //     console.log("totalPrice: ", totalPriceState)
+    // }, [totalPriceState])
     
     return (
         <div className={style.overlay}>
