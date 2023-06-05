@@ -23,9 +23,7 @@ export default function ssgServiceLayout(props:{children:React.ReactNode}) {
     
     return (
         <>
-        <RecoilRoot>
             <Header />
-        </RecoilRoot>
             <Location />
             {props.children}
             <Footer 

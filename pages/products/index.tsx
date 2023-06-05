@@ -37,11 +37,9 @@ const Products: NextPageWithLayout = () => {
 Products.getLayout = function getLayout(page: React.ReactNode) {
   return(
     <>
-      <RecoilRoot>
         <CategorylistLayout>
           {page}
         </CategorylistLayout>
-      </RecoilRoot>
     </>
   )
 }

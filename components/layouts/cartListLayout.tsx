@@ -11,9 +11,7 @@ import { IBM_Plex_Sans_KR } from "next/font/google";
 export default function cartListLayout(props:{children:React.ReactNode}) {
     return (
         <>
-            <RecoilRoot>
-                <Header />
-            </RecoilRoot>
+            <Header />
             <Location />
             {props.children}
         </>

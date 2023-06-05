@@ -6,9 +6,7 @@ import { RecoilRoot } from "recoil";
 export default function Layout(props:{children:React.ReactNode}) {
     return (
         <div>
-            <RecoilRoot>
-                <Header />
-            </RecoilRoot>
+            <Header />
             {props.children}
         </div>
     )

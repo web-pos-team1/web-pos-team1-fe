@@ -53,9 +53,7 @@ export default function PointsLayout(props:{children:React.ReactNode}) {
     return (
         <>
         <PhoneNumberModal show={showPhoneNumberModal} onClose={setShowPhoneNumberModal} />
-        <RecoilRoot>
             <Header />
-        </RecoilRoot>
             
             <Location />
             {props.children}

@@ -11,12 +11,10 @@ export default function CategorylistLayout(props:{children:React.ReactNode}) {
     const [languageIndex, setLanguageIndex] = useRecoilState(LanguageIndexState);
     return (
         <div>
-            <RecoilRoot>
                 <Header 
                     languageIndex={languageIndex}
                     setLanguageIndex={setLanguageIndex}
                 />
-            </RecoilRoot>
             {props.children}
             <Text 
             text="카테고리를 선택해 주세요" 
