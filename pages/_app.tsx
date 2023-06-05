@@ -20,11 +20,12 @@ type AppPropsWithLayout<P = {}> = AppProps<P> & {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
-  return getLayout(
+  return (
     <RecoilRoot>
-      <main className={ibmPlexSansKR.className}>
+    {getLayout(
+    
         <Component {...pageProps} />
-      </main>
+    )}
     </RecoilRoot>
   )
 }

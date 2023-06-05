@@ -8,9 +8,7 @@ import { RecoilRoot } from "recoil";
 export default function LastLayout(props:{children:React.ReactNode}) {
     return (
         <div>
-            <RecoilRoot>
                 <Header />
-            </RecoilRoot>
             <Location />
             {props.children}
             <Link href="/">

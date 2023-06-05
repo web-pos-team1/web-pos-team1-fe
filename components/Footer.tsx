@@ -1,20 +1,13 @@
-import router, { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react'
+import router from 'next/router';
 import style from './Footer.module.css';
 import Image from 'next/image'
-import Link from 'next/link'
 import { formatMoney } from './globalfunctions/formatMoney';
+import { useRecoilValue } from 'recoil';
+import { totalPriceState } from '@/state/totalPriceState';
 
-export default function Footer(props: {
-    totalPrice?: number
-}) {
-    const [tPrice, setTPrice] = useState<number>();
+export default function Footer() {
+    const totalPrice = useRecoilValue(totalPriceState);
 
-
-    useEffect(() => {
-        console.log("Footer / totalPrice: ", props.totalPrice);
-        setTPrice(props.totalPrice);
-    }, [])
     return (
         <footer className={style.footerMenu}>
             <div className={style.pre_btn}>
@@ -52,11 +45,11 @@ export default function Footer(props: {
                             />
                         </li>
                         <li>
-                         ₩{formatMoney(tPrice ? tPrice : 1)}
+                        ₩{formatMoney(totalPrice ? totalPrice : 1)}
                         </li>
                     </ul>
                 </nav>  
             </div>
         </footer>
-  )
+)
 }

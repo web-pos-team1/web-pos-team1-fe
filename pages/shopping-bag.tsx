@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { IBM_Plex_Sans_KR, Inter } from '@next/font/google'
+import { IBM_Plex_Sans_KR } from '@next/font/google'
 import styles from '@/styles/ShoppingBag.module.css'
 import Link from 'next/link'
 import ShoppingBagLayout from '@/components/layouts/shoppingBagLayout'
@@ -178,11 +178,9 @@ const Shoppingbag: NextPageWithLayout = () => {
 Shoppingbag.getLayout = function getLayout(page: React.ReactNode) {
   return(
     <>
-      <RecoilRoot>
         <ShoppingBagLayout>
           {page}
         </ShoppingBagLayout>
-      </RecoilRoot>
     </>
   )
 }
