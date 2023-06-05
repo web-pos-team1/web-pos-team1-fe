@@ -29,7 +29,7 @@ export default function RecyclingBagModal(props:{
       };
 
       const handleConfirm = () => {
-        props.setTotalPrice(price);
+        // props.setTotalPrice(price);
         props.onClose(false);
       };
     

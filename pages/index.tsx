@@ -8,8 +8,7 @@ import { NextPageWithLayout } from './_app'
 import Script from 'next/script'
 import { useRecoilState } from 'recoil'
 import { PayObjectState } from '@/state/PayObjectState'
-import { IBM_Plex_Sans_KR } from 'next/font/google'
-import { NextFont } from 'next/dist/compiled/@next/font'
+import { IBM_Plex_Sans_KR } from '@next/font/google'
 
 const ibmPlexSansKR = IBM_Plex_Sans_KR({
   subsets: ['latin'],

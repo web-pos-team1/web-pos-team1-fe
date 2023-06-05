@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { IBM_Plex_Sans_KR, Inter } from 'next/font/google'
+import { IBM_Plex_Sans_KR, Inter } from '@next/font/google'
 import styles from '@/styles/Payments.module.css'
 import Link from 'next/link'
 import PaymentsLayout from '@/components/layouts/paymentsLayout'

@@ -1,7 +1,7 @@
 import '@/styles/globals.css'
 import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
-import { IBM_Plex_Sans_KR } from 'next/font/google'
+import { IBM_Plex_Sans_KR } from '@next/font/google'
 import { ReactElement, ReactNode } from 'react'
 import { RecoilRoot } from 'recoil'
 

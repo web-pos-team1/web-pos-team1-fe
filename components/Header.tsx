@@ -14,11 +14,7 @@ import DeliveryModal from './DeliveryModal';
 import { useRecoilState } from 'recoil';
 import { LanguageIndexState } from '@/state/LanguageIndexState';
 import { countryImg } from '@/data/countryImg';
-<<<<<<< HEAD
 import { PayObjectState } from '@/state/PayObjectState';
-=======
-import { IBM_Plex_Sans_KR } from 'next/font/google';
->>>>>>> font
 
 type Button = {
   id: number,
@@ -27,11 +23,6 @@ type Button = {
   link: string,
   onClick: any
 } 
-
-// const ibmPlexSansKR = IBM_Plex_Sans_KR({
-//   subsets: ['latin'],
-//   weight: '400',
-// });
 
 export default function Header(
   props: {
@@ -91,8 +82,6 @@ export default function Header(
 
   return (
     <>
-    
-    {/* <html lang="ko" className={ibmPlexSansKR.className}> */}
     <Modal 
       show={showModal} onClose={setShowModal} 
       setLanguageIndex={props.setLanguageIndex}
@@ -139,11 +128,9 @@ export default function Header(
             />
             </li>
           
-         
           ))}
       </ul>
-    </header> 
-    {/* </html> */}
+    </header>
     </>
   )
 }
