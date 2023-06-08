@@ -64,15 +64,15 @@ const SsgService: NextPageWithLayout = () => {
         onClose={setIsGiftOpen}/>
 
       <Text text="이용하실 SSG service를 선택해 주세요" />
-            <div className={style.upperBtn}>
-                <Link href="/shopping-bag">
-                    <Button src="/images/pickUp.png" alt="purchase paper bag" text="픽업" onClick={() => console.log('btn 1')}/>
-                </Link>
-            </div>
-            <div className={style.lowerBtn}>
-                <Button src="/images/deliveryService.png" alt="purchase recycling bag" text="배송" onClick={()=>handleMemberChecker()}/>
-                <Button src="/images/giftService.png" alt="pass this step" text="선물" onClick={() => setIsGiftOpen(true)}/>
-            </div>
+      <div className={style.upperBtn}>
+          <Link href="/shopping-bag">
+              <Button src="/images/pickUp.png" alt="purchase paper bag" text="픽업" onClick={() => console.log('btn 1')}/>
+          </Link>
+      </div>
+      <div className={style.lowerBtn}>
+          <Button src="/images/deliveryService.png" alt="purchase recycling bag" text="배송" onClick={()=>handleMemberChecker()}/>
+          <Button src="/images/giftService.png" alt="pass this step" text="선물" onClick={() => setIsGiftOpen(true)}/>
+      </div>
 
 
       </main>

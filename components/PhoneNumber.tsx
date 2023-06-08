@@ -20,8 +20,9 @@ const PhoneNumber: React.FC = () => {
   const handlePhoneMatch = () => { // 확인 버튼 눌렀을 때
     // setShowPhoneMatch(true)
     console.log("phoneNumber: ", phoneNumber);
-    let req_url = mapToBE(`/api/v1/point/add`);
-    let req_data = {
+    // const req_url = mapToBE(`/api/v1/point/add`);
+    const req_url = `http://localhost:8080/api/v1/point/add`;
+    const req_data = {
       'storeId': process.env.NEXT_PUBLIC_ENV_STORE_ID,
       'posId': process.env.NEXT_PUBLIC_ENV_POS_ID,
       "pointMethod": "phoneNumber",
@@ -36,6 +37,7 @@ const PhoneNumber: React.FC = () => {
       console.log("handlePhonMatch() / res: ", res);
       if (res.status === 200) {
         setShowPhoneMatch(true)
+        localStorage.setItem("accessToken", res.data.accessToken); // 변수에 저장하도록 refactor 할 예정
         setUserLoginState(true)
       }
     })
@@ -73,7 +75,6 @@ const PhoneNumber: React.FC = () => {
             확인
           </p>
         </div>
-      
     </div>
   );
 };
