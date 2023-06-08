@@ -85,7 +85,7 @@ const UsePointsNumber: React.FC = () => {
           <UsePoints show={showUsePoints} onClose={setShowUsePoints}/>
           <UsePointsLimit show={showUsePointsNumberLimit} onClose={setShowUsePointsLimit}/>
           
-           <Image 
+          <Image 
             src="/images/checkPurple.png"
             alt="confirm button"
             width={30}

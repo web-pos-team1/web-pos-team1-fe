@@ -373,7 +373,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       </div>
 
         <Footer 
-          // totalPrice={totalPrice}
+          // totalPrice={totalPricse}
         />
     </div>
     </div>

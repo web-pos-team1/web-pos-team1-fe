@@ -15,22 +15,22 @@ export interface inputDataType {
 export interface deliveryDataType {
     deliveryName: string,
     userName: string,
-    phoneNumber: string,
     address: string,
-    postCode: string,
-    detailAddress: string,
+    detailAddress: string, // address에 붙여서 back에 보낼 예정
+    phoneNumber: string,
     requestDeliveryTime: string,
-    isConfirm: boolean // DB에 없는 데이터
+    postCode: string,
+    requestInfo: string
 }
 
 export interface nonMemberDataType {
     userName: string,
-    phoneNumber: string,
     address: string,
-    postCode: string,
     detailAddress: string,
+    phoneNumber: string,
     requestDeliveryTime: string,
-    isConfirm: boolean // DB에 없는 데이터
+    postCode: string,
+    requestInfo: string
 }
 
 
@@ -84,14 +84,6 @@ const nextStep = (step: number) => {
 if (!props.isOpen) return null
 return (
     <>
-    {/* <CheckAleart
-    step={step}
-    confirm={confirm}
-    setConfirm={setConfirm}
-    isInnerModal={isInnerModal}
-    setIsInnerModal={setIsInnerModal}
-    /> */}
-
     <div className={style.overlay}>
         <div className={style.modal}>
         <div className={style.cancel} onClick={()=>props.setIsOpen(false)}>
@@ -163,36 +155,72 @@ const Step01 = (props:{
     return (
         <div>
         <div className={style.title}>
-         <h1>배송지 입력</h1>
+        <h1>배송지 입력</h1>
         <hr/>
         </div>
 
-            <div>
-                <label>받는 분</label>
+            <div className={style.name}>
+                <p>받는 분</p>
                 <input value={inputData.userName} name='userName' onChange={handleChange} type="text"/>
-                <hr/>
-            </div>            
-            
-            <div className={style.phoneNumberDiv}>
-                <label>휴대폰 번호</label>
-                <span>
-                    <input value={inputData.phoneNumber} name='phoneNumber' onChange={handleChange} type="text" placeholder="01012345678" style={{ marginLeft: "3px" }}/>
-                </span>
-                <hr/>
             </div>
+            <hr className={style.line}/>
+            
+            
+            <div className={style.phoneNumber}>
+                <p>휴대폰 번호</p>
+                <input value={inputData.phoneNumber} name='phoneNumber' onChange={handleChange} type="text" placeholder="01012345678" style={{ marginLeft: "3px" }}/>
+            </div>
+            <hr className={style.line}/>
 
-            <div>
-                <label>주소</label>
+            <div className={style.address}>
+                <p>주소</p>
                 <input className={style.addressInput} value={inputData.address} readOnly type="text" onClick={toggleAddress}/>
                 <Modal isOpen={isDaum} ariaHideApp={false} style={modalStyles}>
                     <button onClick={cancelToggleAddress}>x</button>
                     <DaumPostcode onComplete={completeHandler}/>
                 </Modal>   
-                <input value={inputData.postCode} type="text" readOnly placeholder=" 우편번호 검색" onClick={toggleAddress} style={{ width: "60px", marginLeft: "10px", backgroundColor: "#D4D8DB" }}/>
-                <hr/>
+                <input className={style.postCode} value={inputData.postCode} type="text" readOnly placeholder=" 우편번호 검색" onClick={toggleAddress} 
+                    style={{ width: "141px", 
+                            height: "28px", 
+                            marginLeft: "10px",
+                            paddingLeft: "5px",
+                            borderRadius: "#4C304F 3px solid", 
+                            fontSize: "20px",
+                            color: "#4C304F",
+                            backgroundColor: "#D9D9D9",
+                            borderRadius: "20px" }}/>
             </div>
             <div className={style.detailAddressDiv}>
                 <input className={style.detailAddressInput} value={inputData.detailAddress} onChange={handleChange}  type="text"></input>
+            <hr className={style.line}/>
+            </div>
+            <div className={style.requestInfo}>
+                <p>요청사항</p>
+                <select name="requestInfo">
+                <option selected value="sentence01">선택 안함</option>
+                <option value="sentence02">빠른 배송 부탁드립니다</option>
+                <option value="sentence03">배송 전, 연락주세요</option>
+                <option value="sentence04">부재 시, 휴대폰으로 연락주세요</option>
+                <option value="sentence05">부재 시, 경비실에 맡겨주세요</option>
+                <option value="sentence06">경비실이 없습니다. 배송 전, 연락주세요</option>
+                <option value="sentence07">벨 누르지 말아주세요.</option>
+                </select>
+            </div>
+            <hr className={style.line}/>
+
+            <div className={style.checkBox}>
+            <input className={style.checkBoxInput} type="checkbox"/>
+            <p><span>[선택]</span> 배송정보 수집이용에 동의 합니다.</p>
+            </div>
+
+            <div className={style.description}>
+                <ul>
+                    <li>수집주체 : 신세계</li>
+                    <li>수입목적 : 주문정보고지 및 상품배송</li>
+                    <li>수집항목 : 수령인 성명, 수령인 휴대전화번호(집 전화번호), 배송지 주소</li>
+                    <li>보유이용기간 : 배송완료 후 5년. (단, 배송지 목록에 등록할 경우 회원 탈퇴 혹은 정보 삭제 시까지)</li>
+                    <li>귀하는 개인정보 수집이용에 동의를 거부할 수 있습니다. 다만 이에 대한 동의를 하지 않을 경우 상품 배송이 제한됨을 알려드립니다.</li>
+                </ul>
             </div>
             </div>
     )
@@ -240,11 +268,3 @@ const Step02 = (props:{
         </div>
     )
 }
-
-
-// const Step03 = (props:{isInnerModal: boolean, setIsInnerModal: React.Dispatch<React.SetStateAction<boolean>>}) => {
-//     return (
-//         <div onClick={()=>props.setIsInnerModal(true)}>
-//             Step03
-//         </div>
-//     )

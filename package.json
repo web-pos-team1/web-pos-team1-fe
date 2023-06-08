@@ -42,6 +42,7 @@
     "simple-keyboard": "^3.5.62",
     "simple-keyboard-layouts": "^3.1.325",
     "sse": "^0.0.8",
+    "sweetalert2": "^11.7.11",
     "tls": "^0.0.1",
     "typescript": "5.0.4"
   }

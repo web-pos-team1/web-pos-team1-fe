@@ -96,7 +96,7 @@ export default function PaperBagModal(props:{
                         <Image
                             src="/images/checkPurple.png"
                             alt="confirm"
-                            className={style.conirm}
+                            className={style.confirm}
                             width={28}
                             height={28}
                         />
