@@ -5,7 +5,6 @@ import { categoryList } from '../../data/categorList.json';
 import { CartType } from "@/types/CartType";
 import Layout from '@/components/layouts/layout'
 import style from './Products.module.css';
-import styles from '@/styles/Carts.module.css';
 import Head from 'next/head';
 import Link from 'next/link';
 import axios from 'axios';
@@ -36,6 +35,7 @@ const Products : NextPageWithLayout = () => {
     const [totalPrice, setTotalPrice] = useState<number>(0);
     const [cartId, setCartId] = useState();
     const [categoryIndex, setCategoryIndex] = useState<number>(0);
+    const [barcode, setBarcode] = useState<number>();
 
     const payObjectState = useRecoilValue(PayObjectState);
 
@@ -84,6 +84,8 @@ const Products : NextPageWithLayout = () => {
         setActiveState([...activeState]);
         router.push(url);
     }
+
+    // 마우스로 상품클릭해서 담는 함수
     const handleAddCartClick = (product : ProductType) => {
         console.log("handleAddCartClck()/product: ", product);
         for (let i = 0; i < cartList.length; i++) {
@@ -120,12 +122,47 @@ const Products : NextPageWithLayout = () => {
         localStorage.setItem("cartList", JSON.stringify(cartList));
     }
 
+    // 바코드 인식해서 장바구니에 담는 함수
+    const addToCartUsingProductCode = (product_code: string) => {
+        // product_code에 해당하는 product를 cartList에 추가!
+        for (let i = 0; i < cartList.length; i++) {
+            // 이미 장바구니에 담겼던 상품
+            if (cartList[i].product_code === product_code) {
+                cartList[i].cartQty += 1
+                setCartList([...cartList]);
+                return;
+            }
+        }
+
+        // 처음 장바구니에 담기는 상품 
+        let cartQty = 1;
+        for (let j = 0; j < itemList.length; j++) {
+            if (itemList[j].product_code === product_code) {
+                const cart = convertProductToCart(itemList[j], cartQty);
+                setCartList([...cartList, cart]);
+                return;
+            }
+        }
+    }
+
+    // 바코드 인식해서 13글자가 되는 순간 addToCartUsingProductCode()함수 호출
+    const handleBarcodeChange = (e: any) => {
+        console.log("e.target.value: ", e.target.value); // 9788992357784
+        const product_code = e.target.value; // 바코드로 인식한 일련번호
+        if (product_code.length === 13) {
+            e.target.value = '';
+            addToCartUsingProductCode(product_code);
+        }
+    }
+
+    const handlePreBtnClick = () => {
+        console.log("pre btn clicked!!");
+        localStorage.setItem("cartList", JSON.stringify(cartList));
+    }
     useEffect(() => {
         let c = router.query.category;
         let category_index = category_map[c ? c.toString() : "과일"];
         handleCategoryBtnClick(category_index);
-        console.log("process.env:", process.env);
-        console.log("process.env.NEXT_PUBLIC_ENV_POSID:", process.env.NEXT_PUBLIC_ENV_POS_ID);
         let url_products = mapToBE(`/api/v1/products/${router.query.category}`);
         // let url_products = `http://localhost:3001/products`;
 
@@ -192,6 +229,7 @@ const Products : NextPageWithLayout = () => {
                                 alt={item.description} 
                                 width={210}
                                 height={210}
+                                className="product"
                             />
                             <p className={style.productItemName}>
                                 {item.name}
@@ -208,7 +246,9 @@ const Products : NextPageWithLayout = () => {
             </div>
         
             <div className={style.footer}>
-                <FooterPreBtn />
+                <div onClick={handlePreBtnClick}>
+                    <FooterPreBtn />
+                </div>
                 <Link href="/cart-list">
                 <div onClick={handleCheckCartBtnClick}>
                     <FooterCheckCartBtn />
@@ -233,6 +273,7 @@ const Products : NextPageWithLayout = () => {
                     }
             </div>  
         </div>
+        <input type="text" value={barcode} onInput={handleBarcodeChange} autoFocus className={style.barcodeInputBox}/>
     </>
     );
 }

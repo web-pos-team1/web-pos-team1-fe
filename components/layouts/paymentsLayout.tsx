@@ -15,6 +15,12 @@ import { PayObjectState } from "@/state/PayObjectState";
 import style  from "./paymentsLayout.module.css";
 import Image from 'next/image';
 import UsePointsNumberModal from "../UsePointsNumberModal";
+// import payGuideAnimation from "../../animation/pay-card-guide.json";
+import payGuideAnimation from "../../animation/pay-card-guide.gif"; 
+// import Lottie from 'react-lottie';
+import checkAnimation from "../../animation/check.gif";
+import { useRouter } from 'next/router';
+
 interface Props {
   children: React.ReactNode;
 }
@@ -37,10 +43,16 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
   const [result, setResult] = useState<RequestPayResponse>();
   const [showUsePointsNumberModal, setShowUsePointsNumberModal] = useState<boolean>(false);
   const [usePoints, setUsePoints] = useState<boolean>(false);
+  const [showPayCardGuide, setShowPayCardGuide] = useState<boolean>(false);
+  const [showPaySuccess, setShowPaySuccess] = useState<boolean>(false);
+  const [showPayFail, setShowPayFail] = useState<boolean>(false);
+
   const [finalTotalPrice, setFinalTotalPrice] = useRecoilState<number>(totalPriceState);
   const payObjectState = useRecoilValue(PayObjectState);
 
   const { IMP } = window;
+
+  const router = useRouter();
 
   let payData = initialState;
 
@@ -55,17 +67,82 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
   const handleModal = () => {
     setShowUsePointsNumberModal(true)
   }
-  
 
+  const renderCardGuide = (pay_method: string, pg: string) => {
+    setShowPayCardGuide(true);
+    return function() {
+      setShowPayCardGuide(false);
+      // *결제 진행 메서드 호출*
+      processPay(pay_method, pg);
+    }
+  }
+
+  // 결제 성공했을 경우 에니메이션 렌더링
+  const renderPaySuccessAnimation = () => {
+    setShowPaySuccess(true);
+    return function() {
+      setShowPaySuccess(false);
+      router.push('/last');
+    }
+  }
+
+  // 결제 실패했을 경우 에니메이션 렌더링
+  const renderPayFailAnimation = () => {
+    setShowPayFail(true);
+    return function() {
+      setShowPayFail(true);
+    }
+  }
   const handleCreditCartBtnClick = () => {
     console.log("0. 신용/체크카드 선택");
+    setTimeout(renderCardGuide("card", "nice"), 3000);
+    console.log("handleCreditCardBtnClick()/finish setTimeout()");
+  }
+  
+  const handleMobilePayBtnClick = () => {
+    console.log("1. 모바일페이 선택");
+    // if (IMP) {
+    //   IMP.init(IMP_UID);
+    //   console.log("[mobilePay] success to init IMP: ", IMP);
+    //   console.log("==start to request pay==")
+
+    //   payData['pg'] = "kcp";
+    //   payData['pay_method'] = "samsung";
+    //   payData['amount'] = totalPrice;
+
+    //   console.log("payData: ", payData);
+    //   IMP.request_pay(payData, onPaymentAccepted);
+
+    // } else {
+    //   alert("결제를 진행할 수 없습니다. 다시 시도해주시기 바랍니다.");
+    // }
+  }
+  const handleSimplePayBtnClick = () => {
+    console.log("2. 카카오 페이 선택");
+    // if (IMP) {
+    //   IMP.init(IMP_UID);
+    //   console.log("[simplePay] success to init IMP: ", IMP);
+    //   console.log("==start to request pay==");
+    //   payData['pg'] = "kakaopay";
+    //   payData['pay_method'] = "card";
+    //   payData['amount'] = totalPrice;
+
+    //   console.log("payData: ", payData);
+
+    //   IMP.request_pay(payData, onPaymentAccepted);
+    // } else {
+    //   alert("결제를 진행할 수 없습니다. 다시 시도해주시기 바랍니다.");
+    // }
+  }
+
+  const processPay = (pay_method: string, pg: string) => {
     if (IMP) {
       IMP.init(IMP_UID);
       console.log("[credit card] success to init IMP: ", IMP);
       console.log("==start to request pay==")
       
-      payData['pg'] = "nice";
-      payData['pay_method'] = "card";
+      payData['pg'] = pg;
+      payData['pay_method'] = pay_method;
       payData['amount'] = totalPrice;
       
       console.log("payData: ", payData);
@@ -78,45 +155,6 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       alert("결제를 진행할 수 없습니다. 다시 시도해주시기 바랍니다.");
     }
   }
-  
-  const handleMobilePayBtnClick = () => {
-    console.log("1. 모바일페이 선택");
-    if (IMP) {
-      IMP.init(IMP_UID);
-      console.log("[mobilePay] success to init IMP: ", IMP);
-      console.log("==start to request pay==")
-
-      payData['pg'] = "kcp";
-      payData['pay_method'] = "samsung";
-      payData['amount'] = totalPrice;
-
-      console.log("payData: ", payData);
-      IMP.request_pay(payData, onPaymentAccepted);
-
-    } else {
-      alert("결제를 진행할 수 없습니다. 다시 시도해주시기 바랍니다.");
-    }
-
-    
-  }
-  const handleSimplePayBtnClick = () => {
-    console.log("2. 카카오 페이 선택");
-    if (IMP) {
-      IMP.init(IMP_UID);
-      console.log("[simplePay] success to init IMP: ", IMP);
-      console.log("==start to request pay==");
-      payData['pg'] = "kakaopay";
-      payData['pay_method'] = "card";
-      payData['amount'] = totalPrice;
-
-      console.log("payData: ", payData);
-
-      IMP.request_pay(payData, onPaymentAccepted);
-    } else {
-      alert("결제를 진행할 수 없습니다. 다시 시도해주시기 바랍니다.");
-    }
-  }
-
   
   const onPaymentAccepted = (res: RequestPayResponse) => {
     console.log("res after request_pay: ", res);
@@ -134,19 +172,19 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
         const headers = {
             'content-type': 'application/json'
         };
-        axios(
-        url,
+        axios(url,
         {
             headers: headers,
             method: 'post',
             data: data
-        }
-        )
+        })
         .then((res: any) => {
-        console.log("res after request_pay(): ", res );
+          console.log("res after request_pay(): ", res );
+          setTimeout(renderPaySuccessAnimation(), 2000);
         })
         .catch((err: any) => {
-        console.log("err after reqeust_pay(): ", err);
+          console.log("err after reqeust_pay(): ", err);
+          setTimeout(renderPayFailAnimation(), 2000);
         })
     } else {
         alert("결제 실패했습니다. 다시 시도해주시기 바랍니다.");
@@ -189,6 +227,14 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       onClick: () => handleSimplePayBtnClick(),
     },
   ];
+  const defaultOptions = {
+    loop: true,
+      autoplay: true,
+      animationData: payGuideAnimation,
+      rendererSettings: {
+        preserveAspectRatio: "xMidYMid slice"
+      }
+  };
   useEffect(() => {
     console.log("paymentLayouts / useEffect()");
     setParams({...params, amount: finalTotalPrice});
@@ -198,9 +244,59 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
 
   return (
     <>
-    <div>
-    <UsePointsNumberModal show={showUsePointsNumberModal} onClose={setShowUsePointsNumberModal} />
-    <div>
+      <div>
+        <UsePointsNumberModal show={showUsePointsNumberModal} onClose={setShowUsePointsNumberModal} />
+      <div>
+      {
+        showPayCardGuide && 
+        <div className={style.payGuideAnimationWrapper}>
+          {/* <Lottie 
+            options={defaultOptions}
+            height={400}
+            width={400}
+          /> */}
+            <div className={style.payGuideAnimationConetnt}>
+              <div className={style.title}>
+                <h1>신용/체크카드</h1> 
+              </div>
+              <div className={style.body}>
+                <p>신용카드(IC카드)를 “딸깍” 소리가 날때까지 넣어주세요</p>
+              </div>
+              <Image 
+                src={payGuideAnimation} 
+                alt="pay guide animation"
+                width={600}
+                height={600}
+              />
+            </div>
+        </div>
+      }
+      {
+        showPaySuccess && 
+        <div className={style.checkAnimationWrapper}>
+          <div className={style.checkAnimationConetnt}>
+              <div className={style.titleCheckAnimation}>
+                <h1>신용/체크카드</h1> 
+              </div>
+              <div className={style.bodyCheckAnimation}>
+                <p>결제완료</p>
+              </div>
+              <Image 
+                className={style.imgCheckAnimation}
+                src={checkAnimation} 
+                alt="check animation"
+                width={300}
+                height={300}
+              />
+              <div className={style.bodyCheckAnimation}>
+                <p>결제가 완료되었습니다</p>
+              </div>
+              <div className={style.bodyCheckAnimation}>
+                <p>카드를 빼주세요</p>
+              </div>
+            </div>
+        </div>
+      }
       <Header />
       <Location />
       {children}

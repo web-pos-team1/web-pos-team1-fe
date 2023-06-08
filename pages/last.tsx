@@ -5,6 +5,7 @@ import styles from '@/styles/Last.module.css'
 import Link from 'next/link'
 import { NextPageWithLayout } from './_app'
 import LastLayout from '@/components/layouts/lastLayout'
+import { useEffect } from 'react'
 
 const ibmPlexSansKR = IBM_Plex_Sans_KR({
   subsets: ['latin'],
@@ -12,6 +13,9 @@ const ibmPlexSansKR = IBM_Plex_Sans_KR({
 })
 
 const Last: NextPageWithLayout = () => {
+  useEffect(() => {
+    localStorage.setItem("cartList", '[]');
+  }, [])
   return (
     <>
       <Head>
