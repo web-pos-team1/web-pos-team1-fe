@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { categoryList } from '../../data/categorList.json';
 import { CartType } from "@/types/CartType";
 import Layout from '@/components/layouts/layout'
+// import style from './Products.module.css';
 import style from './Products.module.css';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -229,7 +230,7 @@ const Products : NextPageWithLayout = () => {
                                 alt={item.description} 
                                 width={210}
                                 height={210}
-                                className="product"
+                                className="productImg"
                             />
                             <p className={style.productItemName}>
                                 {item.name}
