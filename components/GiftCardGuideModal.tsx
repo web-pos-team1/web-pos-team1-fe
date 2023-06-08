@@ -17,12 +17,6 @@ export default function GiftCardGuideModal(
         setShowGiftCardNumberModal(true)
     };
 
-    // const handleGiftCardNumberModalClose = () => {
-    //     setShowGiftCardNumberModal(false)
-    // };
-    
-    // const { show, onClose, onClickTrue } = props;
-
     if(!props.show) return null
 
     return (
@@ -50,14 +44,8 @@ export default function GiftCardGuideModal(
 
                 <div className={style.footer}>
                     <div>
-                    {/* <div onClick={onClickTrue}> */}
+
                     <button>
-                    {/* <button onClick={() => { 
-                        // handleGiftCardNumberModal(); 
-                        props.onClose(); 
-                    }}> */}
-                    {/* <GiftCardNumberModal show={showGiftCardNumberModal} onClose={setShowGiftCardNumberModal}/> */}
-                        
                         <Image
                             src="/images/checkWhite.png"
                             alt="confirm"
@@ -68,10 +56,10 @@ export default function GiftCardGuideModal(
                         <p onClick={() => props.onClose()}>
                             예
                         </p>
-                        {/* </button> */}
                     </button>
+
                     </div>
-                {/* </Link> */}
+                    
                 <Link href='/payments'>
                     <button>
                         <Image

@@ -125,4 +125,53 @@ a {
   width: 600px;
 }
 
+.my-swal-popup {
+  background-color: #D4D8DB;
+  width: 600px;
+  height: 300px;
+  border-radius: 30px;
+}
+
+.my-swal-popup .swal2-title {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 38px;
+  color: #4C304F;
+  font-weight: 500
+}
+
+.my-swal-popup .swal2-html-container {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 30px;
+  color: #000000;
+}
+
+
+.my-swal-popup .swal2-confirm {
+  background-color: #4C304F;
+  width: 169px;
+  height: 44px;
+  border-radius: 24px;
+  font-size: 25px;
+  color: #ffffff;
+  border-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.my-swal-popup .swal2-cancel {
+  background-color: #4C304F;
+  width: 169px;
+  height: 44px;
+  border-radius: 24px;
+  font-size: 25px;
+  color: #ffffff;
+  border-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap');

@@ -45,16 +45,21 @@ const Shoppingbag: NextPageWithLayout = () => {
   const handleGiftCardGuideModalShowTrue = () => {
     setShowGiftCardGuideModal(true);
   };
+
   const handlePaperBagClick = () => {
     setIsPaperbagOpen(true)
+    setShowGiftCardGuideModal(true)
     // console.log("===종이백 선택했음===");
     // alert("종이백 수량 입력하는 모달뜨기");
   }
+
   const handleRecyclingBagClick = () => {
     setIsRecyclingbagOpen(true)
+    setShowGiftCardGuideModal(true)
     // console.log("===재활용 가방 선택했음===");
     // alert("재활용백 수량 입력하는 모달뜨기");
   }
+  
   const handleNoClick = () => {
     console.log("===필요없음 선택했음===")
     setShowGiftCardGuideModal(true);
@@ -135,9 +140,6 @@ const Shoppingbag: NextPageWithLayout = () => {
       }
     })
   }
-  // useEffect(() => {
-  //   console.log("shopping-bag/useEffect()/totalPrice: ", totalPrice);
-  // }, [totalPrice])
 
   return (
     <>

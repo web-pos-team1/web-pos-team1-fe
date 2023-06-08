@@ -2,7 +2,6 @@ import React, { Dispatch, SetStateAction, useState } from 'react';
 import GiftCardNumberInput from './GiftCardNumberInput';
 import Image from 'next/image';
 import style from './PhoneNumber.module.css';
-
 import Link from 'next/link';
 import { mapToBE } from './globalfunctions/mapToBE';
 import axios from 'axios';
@@ -13,7 +12,6 @@ import GiftCardOverPrice from './AlertModal/GiftCardOverPrice';
 import GiftCardUsed from './AlertModal/GiftCardUsed';
 import { useRecoilState } from 'recoil';
 import { totalPriceState } from '@/state/totalPriceState';
-
 
 export default function GiftCardNumber (
   props: {
@@ -45,7 +43,7 @@ export default function GiftCardNumber (
     props.setSerialNumber('');
     setGiftCardUsedShow(false);
   }
- 
+
   /* shoppingBag.tsx 로 빼서 상품권 유효성 검사 로직 진행하자 */
   const handleGiftCartNumberMatch = () => {
     console.log("props.serialNumber: ", props.serialNumber);

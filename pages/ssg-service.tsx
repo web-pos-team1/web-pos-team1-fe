@@ -12,6 +12,7 @@ import React from 'react'
 import DeliveryServiceModal from '@/components/DeliveryServiceModal'
 import { UserLoginState } from '@/state/UserLoginState'
 import GiftModal from '@/components/GiftModal'
+import MemberDeliveryServiceModal from '@/components/MemberDeliveryServiceModal'
 
 const ibmPlexSansKR = IBM_Plex_Sans_KR({
   subsets: ['latin'],
@@ -54,10 +55,10 @@ const SsgService: NextPageWithLayout = () => {
         setIsOpen={setIsOpen}
       />
       {/* 회원 */}
-      {/* < MemberDeliveryServiceModal
+      < MemberDeliveryServiceModal
         isOpen={isMemberOpen}
         setIsOpen={setIsMemberOpen}
-      /> */}
+      />
 
       <GiftModal 
         show={isGiftOpen}
