@@ -157,7 +157,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 10px;
+  padding-top: 8px;
 }
 
 .my-swal-popup .swal2-cancel {
@@ -171,7 +171,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 10px;
+  padding-top: 8px;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap');

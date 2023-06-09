@@ -16,9 +16,9 @@ export interface deliveryAddressType {
     phoneNumber: string,
     postCode: string,
     address: string,
+    requestDeliveryTime: string,
     detailAddress: string, // address에 붙여서 back에 보낼 예정
     requestInfo: string
-    // requestDeliveryTime: string , step02에서 선택될 정보
 }
 
 export interface requestDataType {
@@ -68,6 +68,24 @@ export default function MemberDeliveryServiceModal(
             })
         }
     }, [requestInputData])
+
+    const url = mapToBE('/api/v1/delivery/select-delivery')
+    console.log(url)
+
+    const postData = async () => {
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestInputData),
+        });
+        if (res.status === 201) {
+            console.log('success');
+            } else {
+            console.log('fail');
+            }
+        };
 
     const innerData = [
         <Step01 
@@ -147,7 +165,7 @@ export default function MemberDeliveryServiceModal(
             width={30}
             height={30}
             />
-            <p>확인</p>
+            <p onClick={postData}>확인</p>
             </div>
         </div>
     </div>
@@ -206,6 +224,7 @@ const Step01 = (props:{
                     />
                 ))
             }
+            <button className={style.addBtn}>배송지 추가</button>
         </div>
     )
 }
@@ -228,22 +247,27 @@ const Step02 = (props:{
 
     const { requestInputData,  setRequestInputData } = props
 
-    const url = mapToBE('/api/v1/delivery/select-delivery')
-    console.log(url)
+    // const url = mapToBE('/api/v1/delivery/select-delivery')
+    // console.log(url)
 
-    useEffect(() => {
-        const getData = async () => {
-        const res = await fetch(url)
-        const data = await res.json()
-        console.log(data)
-        {
-            res.status === 200 ? console.log('success') : console.log('fail')
-        }
-        setRequestInputData(data)
-        }
-        getData()
-    },[])
-    console.log(requestInputData)
+    // useEffect(() => {
+    //     const postData = async () => {
+    //     const res = await fetch(url, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(requestInputData),
+    //     });
+    //     if (res.status === 200) {
+    //         console.log('success');
+    //         } else {
+    //         console.log('fail');
+    //         }
+    //     };
+    //     postData();
+    //     },[])
+        console.log(requestInputData)
 
     return (
         
@@ -259,7 +283,7 @@ const Step02 = (props:{
                 deliveryTimeList && deliveryTimeList.map((time:DeliveryTimeType, index:number) => (
                 <div key={time.id}>
                     <label>
-                    <input 
+                    <input
                         type='radio' 
                         name='delivery' 
                         value={time.title}
@@ -284,10 +308,6 @@ const AddressItem = (props:{
     const { data } = props
     const [isCheck, setIsCheck] = useState(false)
 
-    useEffect(() => {
-        setIsCheck(data.isDefault)
-    },[data.isDefault])
-
     const handleCheck = () => {
         setIsCheck(!isCheck)
     }
@@ -302,15 +322,27 @@ const AddressItem = (props:{
             phoneNumber: data.phoneNumber,
             postCode: data.postCode,
             address: data.address,
-            // detailAddress: data.detailAddress,
+            requestDeliveryTime: data.requestDeliveryTime,
             requestInfo: data.requestInfo
+            
         })
     }
     return (
         <div className={style.addressItem} onClick={handleSetAddress}>
 
             <ul onClick={handleCheck}>
-                <li style={{width:'1rem', height:'1rem', marginLeft:'15px', borderRadius: '5px', backgroundColor:  isCheck ? '#4C304F' : '#ffffff', border: '1px solid #333' }}></li>
+                <li 
+                style= {{
+                    width:'25px', 
+                    height:'25px', 
+                    marginLeft:'15px', 
+                    borderRadius: '50%', 
+                    backgroundColor:  isCheck ? '#4C304F'  : '#ffffff',
+                    backgroundSize: isCheck ? '10px' : '0px',
+                    border: '1px solid #333' 
+                    }}
+                    >
+                </li>
                 <li>
                     <p>{data.deliveryName}</p>
                 </li>
@@ -323,6 +355,10 @@ const AddressItem = (props:{
                 </li>
                 <li>
                     <p>{data.requestInfo}</p>
+                </li>
+                <li>
+                    <p><span>수정</span></p>
+                    <p><span>삭제</span></p>
                 </li>
             </ul>
             <hr className={style.line}/>
