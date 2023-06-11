@@ -7,14 +7,13 @@ import HeaderButton from "@/components/HeaderButton";
 import { transeData } from '@/data/translations';
 import Modal from "@/components/Modal";
 import CallStaffModal from './CallStaffModal';
-import GiftCardNumberModal from './GiftCardNumberModal';
-import GiftModal from './GiftModal';
-import PhoneNumberModal from './PhoneNumberModal';
-import DeliveryModal from './DeliveryModal';
-import { useRecoilState } from 'recoil';
-import { LanguageIndexState } from '@/state/LanguageIndexState';
 import { countryImg } from '@/data/countryImg';
 import { PayObjectState } from '@/state/PayObjectState';
+import axios from 'axios';
+import { callStaffImg } from '@/data/callStaffImg';
+import { Board, Led } from 'johnny-five';
+// import Board from './globalfunctions/board';
+// import Led from './globalfunctions/led';
 
 type Button = {
   id: number,
@@ -27,7 +26,8 @@ type Button = {
 export default function Header(
   props: {
     languageIndex?: number,
-    setLanguageIndex?: Dispatch<SetStateAction<number>>
+    setLanguageIndex?: Dispatch<SetStateAction<number>>,
+    layoutName?: string 
   }
 ) {
 
@@ -46,9 +46,24 @@ export default function Header(
     console.log('modal')
     setShowModal(true)
   }
+  const handleCallStaff = () => {
+    setShowCallStaffModal (true);
+    console.log("cal staff clicked!!");
+  
+    // const board = new Board();
+    // board.on("ready", () => {
+    //   const led = new Led(5);
+    //   led.blink(500);
+    // });
+  }
 
   useEffect(()=>{
     console.log("Header's useEffect() / props.languageIndex: ", props.languageIndex);
+    const url = `http://localhost:8080/api/v1/translation/${props.languageIndex}/${props.layoutName}`;
+    axios.get(url)
+    .then((res) => setTitle(res.data.one))
+    .catch((err) => console.log("Hader/useEffect()/err: ", err));
+
     const res = transeData.filter(item => item.key === pathName)
     if ( res.length > 0 ) {
       setTitle(res[0].value)
@@ -63,10 +78,10 @@ export default function Header(
       },
       {
           id: 2,
-          src: "/images/callStaff.png", 
+          src: callStaffImg[props.languageIndex ? props.languageIndex : 0], 
           alt: "call staff",
           link: "/",
-          onClick: () => setShowCallStaffModal (true)
+          onClick: () => handleCallStaff()
       },
       {
           id: 3,

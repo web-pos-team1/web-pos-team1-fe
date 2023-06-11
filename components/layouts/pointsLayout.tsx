@@ -80,7 +80,7 @@ export default function PointsLayout(props:{children:React.ReactNode}) {
             </div>
             {/* <Link href='/cart-list'> */}
                 <Footer 
-                    totalPrice={totalPrice}
+                    // totalPrice={totalPrice}
                 />
             {/* </Link> */}
         </>

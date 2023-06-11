@@ -20,8 +20,8 @@ const PhoneNumber: React.FC = () => {
   const handlePhoneMatch = () => { // 확인 버튼 눌렀을 때
     // setShowPhoneMatch(true)
     console.log("phoneNumber: ", phoneNumber);
-    // const req_url = mapToBE(`/api/v1/point/add`);
-    const req_url = `http://localhost:8080/api/v1/point/add`;
+    const req_url = mapToBE(`/api/v1/point/add`);
+    // const req_url = `http://localhost:8080/api/v1/point/add`;
     const req_data = {
       'storeId': process.env.NEXT_PUBLIC_ENV_STORE_ID,
       'posId': process.env.NEXT_PUBLIC_ENV_POS_ID,

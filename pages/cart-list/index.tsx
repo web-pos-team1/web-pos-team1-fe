@@ -14,12 +14,14 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { CartListState } from '@/state/CartListState';
 import axios from 'axios';
 import { totalPriceState } from '@/state/totalPriceState';
+import { totalOriginPriceState } from '@/state/totalOriginPriceStatet';
 
 const CartList : NextPageWithLayout = () => {
     const rt = useRouter();
     
     const [delProductId, setDelProductId] = useState<number>(0);
     const [totalPrice, setTotalPrice] = useState<number>(0);
+    const [totalOriginPrice, setTotalOriginPrice] = useState<number>(0);
     const [showPointGuideModal, setShowPointGuideModal] = useState<boolean>(false);
 
     // const [cartList, setCartList] = useState<CartType[]>(parseCartList);
@@ -28,9 +30,12 @@ const CartList : NextPageWithLayout = () => {
         const cList = isLocalStorageAvailable() ? localStorage.getItem('cartList') : null;
         return cList !== null ? JSON.parse(cList) : [];
     });
-    const [recoilTotalPrice, setRecoilTotalPrice] = useRecoilState(totalPriceState);
+    const [recoilTotalPrice, setRecoilTotalPrice] = useRecoilState<number>(totalPriceState);
     // const [cartList, setCartList] = useRecoilState();
     // const recoilValue = useRecoilValue(CartListState);
+    const [recoilOriginPrice, setRecoilOriginPrice] = useRecoilState<number>(totalOriginPriceState);
+
+    let tOriginPrice = 0; // 총 원가합
     
     const handlePrevBtnClick = () => {
         console.log("CartList / handlePrevBtnClick!!!");
@@ -42,13 +47,14 @@ const CartList : NextPageWithLayout = () => {
     useEffect(() => {
         console.log("CartList / delProductId: ", delProductId);
         isLocalStorageAvailable();
-        let tPrice = 0;
+        let tPrice = 0; // totalPrice - 결제금액
+        tOriginPrice = 0; // totalOriginPrice - 총원가 
 
         if (delProductId !== 0) {
             // let newCartList = cartList.map((cart : CartType) => {
             //     let newCart = {...cart}
             //     if (cart.product_id !== delProductId) {
-            //         tPrice += tPrice += cart.cartQty * cart.price;
+            //         tPrice += cart.cartQty * cart.price;
             //         return cart;
             //     }
             // })
@@ -58,26 +64,33 @@ const CartList : NextPageWithLayout = () => {
                     continue;
                 } else {
                     tPrice += cartList[i].cartQty * cartList[i].price;
+                    tOriginPrice += cartList[i].cartQty * cartList[i].origin_price;
                     newCartList.push(cartList[i]);
                 }
             }
             console.log("after / tempCartList: ", newCartList);
             setCartList(newCartList);
             setTotalPrice(tPrice);
-
+            // setTotalOriginPrice(tOriginPrice);
+            
+        
         } else {
             for (let i = 0; i < cartList.length; i++) {
                 tPrice += cartList[i].cartQty * cartList[i].price;
+                tOriginPrice += cartList[i].cartQty * cartList[i].origin_price;
             }
-            setTotalPrice(tPrice)
+            setTotalPrice(tPrice);
+            // setTotalOriginPrice(tOriginPrice);
         }
         
     }, [delProductId])
 
     const handleModal = () => {
         console.log('modal')
+        localStorage.setItem("cartList", JSON.stringify(cartList));
         setRecoilTotalPrice(totalPrice);
-        setShowPointGuideModal(true)
+        setRecoilOriginPrice(tOriginPrice);
+        setShowPointGuideModal(true);
       }
 
     return (
@@ -117,6 +130,8 @@ const CartList : NextPageWithLayout = () => {
                                     setDelProductId={setDelProductId}
                                     totalPrice={totalPrice}
                                     setTotalPrice={setTotalPrice}
+                                    totalOriginPrice={totalOriginPrice}
+                                    setTotalOriginPrice={setTotalOriginPrice}
                                     event={cart.event}
                                 />
                             ))

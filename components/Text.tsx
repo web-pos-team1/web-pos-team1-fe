@@ -1,7 +1,7 @@
 import style from './Text.module.css'
 
 interface Props {
-    text: string
+    text?: string
 }
 
 const Text: React.FC<Props> = ({ text }) => {

@@ -2,7 +2,8 @@
   "compilerOptions": {
     "target": "es5",
     "types": [
-      "iamport-typings"
+      "iamport-typings",
+      "johnny-five",
     ],
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
