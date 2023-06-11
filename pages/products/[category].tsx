@@ -1,9 +1,10 @@
 import { useRouter } from "next/router"
 import { ProductType } from "@/types/ProductType";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { categoryList } from '../../data/categorList.json';
 import { CartType } from "@/types/CartType";
 import Layout from '@/components/layouts/layout'
+// import style from './Products.module.css';
 import style from './Products.module.css';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -20,6 +21,7 @@ import FooterPreBtn from "@/components/FooterPreBtn";
 import FooterCheckCartBtn from "@/components/FooterCheckCartBtn";
 import { RecoilRoot, useRecoilValue } from "recoil";
 import { PayObjectState } from "@/state/PayObjectState";
+import { convertCategory } from "@/components/globalfunctions/convertCategoryToEng";
 
 const Products : NextPageWithLayout = () => {
     const router = useRouter();
@@ -39,6 +41,8 @@ const Products : NextPageWithLayout = () => {
 
     const payObjectState = useRecoilValue(PayObjectState);
 
+    const ref = useRef<HTMLInputElement>(null);
+
     const category_map : {[key: string] : number} = {
         "과일": 0,
         "채소": 1,
@@ -47,7 +51,7 @@ const Products : NextPageWithLayout = () => {
         "쌀-견과": 4,
         "우유-유제품": 5,
         "간식": 6,
-        "소스-오익": 7,
+        "소스-오일": 7,
         "선물류": 8,
     } 
         
@@ -65,6 +69,9 @@ const Products : NextPageWithLayout = () => {
             }
         }
         setActiveState([...activeState]);
+        if (ref.current) {
+            ref.current.focus();
+        }
     }
 
     const handleCategoryBtnClick = (id:number) => {
@@ -100,6 +107,9 @@ const Products : NextPageWithLayout = () => {
         let cartQty = 1;
         let cart = convertProductToCart(product, cartQty);
         setCartList([...cartList, cart]);
+        if (ref.current) {
+            ref.current.focus();
+        }
     }
 
     const convertProductToCart = (product : ProductType, cartQty: number) => {
@@ -112,7 +122,8 @@ const Products : NextPageWithLayout = () => {
             description: product.description,
             qty: product.qty,
             cartQty: cartQty,
-            event: product.event
+            event: product.event,
+            origin_price: product.origin_price
         };
         return cart;
     }
@@ -163,8 +174,8 @@ const Products : NextPageWithLayout = () => {
         let c = router.query.category;
         let category_index = category_map[c ? c.toString() : "과일"];
         handleCategoryBtnClick(category_index);
-        let url_products = mapToBE(`/api/v1/products/${router.query.category}`);
-        // let url_products = `http://localhost:3001/products`;
+        // let url_products = mapToBE(`/api/v1/products/${convertCategory(router.query.category ? router.query.category : '과일')}`);
+        let url_products = `http://localhost:8080/api/v1/products?category=${convertCategory(router.query.category ? router.query.category : '과일')}`;
 
         axios(
             url_products,
@@ -229,7 +240,7 @@ const Products : NextPageWithLayout = () => {
                                 alt={item.description} 
                                 width={210}
                                 height={210}
-                                className="product"
+                                className="productImg"
                             />
                             <p className={style.productItemName}>
                                 {item.name}
@@ -258,22 +269,22 @@ const Products : NextPageWithLayout = () => {
 
             <div className={style.cartList}>
                 {
-                        cartList.length > 0 ? 
-                        cartList.map((cart: CartType, index: number) => (
-                            <div className={style.cartWrap} key={index}>
-                                <Cart
-                                    item={cart}
-                                    delProductId={delProductId}
-                                    setDelProductId={setDelProductId}
-                                    totalPrice={totalPrice}
-                                    setTotalPrice={setTotalPrice}
-                                />
-                            </div>
-                        )) : <div></div>
-                    }
+                    cartList.length > 0 ? 
+                    cartList.map((cart: CartType, index: number) => (
+                        <div className={style.cartWrap} key={index}>
+                            <Cart
+                                item={cart}
+                                delProductId={delProductId}
+                                setDelProductId={setDelProductId}
+                                totalPrice={totalPrice}
+                                setTotalPrice={setTotalPrice}
+                            />
+                        </div>
+                    )) : <div></div>
+                }
             </div>  
         </div>
-        <input type="text" value={barcode} onInput={handleBarcodeChange} autoFocus className={style.barcodeInputBox}/>
+        <input type="text" ref={ref} value={barcode} onInput={handleBarcodeChange} autoFocus className={style.barcodeInputBox}/>
     </>
     );
 }
@@ -301,4 +312,3 @@ Products.getLayout = function getLayout(page: React.ReactNode) {
   }
   
   export default Products;
-  

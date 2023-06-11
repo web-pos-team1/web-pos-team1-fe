@@ -4,8 +4,12 @@ import style from "./GiftCardValidAlertModal.module.css";
 import Image from 'next/image';
 import Link from "next/link";
 
-export default function GiftCardMatch(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
-
+export default function GiftCardMatch(
+    props: {
+        show:boolean, 
+        onClose:Dispatch<SetStateAction<boolean>>,
+        deductedPrice: number
+    }) {
 
     if(!props.show) return null
     

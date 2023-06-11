@@ -14,12 +14,12 @@ const Products: NextPageWithLayout = () => {
   const [payObjectState, setPayObjectState] = useRecoilState(PayObjectState);
   useEffect(() => {
     // console.log("Object.keys(payObjectState).length: ", Object.keys(payObjectState).length)
-    if (!payObjectState) {
+    // if (!payObjectState) {
       let { IMP } = window;
       setPayObjectState(IMP);
-      console.log("succcess to init IMP to recoilState");
       console.log("IMP: ", IMP);
-    }
+      localStorage.setItem("IMP", JSON.stringify(IMP));
+    // }
   }, [])
 
   return (
@@ -33,6 +33,7 @@ const Products: NextPageWithLayout = () => {
     </>
   );
 }
+
 
 Products.getLayout = function getLayout(page: React.ReactNode) {
   return(

@@ -2,21 +2,36 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '@/components/layouts/layout'
 import { NextPageWithLayout } from './_app'
 import Script from 'next/script'
-import { useRecoilState } from 'recoil'
+import { RecoilRoot, useRecoilState, useRecoilValue } from 'recoil'
 import { PayObjectState } from '@/state/PayObjectState'
 import { IBM_Plex_Sans_KR } from '@next/font/google'
+import axios from 'axios';
+import { LanguageIndexState } from '@/state/LanguageIndexState'
+import { LanguageDataType } from '@/types/LanguageDataType'
+import Header from '@/components/Header'
 
 const ibmPlexSansKR = IBM_Plex_Sans_KR({
   subsets: ['latin'],
   weight: '400',
 });
 
-
-const Home: NextPageWithLayout = () => {
+export default function Home() {
+  const [languageIndex, setLanguageIndex] = useRecoilState(LanguageIndexState);  
+  const [languageDatas, setLanguageDatas] = useState<LanguageDataType>({});
+  
+  const layoutName = 'L0000';
+  const bodyName = 'B0000';
+  useEffect(() => {
+    const url = `http://localhost:8080/api/v1/translation/${languageIndex}/${bodyName}`;
+    console.log("url: ", url);
+    axios.get(url)
+    .then((res) => setLanguageDatas(res.data))
+    .catch((err) => console.log("err: ", err));
+  }, [languageIndex])
 
   return (
     <>
@@ -24,6 +39,11 @@ const Home: NextPageWithLayout = () => {
     <Script src="https://code.jquery.com/jquery-1.12.4.min.js" strategy="beforeInteractive"/>
     {/* iamport-payment */}
     <Script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js" strategy="beforeInteractive" />
+    <Header
+      languageIndex={languageIndex}
+      setLanguageIndex={setLanguageIndex}
+      layoutName={layoutName}
+    />
     <Link href="/products">
       <Head>
         <title>POS main</title>
@@ -43,7 +63,7 @@ const Home: NextPageWithLayout = () => {
         </div>
           <div className={styles.font}>
             <h1>
-              계산을 진행하시려면, 화면을 터치해주세요.
+              {languageDatas.one}
             </h1>
           </div>
       </main>
@@ -52,14 +72,14 @@ const Home: NextPageWithLayout = () => {
   );
 }
 
-Home.getLayout = function getLayout(page: React.ReactNode) {
-  return(
-    <>
-    <Layout>
-      {page}
-    </Layout>
-    </>
-  )
-}
+// Home.getLayout = function getLayout(page: React.ReactNode) {
+//   return(
+//     <>
+//         {/* <Layout> */}
+//           {page}
+//         {/* </Layout> */}
+//     </>
+//   )
+// }
 
-export default Home
+// export default Home
