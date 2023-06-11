@@ -34,10 +34,10 @@ const SsgService: NextPageWithLayout = () => {
   const handleMemberChecker = () => {
     console.log("enter handleMemberChecker()");
     if (userLoginState) {
-      console.log("user Logined!!");
+      console.log("user Logined");
       setIsMemberOpen(true)
     } else {
-      console.log("user not Logined!!");
+      console.log("user not Logined");
       setIsOpen(true)
     }
 

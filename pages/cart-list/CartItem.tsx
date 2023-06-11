@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import axios from 'axios';
 import { CartType } from "@/types/CartType";
 import { formatMoney } from "@/components/globalfunctions/formatMoney";
@@ -18,6 +18,8 @@ export default function CartItem(
         setCartList: any
         cartList: CartType[],
         event: boolean
+        totalOriginPrice: number,
+        setTotalOriginPrice: Dispatch<SetStateAction<number>>
     }) 
     {
     const [cartQty, setCartQty] = useState<number>(props.item.cartQty);
@@ -41,6 +43,7 @@ export default function CartItem(
         }
         props.setCartList([...props.cartList]);
         props.setTotalPrice(props.totalPrice - props.item.price);
+        props.setTotalOriginPrice(props.totalOriginPrice - props.item.origin_price);
     }
     const plusCount = () => {
         setCartQty(cartQty + 1);
@@ -52,6 +55,7 @@ export default function CartItem(
         }
         props.setCartList([...props.cartList]);
         props.setTotalPrice(props.totalPrice + props.item.price);
+        props.setTotalOriginPrice(props.totalOriginPrice + props.item.origin_price);
     }
     const handleDelBtnClick = (cart : CartType) => {
         console.log("삭제할 product: ", cart);
@@ -84,7 +88,7 @@ export default function CartItem(
             <tr className={style.cartItemRow}>
                 <td className={style.cartItemName}>
                     <Image 
-                    src={props.item.image_url} width={140} height={140} alt="product image"/>
+                        src={props.item.image_url} width={140} height={140} alt="product image"/>
                     <p>{props.item.name}</p>
                 </td>
                 <td className={style.qtyController}>

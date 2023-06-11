@@ -7,5 +7,6 @@ export interface CartType {
     description: string,
     qty: number,
     cartQty: number,
-    event: boolean
+    event: boolean,
+    origin_price: number,
 }

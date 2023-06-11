@@ -5,7 +5,7 @@ interface Props {
     onClick: () => void;
     src: string;
     alt: string;
-    text: string;
+    text?: string;
     style? : React.CSSProperties;
 }
 
