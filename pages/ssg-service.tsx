@@ -8,7 +8,7 @@ import { RecoilRoot, useRecoilState } from 'recoil'
 import Button from "@/components/Button";
 import Text from "@/components/Text";
 import style from "../components/layouts/shoppingBagLayout.module.css"
-import React from 'react'
+import React, { useEffect } from 'react'
 import DeliveryServiceModal from '@/components/DeliveryServiceModal'
 import { UserLoginState } from '@/state/UserLoginState'
 import GiftModal from '@/components/GiftModal'
@@ -27,6 +27,9 @@ const SsgService: NextPageWithLayout = () => {
 
   // const [useLoginState, setUseLoginState] = React.useState<boolean>(false);
   const [userLoginState, setUserLoginState] = useRecoilState(UserLoginState)
+
+  const [price, setPrice] = React.useState<number>(0);
+  const [isLower, setIsLower] = React.useState<boolean>(false);
   
   const handleMemberChecker = () => {
     console.log("enter handleMemberChecker()");
@@ -37,6 +40,19 @@ const SsgService: NextPageWithLayout = () => {
       console.log("user not Logined!!");
       setIsOpen(true)
     }
+
+    useEffect(() => {
+      if (price >= 30000) {
+        setIsLower(true);
+      } else {
+        setIsLower(false);
+      }
+    }, [price]);
+
+    const handlePriceChange = (newPrice: number) => {
+      setPrice(newPrice);
+    };
+    
 }
 
   return (
@@ -70,9 +86,17 @@ const SsgService: NextPageWithLayout = () => {
               <Button src="/images/pickUp.png" alt="purchase paper bag" text="픽업" onClick={() => console.log('btn 1')}/>
           </Link>
       </div>
-      <div className={style.lowerBtn}>
-          <Button src="/images/deliveryService.png" alt="purchase recycling bag" text="배송" onClick={()=>handleMemberChecker()}/>
-          <Button src="/images/giftService.png" alt="pass this step" text="선물" onClick={() => setIsGiftOpen(true)}/>
+      <div className={`${style.lowerBtn} ${isLower ? style.lower : ''}`}>
+          <Button 
+          src="/images/deliveryService.png" 
+          alt="purchase recycling bag" 
+          text="배송" 
+          onClick={()=>handleMemberChecker()}/>
+          <Button 
+          src="/images/giftService.png" 
+          alt="pass this step" 
+          text="선물" 
+          onClick={() => setIsGiftOpen(true)}/>
       </div>
 
 
