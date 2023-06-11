@@ -39,7 +39,7 @@ export default function GiftCardGuideModal(
                 </div>
 
                 <div className={style.body}>
-                    <p>모바일 상품권을 사용하시겠습니까? <br/> <span>초과된 금액은 사용하실 수 없습니다</span></p>
+                    <p>신세계상품권을 사용하시겠습니까? <br/> <span>초과된 금액은 사용하실 수 없습니다</span></p>
                 </div>
 
                 <div className={style.footer}>

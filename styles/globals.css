@@ -145,6 +145,11 @@ a {
   color: #000000;
 }
 
+.my-swal-popup .swal2-html-container span {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 30px;
+  color: #F22C2D;
+}
 
 .my-swal-popup .swal2-confirm {
   background-color: #4C304F;

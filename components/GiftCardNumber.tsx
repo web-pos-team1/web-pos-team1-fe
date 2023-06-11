@@ -97,7 +97,7 @@ export default function GiftCardNumber (
       <GiftCardExpired show={giftCardExpiredShow} onClose={setGiftCardExpiredShow} setSerialNumber={props.setSerialNumber}/>
       <GiftCardOverPrice show={giftCardOverPriceShow} onClose={setGiftCardOverPriceShow} setSerialNumber={props.setSerialNumber}/>
       <GiftCardUsed show={giftCardUsedShow} onClose={setGiftCardUsedShow} setSerialNumber={props.setSerialNumber}/>
-      <h1>모바일 상품권</h1>
+      <h1>신세계상품권</h1>
       <p>상품권의 일련번호를 입력해 주세요</p>
       <GiftCardNumberInput 
         serialNumber={props.serialNumber}
