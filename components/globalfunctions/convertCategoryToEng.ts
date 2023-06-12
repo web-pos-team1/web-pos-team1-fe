@@ -17,7 +17,7 @@ export function convertCategory(inputVal: any) {
   } else if (inputVal === '소스-오일') {
     retVal = 'sourceAndOil';
   } else if (inputVal === '선물류') {
-    retVal = 'present';
+    retVal = 'gift';
   }
   return retVal;
 }

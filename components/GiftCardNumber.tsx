@@ -12,6 +12,7 @@ import GiftCardOverPrice from './AlertModal/GiftCardOverPrice';
 import GiftCardUsed from './AlertModal/GiftCardUsed';
 import { useRecoilState } from 'recoil';
 import { totalPriceState } from '@/state/totalPriceState';
+import { CouponUseState } from '@/state/CouponUseState';
 
 export default function GiftCardNumber (
   props: {
@@ -25,6 +26,7 @@ export default function GiftCardNumber (
   const [giftCardUsedShow, setGiftCardUsedShow] = useState<boolean>(false);
   const [totalPrice, setTotalPrice] = useRecoilState(totalPriceState);
   const [deductedPrice, setDeductedPrice] = useState<number>(0);
+  const [couponUseAmount, setCouponUseAmount] = useRecoilState(CouponUseState);
 
   const handleCloseGiftCardExpired = () => {
     props.setSerialNumber('');
@@ -72,6 +74,7 @@ export default function GiftCardNumber (
       } else { // 정상적으로 쿠폰 사용이 가능한 경우
         console.log("유효한 쿠폰입니다.");
         setGiftCardMatchShow(true);
+        setCouponUseAmount(res.data.deductedPrice);
         console.log("적용될 상품권 할인 금액: " + res.data.deductedPrice);
         setDeductedPrice(res.data.deductedPrice);
       }

@@ -1,8 +1,10 @@
-import { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 // import style from "./AlertModal.module.css";
 import style from "./GiftCardValidAlertModal.module.css";
 import Image from 'next/image';
 import Link from "next/link";
+import { useRecoilState } from "recoil";
+import { CouponUseState } from "@/state/CouponUseState";
 
 export default function GiftCardMatch(
     props: {
@@ -10,9 +12,11 @@ export default function GiftCardMatch(
         onClose:Dispatch<SetStateAction<boolean>>,
         deductedPrice: number
     }) {
-
+    // const [couponUseAmount, setCouponUseAmount] = useRecoilState(CouponUseState);
     if(!props.show) return null
-    
+    // useEffect(() => {
+    //     setCouponUseAmount(props.deductedPrice);
+    // }, [])
     return (
         <div className={style.overlay}>
             <div className={style.modal}>

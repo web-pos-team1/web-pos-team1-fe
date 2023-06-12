@@ -40,7 +40,10 @@ const UsePointsNumberInput: React.FC<Props> = (
     };
   
     const handleUsePointsAll = () => {
-      setInputValue(points.toString());
+      let point = Math.floor(points/10);
+      console.log("point: ", point);
+      setInputValue((point * 10).toString());
+      setUsePointsNumber((point * 10).toString());
       // setUsePointsNumber('전체사용');
     };
 

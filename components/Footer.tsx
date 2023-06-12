@@ -5,7 +5,11 @@ import { formatMoney } from './globalfunctions/formatMoney';
 import { useRecoilValue } from 'recoil';
 import { totalPriceState } from '@/state/totalPriceState';
 
-export default function Footer() {
+export default function Footer(
+    props: {
+        finalTotalPriceToBE: number
+    }
+) {
     const totalPrice = useRecoilValue(totalPriceState);
 
     return (
@@ -45,7 +49,8 @@ export default function Footer() {
                             />
                         </li>
                         <li>
-                        ₩{formatMoney(totalPrice ? totalPrice : 1)}
+                        {/* ₩{formatMoney(totalPrice ? totalPrice : 1)} */}
+                            ₩{formatMoney(props.finalTotalPriceToBE ? props.finalTotalPriceToBE : totalPrice)}
                         </li>
                     </ul>
                 </nav>  
