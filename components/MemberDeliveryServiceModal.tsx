@@ -116,7 +116,7 @@ export default function MemberDeliveryServiceModal(
         if (step === 1) {
             Swal.fire({
                 title: '상품권 사용',
-                html: '모바일 상품권을 사용하시겠습니까?<br>초과된 금액은 사용하실 수 없습니다.',
+                html: '신세계상품권을 사용하시겠습니까?<br><span>초과된 금액은 사용하실 수 없습니다.</span>',
                 showCancelButton: true,
                 // imageUrl: '/images/checkWhite.png',
                 confirmButtonText: '예',

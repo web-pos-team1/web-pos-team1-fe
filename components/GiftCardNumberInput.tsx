@@ -16,7 +16,7 @@ const GiftCardNumberInput: React.FC<Props> = (
   
     const handleNumberClick = (value: number) => {
 
-      if (inputValue.length < 5) {
+      if (inputValue.length < 13) {
         // const newValue = inputValue + value;
         const newValue = serialNumber + value;
         setSerialNumber(newValue);
