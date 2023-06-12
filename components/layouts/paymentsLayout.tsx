@@ -9,7 +9,7 @@ import Text3Button from "../Text3Button";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { totalPriceState } from "@/state/totalPriceState"; 
 import axios from 'axios';
-import { RequestPayParams, RequestPayResponse } from "iamport-typings";
+import { RequestPayParams, RequestPayResponse, RequestPayResponseCallback } from "iamport-typings";
 import { mapToBE } from "../globalfunctions/mapToBE";
 import { PayObjectState } from "@/state/PayObjectState";
 import style  from "./paymentsLayout.module.css";
@@ -20,6 +20,10 @@ import payGuideAnimation from "../../animation/pay-card-guide.gif";
 // import Lottie from 'react-lottie';
 import checkAnimation from "../../animation/check.gif";
 import { useRouter } from 'next/router';
+import { totalOriginPriceState } from "@/state/totalOriginPriceStatet";
+import { types } from "util";
+import { BuyerTelState } from "@/state/BuyerTelState";
+import { OrderNameState } from "@/state/OrderNameState";
 
 interface Props {
   children: React.ReactNode;
@@ -33,6 +37,7 @@ const initialState: RequestPayParams = {
   amount: 1000, // 결제금액
   buyer_tel: "010-0000-0000"
 };
+
 
 const IMP_UID = process.env.NEXT_PUBLIC_ENV_IMP_UID ?? "imptest9298";
 
@@ -48,9 +53,15 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
   const [showPayFail, setShowPayFail] = useState<boolean>(false);
 
   const [finalTotalPrice, setFinalTotalPrice] = useRecoilState<number>(totalPriceState);
-  const payObjectState = useRecoilValue(PayObjectState);
+  
+  const IMP = useRecoilValue(PayObjectState);
+  const totalOriginPrice = useRecoilValue(totalOriginPriceState);
+  const buyerTel = useRecoilValue(BuyerTelState);
+  const orderName = useRecoilValue(OrderNameState);
 
-  const { IMP } = window;
+  // const { IMP } = window;
+  // const IMP = JSON.pars(localStorage.getItem("IMP")!);
+  console.log("IMP: ", IMP);
 
   const router = useRouter();
 
@@ -144,6 +155,8 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       payData['pg'] = pg;
       payData['pay_method'] = pay_method;
       payData['amount'] = totalPrice;
+      payData['buyer_tel'] = buyerTel;
+      payData['name'] = orderName;
       
       console.log("payData: ", payData);
       
@@ -156,7 +169,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
     }
   }
   
-  const onPaymentAccepted = (res: RequestPayResponse) => {
+  const onPaymentAccepted = (res: any) => {
     console.log("res after request_pay: ", res);
     setResult(res);
     if (res.success) {
@@ -165,10 +178,18 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
             'storeId': process.env.NEXT_PUBLIC_ENV_STORE_ID,
             'success': true,
             'error_msg': "결제 성공했습니다.",
-            'img_uid': IMP_UID,
+            'imp_uid': IMP_UID,
+            // 
+            'paid_amount': payData['amount'],
+
+            "merchantUid": payData['merchant_uid'],
+            "cardName": res.card_name,
+            "cardNumber": res.card_number
+
         };
-        const url = mapToBE(`/api/v1/payment/callback-receive`);
-        // const url = `http://localhost:8080/api/v1/payment/callback-receive`;
+        console.log("reqData: ", data);
+        // const url = mapToBE(`/api/v1/payment/callback-receive`);
+        const url = `http://localhost:8080/api/v1/payment/callback-receive`;
         const headers = {
             'content-type': 'application/json'
         };
@@ -179,12 +200,12 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
             data: data
         })
         .then((res: any) => {
-          console.log("res after request_pay(): ", res );
+          console.log("res after request_pay(): ", res);
           setTimeout(renderPaySuccessAnimation(), 2000);
         })
         .catch((err: any) => {
           console.log("err after reqeust_pay(): ", err);
-          setTimeout(renderPayFailAnimation(), 2000);
+          // setTimeout(renderPayFailAnimation(), 2000);
         })
     } else {
         alert("결제 실패했습니다. 다시 시도해주시기 바랍니다.");
@@ -204,7 +225,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
     let timeList = date.toTimeString().split(' ')[0].split(':'); // ['13', '56', '15'] -> [시, 분, 초]
     const retUID = 
     date.getFullYear() + "" + Number(date.getMonth()) + 1 + "" + date.getDate() + "" + timeList[0] + timeList[1] + timeList[2] + "" + storeId + posId
-    
+    console.log("retUID: ", retUID);
     return retUID;
   }
   const buttons = [
@@ -247,6 +268,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       <div>
         <UsePointsNumberModal show={showUsePointsNumberModal} onClose={setShowUsePointsNumberModal} />
       <div>
+      {/* 결제 가이드 애니메이션 */}
       {
         showPayCardGuide && 
         <div className={style.payGuideAnimationWrapper}>
@@ -271,6 +293,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
             </div>
         </div>
       }
+      {/* 결제완료 애니메이션 */}
       {
         showPaySuccess && 
         <div className={style.checkAnimationWrapper}>

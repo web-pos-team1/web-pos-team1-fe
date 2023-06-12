@@ -24,6 +24,7 @@ export default function GiftCardNumber (
   const [giftCardOverPriceShow, setGiftCardOverPriceShow] = useState<boolean>(false);
   const [giftCardUsedShow, setGiftCardUsedShow] = useState<boolean>(false);
   const [totalPrice, setTotalPrice] = useRecoilState(totalPriceState);
+  const [deductedPrice, setDeductedPrice] = useState<number>(0);
 
   const handleCloseGiftCardExpired = () => {
     props.setSerialNumber('');
@@ -71,7 +72,8 @@ export default function GiftCardNumber (
       } else { // 정상적으로 쿠폰 사용이 가능한 경우
         console.log("유효한 쿠폰입니다.");
         setGiftCardMatchShow(true);
-        console.log("적용될 상품권 할인 금액: " + res.data.deductedPrice)
+        console.log("적용될 상품권 할인 금액: " + res.data.deductedPrice);
+        setDeductedPrice(res.data.deductedPrice);
       }
     })
     .catch((err) => {
@@ -92,7 +94,7 @@ export default function GiftCardNumber (
 
   return (
     <div className={style.topWrap}>
-      <GiftCardMatch show={giftCardMatchShow} onClose={setGiftCardMatchShow}/>
+      <GiftCardMatch show={giftCardMatchShow} onClose={setGiftCardMatchShow} deductedPrice={deductedPrice}/>
       <GiftCardNotExist show={giftCardNotExistShow} onClose={setGiftCardNotExistShow} setSerialNumber={props.setSerialNumber}/>
       <GiftCardExpired show={giftCardExpiredShow} onClose={setGiftCardExpiredShow} setSerialNumber={props.setSerialNumber}/>
       <GiftCardOverPrice show={giftCardOverPriceShow} onClose={setGiftCardOverPriceShow} setSerialNumber={props.setSerialNumber}/>

@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document'
+import { RecoilRoot } from 'recoil'
 
 export default function Document() {
   return (
@@ -18,7 +19,10 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <div id="modal-root"></div>
+          <RecoilRoot>
+            <div id="modal-root"></div>
+          </RecoilRoot>
+        
       </body>
     </Html>
   )
