@@ -8,6 +8,7 @@ import { LanguageIndexState } from "@/state/LanguageIndexState";
 import { IBM_Plex_Sans_KR } from "next/font/google";
 import axios from 'axios';
 import { LanguageDataType } from "@/types/LanguageDataType";
+import { mapToBE } from "../globalfunctions/mapToBE";
 
 export default function CategorylistLayout(props:{children:React.ReactNode}) {
     const pageName = 'B0001';
@@ -16,7 +17,8 @@ export default function CategorylistLayout(props:{children:React.ReactNode}) {
     const [langDatas, setLangDatas] = useState<LanguageDataType>({});
     
     useEffect(() => {
-        const url = `http://localhost:8080/api/v1/translation/${languageIndex}/${pageName}`;
+        // const url = `http://localhost:8080/api/v1/translation/${languageIndex}/${pageName}`;
+        const url = mapToBE(`/api/v1/translation/${languageIndex}/${pageName}`);
         axios.get(url)
         .then((res) => res.data)
         .then((res) => {

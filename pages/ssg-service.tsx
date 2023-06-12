@@ -40,6 +40,7 @@ const SsgService: NextPageWithLayout = () => {
       console.log("user not Logined");
       setIsOpen(true)
     }
+  }
 
     useEffect(() => {
       if (price >= 30000) {
@@ -53,7 +54,6 @@ const SsgService: NextPageWithLayout = () => {
       setPrice(newPrice);
     };
     
-}
 
   return (
     <>
