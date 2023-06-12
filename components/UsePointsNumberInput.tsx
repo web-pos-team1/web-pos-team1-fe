@@ -1,6 +1,10 @@
-import React, { useState, Dispatch, SetStateAction } from 'react';
+import React, { useState, Dispatch, SetStateAction, useEffect } from 'react';
 import Image from 'next/image';
 import style from './UsePointsNumberInput.module.css'
+import { useRecoilState } from 'recoil';
+import { UserLoginState } from '@/state/UserLoginState';
+import { mapToBE } from './globalfunctions/mapToBE';
+import axios from 'axios';
 
 type Props = {
   usePointsNumber: string,
@@ -14,6 +18,8 @@ const UsePointsNumberInput: React.FC<Props> = (
   }
 ) => {
     const [inputValue, setInputValue] = useState<string>('');
+    const [userLoginState, setUserLoginState] = useRecoilState(UserLoginState);
+    const [points, setPoints] = useState<number>(0);
   
     const handleNumberClick = (value: number) => {
       if (inputValue.length < 8) {
@@ -34,9 +40,31 @@ const UsePointsNumberInput: React.FC<Props> = (
     };
   
     const handleUsePointsAll = () => {
-      setInputValue('전체사용');
-      setUsePointsNumber('전체사용');
+      setInputValue(points.toString());
+      // setUsePointsNumber('전체사용');
     };
+
+    useEffect(() => {
+      console.log("userLoginState: ", userLoginState);
+      console.log("usePointsNumber: ", usePointsNumber);
+      let req_url = mapToBE(`/api/v1/point/use`);
+      let req_data = {
+        "userId": 1
+      }
+      axios({
+        url: req_url,
+        method: 'post',
+        data: req_data
+      })
+      .then((res) => {
+        console.log("handleUsePoints() / res: ", res);
+        console.log("handleUsePoints() / res.status: ", res.status);
+        setPoints(res.data.pointAmount);
+      })
+      .catch((err) => {
+      console.log('handleUsePoints() / err: ', err);
+      })
+    }, [userLoginState])
 
     return (
       <div className={style.phoneWrap}>
