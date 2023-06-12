@@ -57,6 +57,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
 
   const [couponUseAmount, setCouponUseAmount] = useRecoilState(CouponUseState);
   const [poinUseAmount, setPointUseAmount] = useRecoilState(PointUseState);
+  const [pointSaveAmount, setPointSaveAmount] = useState<number>(0);
   
   // const IMP = useRecoilValue(PayObjectState);
   const totalOriginPrice = useRecoilValue(totalOriginPriceState);
@@ -290,6 +291,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
     console.log("orderName: ", orderName);
     console.log("finalTotalPrice: ", totalPrice);
     console.log("dashedPhone: ", insertDash(buyerTel));
+    setPointSaveAmount(Math.floor(finalTotalPriceToBE * 0.001));
     payData['merchant_uid'] = makeUID();
   }, [])
 
@@ -400,9 +402,11 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          padding: "40px",
-          marginTop: "20px",
-          marginBottom: "52px",
+          paddingRight: "40px",
+          paddingLeft: "40px",
+          paddingBottom: "40px",
+          marginTop: "0px",
+          marginBottom: "7px",
         }}
       >
         {buttons.map((button, index) => (
@@ -416,12 +420,23 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
         ))}
       </div>
 
-      <div className={style.discount}>
+      <div className={style.discountFirst}>
+        <ul>
+          <li>포인트 적립 예정 금액</li>
+          <li>
+            <span className={style.pointUseAmount}>{pointSaveAmount}p</span>
+          </li>
+          <li>상품권 사용금액</li>
+          <li><span>₩ {couponUseAmount}</span></li>
+        </ul>
+      </div>
+
+      <div className={style.discountSecond}>
         <ul>
           <li>총 주문 금액</li>
-          <li><span>₩ 12,000</span></li>
-          <li>총 할인 금액</li>
-          <li><span>₩ 950</span></li>
+          <li><span>₩ 39,680</span></li>
+          <li>포인트 사용 금액</li>
+          <li><span>{poinUseAmount}p</span></li>
         </ul>
       </div>
 

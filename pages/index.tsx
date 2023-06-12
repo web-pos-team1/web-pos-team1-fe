@@ -13,6 +13,7 @@ import axios from 'axios';
 import { LanguageIndexState } from '@/state/LanguageIndexState'
 import { LanguageDataType } from '@/types/LanguageDataType'
 import Header from '@/components/Header'
+import { mapToBE } from '@/components/globalfunctions/mapToBE'
 
 const ibmPlexSansKR = IBM_Plex_Sans_KR({
   subsets: ['latin'],
@@ -26,7 +27,8 @@ export default function Home() {
   const layoutName = 'L0000';
   const bodyName = 'B0000';
   useEffect(() => {
-    const url = `http://localhost:8080/api/v1/translation/${languageIndex}/${bodyName}`;
+    const url = mapToBE(`/api/v1/translation/${languageIndex}/${bodyName}`);
+    // const url = `http://localhost:8080/api/v1/translation/${languageIndex}/${bodyName}`;
     console.log("url: ", url);
     axios.get(url)
     .then((res) => setLanguageDatas(res.data))
