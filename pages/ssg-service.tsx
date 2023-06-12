@@ -13,6 +13,7 @@ import DeliveryServiceModal from '@/components/DeliveryServiceModal'
 import { UserLoginState } from '@/state/UserLoginState'
 import GiftModal from '@/components/GiftModal'
 import MemberDeliveryServiceModal from '@/components/MemberDeliveryServiceModal'
+import { totalPriceState } from '@/state/totalPriceState'
 
 const ibmPlexSansKR = IBM_Plex_Sans_KR({
   subsets: ['latin'],
@@ -28,11 +29,15 @@ const SsgService: NextPageWithLayout = () => {
   // const [useLoginState, setUseLoginState] = React.useState<boolean>(false);
   const [userLoginState, setUserLoginState] = useRecoilState(UserLoginState)
 
-  const [price, setPrice] = React.useState<number>(0);
+  const [totalPrice, setTotalPrice] = useRecoilState<number>(totalPriceState);
   const [isLower, setIsLower] = React.useState<boolean>(false);
   
   const handleMemberChecker = () => {
     console.log("enter handleMemberChecker()");
+    if (isLower) {
+      console.log("==구매금액 3만원 이상부터 배송 및 선물 서비스 이용이 가능합니다.==")
+      return;
+    }
     if (userLoginState) {
       console.log("user Logined");
       setIsMemberOpen(true)
@@ -43,15 +48,15 @@ const SsgService: NextPageWithLayout = () => {
   }
 
     useEffect(() => {
-      if (price >= 30000) {
+      if (totalPrice < 30000) {
         setIsLower(true);
       } else {
         setIsLower(false);
       }
-    }, [price]);
+    }, [totalPrice]);
 
     const handlePriceChange = (newPrice: number) => {
-      setPrice(newPrice);
+      setTotalPrice(newPrice);
     };
     
 
@@ -88,15 +93,19 @@ const SsgService: NextPageWithLayout = () => {
       </div>
       <div className={`${style.lowerBtn} ${isLower ? style.lower : ''}`}>
           <Button 
-          src="/images/deliveryService.png" 
-          alt="purchase recycling bag" 
-          text="배송" 
-          onClick={()=>handleMemberChecker()}/>
+            src="/images/deliveryService.png" 
+            alt="purchase recycling bag" 
+            text="배송" 
+            onClick={()=>handleMemberChecker()}
+            styleText={`${isLower ? `style.lower` : ''}`}
+          />
           <Button 
-          src="/images/giftService.png" 
-          alt="pass this step" 
-          text="선물" 
-          onClick={() => setIsGiftOpen(true)}/>
+            src="/images/giftService.png" 
+            alt="pass this step" 
+            text="선물" 
+            onClick={() => setIsGiftOpen(true)}
+            styleText={`${isLower ? `style.lower` : ''}`}
+          />
       </div>
 
 

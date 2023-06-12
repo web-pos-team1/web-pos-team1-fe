@@ -71,6 +71,7 @@ export default function MemberDeliveryServiceModal(
     }, [requestInputData])
 
     const url = mapToBE('/api/v1/delivery/select-delivery')
+    // const url = "http://localhost:8080/api/v1/delivery/select-delivery";
     console.log(url)
 
     const postData = async () => {
@@ -187,6 +188,7 @@ const Step01 = (props:{
     const { deliveryData, handleChange, setDeliveryData } = props
 
     const url = mapToBE('/api/v1/delivery/list')
+    // const url = "http://localhost:8080/api/v1/delivery/list";
     console.log(url)
 
     useEffect(() => {
