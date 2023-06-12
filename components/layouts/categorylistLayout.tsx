@@ -5,7 +5,7 @@ import Button from "@/components/Button";
 import Text from "@/components/Text";
 import { RecoilRoot, useRecoilState } from "recoil";
 import { LanguageIndexState } from "@/state/LanguageIndexState";
-import { IBM_Plex_Sans_KR } from "next/font/google";
+import { IBM_Plex_Sans_KR } from "@next/font/google";
 import axios from 'axios';
 import { LanguageDataType } from "@/types/LanguageDataType";
 import { mapToBE } from "../globalfunctions/mapToBE";
@@ -28,6 +28,7 @@ export default function CategorylistLayout(props:{children:React.ReactNode}) {
             console.log("err: ", err);
         })
     }, [languageIndex])
+    
     return (
         <div>
             <Header 
