@@ -12,11 +12,11 @@ export default function GiftCardMatch(
         onClose:Dispatch<SetStateAction<boolean>>,
         deductedPrice: number
     }) {
-    const [couponUseAmount, setCouponUseAmount] = useRecoilState(CouponUseState);
+    // const [couponUseAmount, setCouponUseAmount] = useRecoilState(CouponUseState);
     if(!props.show) return null
-    useEffect(() => {
-        setCouponUseAmount(props.deductedPrice);
-    }, [])
+    // useEffect(() => {
+    //     setCouponUseAmount(props.deductedPrice);
+    // }, [])
     return (
         <div className={style.overlay}>
             <div className={style.modal}>

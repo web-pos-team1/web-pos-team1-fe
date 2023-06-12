@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
 import style from './UsePointsNumber.module.css';
 import axios from 'axios';
@@ -12,7 +12,14 @@ import UsePointsLimit from './AlertModal/UsePointsLimit';
 import { formatMoney } from './globalfunctions/formatMoney';
 import { totalPriceState } from '@/state/totalPriceState';
 
-const UsePointsNumber: React.FC = () => {
+export default function UsePointsNumber(
+  props: {
+    usePointsNumber: string,
+    setUsePointNumber: Dispatch<SetStateAction<string>>,
+    isUsePoint: boolean
+    setIsUSePoint: Dispatch<SetStateAction<boolean>>,
+    onClose: Dispatch<SetStateAction<boolean>>
+  }) {
 
   const [showPointsLimit, setShowPointsLimit] = useState<boolean>(false);
   const [showUsePoints, setShowUsePoints] = useState<boolean>(false);
@@ -34,6 +41,9 @@ const UsePointsNumber: React.FC = () => {
       //   setShowUsePointsLimit(true)
       //   setUserLoginState(true)
       // }
+      props.setIsUSePoint(!props.isUsePoint)
+      setUsePointsNumber(usePointsNumber);
+      props.onClose(false);
   
   };
 
@@ -53,6 +63,7 @@ const UsePointsNumber: React.FC = () => {
       console.log("handleUsePoints() / res: ", res);
       console.log("handleUsePoints() / res.status: ", res.status);
       setPoints(res.data.pointAmount);
+      props.setUsePointNumber(res.data.pointAmount);
     })
     .catch((err) => {
     console.log('handleUsePoints() / err: ', err);
@@ -102,5 +113,3 @@ const UsePointsNumber: React.FC = () => {
     </div>
   );
 };
-
-export default UsePointsNumber;

@@ -4,7 +4,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import UsePointsNumber from "./UsePointsNumber";
 
-export default function UsePointsNumberModal(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
+export default function UsePointsNumberModal(
+    props: {
+        show:boolean, 
+        onClose:Dispatch<SetStateAction<boolean>>,
+        isUsePoint: boolean,
+        setIsUsePoint: Dispatch<SetStateAction<boolean>>,
+        usePointsNumber: string,
+        setUsePointsNumber: Dispatch<SetStateAction<string>>,
+    }) {
 
 
     if(!props.show) return null
@@ -27,7 +35,13 @@ export default function UsePointsNumberModal(props:{show:boolean, onClose:Dispat
                 
 
                 <div className={style.body}>
-                    <UsePointsNumber />
+                    <UsePointsNumber 
+                        usePointsNumber={props.usePointsNumber}
+                        setUsePointNumber={props.setUsePointsNumber}
+                        isUsePoint={props.isUsePoint}
+                        setIsUSePoint={props.setIsUsePoint}
+                        onClose={props.onClose}
+                    />
                 </div>
 
                 

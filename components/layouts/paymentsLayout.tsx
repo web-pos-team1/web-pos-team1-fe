@@ -57,14 +57,19 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
   const [showPayFail, setShowPayFail] = useState<boolean>(false);
 
   const [couponUseAmount, setCouponUseAmount] = useRecoilState(CouponUseState);
-  const [poinUseAmount, setPointUseAmount] = useRecoilState(PointUseState);
+  const [poinUseAmount, setPointUseAmount] = useState<number>(0);
   const [pointSaveAmount, setPointSaveAmount] = useState<number>(0);
   
+  const [usePointsNumber, setUsePointsNumber] = useState<string>('');
+  const [isUsePoint, setIsUsePoint] = useState<boolean>(false);
   // const IMP = useRecoilValue(PayObjectState);
   const totalOriginPrice = useRecoilValue(totalOriginPriceState);
   const buyerTel = useRecoilValue(BuyerTelState);
   const orderName = useRecoilValue(OrderNameState);
-  let finalTotalPriceToBE = totalPrice;
+
+  const [finalTotalPriceToBE, setFinalTotalPriceBE] = useState<number>(totalPrice);
+
+  // let finalTotalPriceToBE = totalPrice;
 
   const { IMP } = window;
   // const IMP = JSON.pars(localStorage.getItem("IMP")!);
@@ -152,6 +157,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
     //   alert("결제를 진행할 수 없습니다. 다시 시도해주시기 바랍니다.");
     // }
   }
+  // iamport로 전화번호를 전달할 땐, dash필요
   const insertDash = (pn: string) => {
     if (pn === undefined || pn === '') {
       return '010-1234-5678';
@@ -176,8 +182,6 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       payData['name'] = orderName;
       
       console.log("payData: ", payData);
-      
-      finalTotalPriceToBE = totalPrice - couponUseAmount - poinUseAmount;
 
       IMP.request_pay(payData, onPaymentAccepted); // 이니시스 결제 모달
 
@@ -288,18 +292,26 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     console.log("paymentLayouts / useEffect()");
     setParams({...params, amount: totalPrice});
-    // ** 이름은 recoil에 장바구니 찾아서  list.size()참고해서 짜자 ** 
     console.log("orderName: ", orderName);
     console.log("finalTotalPrice: ", totalPrice);
     console.log("dashedPhone: ", insertDash(buyerTel));
+    console.log("couponUseAmount: ", couponUseAmount);
     setPointSaveAmount(Math.floor(finalTotalPriceToBE * 0.001));
+    setFinalTotalPriceBE(totalPrice - couponUseAmount - Number(usePointsNumber));
     payData['merchant_uid'] = makeUID();
-  }, [])
+  }, [isUsePoint])
 
   return (
     <>
       <div>
-        <UsePointsNumberModal show={showUsePointsNumberModal} onClose={setShowUsePointsNumberModal} />
+        <UsePointsNumberModal 
+          show={showUsePointsNumberModal} 
+          onClose={setShowUsePointsNumberModal}
+          isUsePoint={isUsePoint}
+          setIsUsePoint={setIsUsePoint}
+          usePointsNumber={usePointsNumber}
+          setUsePointsNumber={setUsePointsNumber}
+        />
       <div>
       {/* 결제 가이드 애니메이션 */}
       {
@@ -437,12 +449,12 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
           <li>총 주문 금액</li>
           <li><span>₩{formatMoney(totalPrice)}</span></li>
           <li>포인트 사용 금액</li>
-          <li><span>{poinUseAmount}p</span></li>
+          <li><span>{usePointsNumber !== '' ? usePointsNumber : 0 }p</span></li>
         </ul>
       </div>
 
         <Footer 
-          // totalPrice={totalPricse}
+          finalTotalPriceToBE={finalTotalPriceToBE}
         />
     </div>
     </div>

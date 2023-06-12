@@ -14,6 +14,7 @@ export interface deliveryAddressType {
     isDefault: boolean, // 0: default 배송지 X, 1: default 배송지 O
     deliveryName: string,
     name: string,
+    userName: string,
     phoneNumber: string,
     postCode: string,
     address: string,
@@ -349,8 +350,8 @@ const AddressItem = (props:{
                     <p>{data.deliveryName}</p>
                 </li>
                 <li>
-                    <p>{data.name}</p>
-                    <p>{data.phoneNumber}</p>
+                    <p>{data.userName}</p>
+                    {/* <p>{data.phoneNumber}</p> */}
                 </li>
                 <li>
                     <p>[{data.postCode}] {data.address}</p>
