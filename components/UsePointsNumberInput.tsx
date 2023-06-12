@@ -21,13 +21,13 @@ const UsePointsNumberInput: React.FC<Props> = (
     const [userLoginState, setUserLoginState] = useRecoilState(UserLoginState);
     const [points, setPoints] = useState<number>(0);
   
-    const handleNumberClick = (value: number) => {
-      if (inputValue.length < 8) {
+    const handleNumberClick = (value: number) => { 
+      if (inputValue.length < 8 )  {
         const newValue = usePointsNumber + value;
         setInputValue(newValue);
         setUsePointsNumber(newValue);
       }
-    };
+    }; 
   
     const handleClearClick = () => {
       setInputValue('');
