@@ -9,6 +9,8 @@ import UsePointsNumberInput from './UsePointsNumberInput';
 import PointsLimit from './AlertModal/PointsLimit';
 import UsePoints from './AlertModal/UsePoints';
 import UsePointsLimit from './AlertModal/UsePointsLimit';
+import { formatMoney } from './globalfunctions/formatMoney';
+import { totalPriceState } from '@/state/totalPriceState';
 
 const UsePointsNumber: React.FC = () => {
 
@@ -18,6 +20,7 @@ const UsePointsNumber: React.FC = () => {
   const [usePointsNumber, setUsePointsNumber] = useState<string>('');
   const [userLoginState, setUserLoginState] = useRecoilState(UserLoginState);
   const [points, setPoints] = useState<number>(0);
+  const [totalPrice, setTotalPrice] = useRecoilState(totalPriceState);
 
   const handleUsePointsOn = () => { // 확인 버튼 눌렀을 때
     
@@ -37,7 +40,7 @@ const UsePointsNumber: React.FC = () => {
   useEffect(() => {
     console.log("userLoginState: ", userLoginState);
     console.log("usePointsNumber: ", usePointsNumber);
-    let req_url = mapToBE(`/api/v1/point/use`);
+    let req_url =  mapToBE(`/api/v1/point/use`);
     let req_data = {
       "userId": 1
     }
@@ -63,16 +66,16 @@ const UsePointsNumber: React.FC = () => {
       <div className={style.totalPrice}>
         <ul>
           <li>최종 결제금액</li>
-          <li>12,000</li>
+          <li>₩{formatMoney(totalPrice)}</li>
         </ul>
       </div>
       <div className={style.pointAmount}>
         <ul>
           <li>보유포인트</li>
-          <li>{points}</li>
+          <li>{points}p</li>
         </ul>
       </div>
-      <UsePointsNumberInput 
+      <UsePointsNumberInput
         usePointsNumber={usePointsNumber}
         setUsePointsNumber={setUsePointsNumber}
       />      

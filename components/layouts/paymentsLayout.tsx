@@ -27,6 +27,7 @@ import { OrderNameState } from "@/state/OrderNameState";
 import PhoneNumber from "../PhoneNumber";
 import { CouponUseState } from "@/state/CouponUseState";
 import { PointUseState } from "@/state/PointUseState";
+import { formatMoney } from "../globalfunctions/formatMoney";
 
 interface Props {
   children: React.ReactNode;
@@ -419,7 +420,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       <div className={style.discount}>
         <ul>
           <li>총 주문 금액</li>
-          <li><span>₩ 12,000</span></li>
+          <li><span>₩{formatMoney(totalPrice)}</span></li>
           <li>총 할인 금액</li>
           <li><span>₩ 950</span></li>
         </ul>
