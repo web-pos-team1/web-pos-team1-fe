@@ -7,6 +7,7 @@ import { mapToBE } from './globalfunctions/mapToBE';
 import Swal from 'sweetalert2'
 import GiftCardNumberModal from './GiftCardNumberModal';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 export interface deliveryAddressType {
     delivertAddressId: number,
@@ -190,13 +191,12 @@ const Step01 = (props:{
 
     useEffect(() => {
         const getData = async () => {
-        const res = await fetch(url)
-        const data = await res.json()
-        console.log(data)
+        const res = await axios.get(url)
+        console.log(res.data)
         {
-            res.status === 200 ? console.log('success') : console.log('fail')
+            res.data.status === 200 ? console.log('success') : console.log('fail')
         }
-        setDeliveryData(data)
+        setDeliveryData(res.data)
         }
         getData()
     },[])

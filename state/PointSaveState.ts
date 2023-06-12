@@ -3,9 +3,9 @@ import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist();
 
-// 구매자의 전화번호 저장
-export const BuyerTelState = atom({
-	key: 'BuyerTelState',
-	default: '',
+// 포인트 적립 금액 - BE에게 order정보 전달할 때 사용
+export const PointSaveState = atom({
+	key: 'PointSaveState',
+	default: 0,
 	effects_UNSTABLE: [persistAtom],
 });

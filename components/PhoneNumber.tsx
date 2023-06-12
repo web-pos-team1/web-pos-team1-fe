@@ -8,6 +8,7 @@ import axios from 'axios';
 import { mapToBE } from './globalfunctions/mapToBE';
 import { UserLoginState } from '@/state/UserLoginState';
 import { useRecoilState } from 'recoil';
+import { BuyerTelState } from '@/state/BuyerTelState';
 
 const PhoneNumber: React.FC = () => {
 
@@ -16,6 +17,7 @@ const PhoneNumber: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
   const [userLoginState, setUserLoginState] = useRecoilState(UserLoginState);
+  const [buyerTel, setBuyerTel] = useRecoilState(BuyerTelState);
 
   const handlePhoneMatch = () => { // 확인 버튼 눌렀을 때
     // setShowPhoneMatch(true)
@@ -38,6 +40,7 @@ const PhoneNumber: React.FC = () => {
       if (res.status === 200) {
         setShowPhoneMatch(true)
         localStorage.setItem("accessToken", res.data.accessToken); // 변수에 저장하도록 refactor 할 예정
+        setBuyerTel(phoneNumber)
         setUserLoginState(true)
       }
     })

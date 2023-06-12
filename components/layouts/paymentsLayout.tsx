@@ -24,6 +24,9 @@ import { totalOriginPriceState } from "@/state/totalOriginPriceStatet";
 import { types } from "util";
 import { BuyerTelState } from "@/state/BuyerTelState";
 import { OrderNameState } from "@/state/OrderNameState";
+import PhoneNumber from "../PhoneNumber";
+import { CouponUseState } from "@/state/CouponUseState";
+import { PointUseState } from "@/state/PointUseState";
 
 interface Props {
   children: React.ReactNode;
@@ -52,14 +55,16 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
   const [showPaySuccess, setShowPaySuccess] = useState<boolean>(false);
   const [showPayFail, setShowPayFail] = useState<boolean>(false);
 
-  const [finalTotalPrice, setFinalTotalPrice] = useRecoilState<number>(totalPriceState);
+  const [couponUseAmount, setCouponUseAmount] = useRecoilState(CouponUseState);
+  const [poinUseAmount, setPointUseAmount] = useRecoilState(PointUseState);
   
-  const IMP = useRecoilValue(PayObjectState);
+  // const IMP = useRecoilValue(PayObjectState);
   const totalOriginPrice = useRecoilValue(totalOriginPriceState);
   const buyerTel = useRecoilValue(BuyerTelState);
   const orderName = useRecoilValue(OrderNameState);
+  let finalTotalPriceToBE = totalPrice;
 
-  // const { IMP } = window;
+  const { IMP } = window;
   // const IMP = JSON.pars(localStorage.getItem("IMP")!);
   console.log("IMP: ", IMP);
 
@@ -145,6 +150,16 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
     //   alert("결제를 진행할 수 없습니다. 다시 시도해주시기 바랍니다.");
     // }
   }
+  const insertDash = (pn: string) => {
+    if (pn === undefined || pn === '') {
+      return '010-1234-5678';
+    } else {
+      const first = pn.substring(0, 3);
+      const seconde = pn.substring(3, 7);
+      const third = pn.substring(7, 11);
+      return first + "-" + seconde + "-" + third;
+    }
+  }
 
   const processPay = (pay_method: string, pg: string) => {
     if (IMP) {
@@ -155,12 +170,12 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       payData['pg'] = pg;
       payData['pay_method'] = pay_method;
       payData['amount'] = totalPrice;
-      payData['buyer_tel'] = buyerTel;
+      payData['buyer_tel'] = insertDash(buyerTel);
       payData['name'] = orderName;
       
       console.log("payData: ", payData);
       
-      // 결제 가이드 로띠().then()
+      finalTotalPriceToBE = totalPrice - couponUseAmount - poinUseAmount;
 
       IMP.request_pay(payData, onPaymentAccepted); // 이니시스 결제 모달
 
@@ -172,6 +187,8 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
   const onPaymentAccepted = (res: any) => {
     console.log("res after request_pay: ", res);
     setResult(res);
+    const chargeByNice = 0.032;
+
     if (res.success) {
         let data = {
             'posId' : process.env.NEXT_PUBLIC_ENV_POS_ID,
@@ -180,16 +197,19 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
             'error_msg': "결제 성공했습니다.",
             'imp_uid': IMP_UID,
             // 
-            'paid_amount': payData['amount'],
+            'paidAmount': Math.floor(finalTotalPriceToBE * chargeByNice),
 
             "merchantUid": payData['merchant_uid'],
             "cardName": res.card_name,
-            "cardNumber": res.card_number
-
+            "cardNumber": res.card_number,
+            "charge": chargeByNice,
+            "pointAmount": poinUseAmount,
+            "giftCardAmount": couponUseAmount,
+            "couponUsePrice": couponUseAmount,
         };
         console.log("reqData: ", data);
-        // const url = mapToBE(`/api/v1/payment/callback-receive`);
-        const url = `http://localhost:8080/api/v1/payment/callback-receive`;
+        const url = mapToBE(`/api/v1/payment/callback-receive`);
+        // const url = `http://localhost:8080/api/v1/payment/callback-receive`;
         const headers = {
             'content-type': 'application/json'
         };
@@ -223,8 +243,15 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       posId = '0' + posId;
     }
     let timeList = date.toTimeString().split(' ')[0].split(':'); // ['13', '56', '15'] -> [시, 분, 초]
+    const month =  Number(date.getMonth()) + 1;
+    let monthStr = '';
+    if (month < 10) {
+      monthStr = '0' + month;
+    } else {
+      monthStr = month.toString();
+    }
     const retUID = 
-    date.getFullYear() + "" + Number(date.getMonth()) + 1 + "" + date.getDate() + "" + timeList[0] + timeList[1] + timeList[2] + "" + storeId + posId
+    date.getFullYear() + "" + monthStr + "" + date.getDate() + "" + timeList[0] + timeList[1] + timeList[2] + "" + storeId + posId
     console.log("retUID: ", retUID);
     return retUID;
   }
@@ -258,8 +285,11 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
   };
   useEffect(() => {
     console.log("paymentLayouts / useEffect()");
-    setParams({...params, amount: finalTotalPrice});
-    // ** 이름은 recoil에 장바구니 찾아서  list.size()참고해서 짜자 **  
+    setParams({...params, amount: totalPrice});
+    // ** 이름은 recoil에 장바구니 찾아서  list.size()참고해서 짜자 ** 
+    console.log("orderName: ", orderName);
+    console.log("finalTotalPrice: ", totalPrice);
+    console.log("dashedPhone: ", insertDash(buyerTel));
     payData['merchant_uid'] = makeUID();
   }, [])
 

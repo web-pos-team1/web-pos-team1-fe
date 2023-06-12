@@ -15,6 +15,7 @@ import { CartListState } from '@/state/CartListState';
 import axios from 'axios';
 import { totalPriceState } from '@/state/totalPriceState';
 import { totalOriginPriceState } from '@/state/totalOriginPriceStatet';
+import { OrderNameState } from '@/state/OrderNameState';
 
 const CartList : NextPageWithLayout = () => {
     const rt = useRouter();
@@ -23,6 +24,7 @@ const CartList : NextPageWithLayout = () => {
     const [totalPrice, setTotalPrice] = useState<number>(0);
     const [totalOriginPrice, setTotalOriginPrice] = useState<number>(0);
     const [showPointGuideModal, setShowPointGuideModal] = useState<boolean>(false);
+    const [orderName, setOrderName] = useRecoilState<string>(OrderNameState);
 
     // const [cartList, setCartList] = useState<CartType[]>(parseCartList);
 
@@ -91,6 +93,15 @@ const CartList : NextPageWithLayout = () => {
         setRecoilTotalPrice(totalPrice);
         setRecoilOriginPrice(tOriginPrice);
         setShowPointGuideModal(true);
+        if (cartList.length === 0) {
+            alert("장바구니가 비어있습니다");
+            setOrderName('');
+            return;
+        } else { // 주문이름 설정
+            const firstItem = cartList[0].name;
+            const cnt = cartList.length - 1;
+            setOrderName(firstItem + "외 " + cnt + "건");
+        }
       }
 
     return (

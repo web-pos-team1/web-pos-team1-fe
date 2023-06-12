@@ -12,6 +12,9 @@ import { PayObjectState } from '@/state/PayObjectState';
 import axios from 'axios';
 import { callStaffImg } from '@/data/callStaffImg';
 import { Board, Led } from 'johnny-five';
+import { mapToBE } from './globalfunctions/mapToBE';
+import { LanguageIndexState } from '@/state/LanguageIndexState';
+import { useRecoilSnapshot, useRecoilState } from 'recoil';
 // import Board from './globalfunctions/board';
 // import Led from './globalfunctions/led';
 
@@ -41,6 +44,7 @@ export default function Header(
   const [title, setTitle] = useState<string>('');
 
   const [buttons, setButtons] = useState<Button[]>([]);
+  const [langIndex, setLangIndex] = useRecoilState(LanguageIndexState);
 
   const handleModal = () => {
     console.log('modal')
@@ -59,7 +63,10 @@ export default function Header(
 
   useEffect(()=>{
     console.log("Header's useEffect() / props.languageIndex: ", props.languageIndex);
-    const url = `http://localhost:8080/api/v1/translation/${props.languageIndex}/${props.layoutName}`;
+    // const url = `http://localhost:8080/api/v1/translation/${props.languageIndex}/${props.layoutName}`;
+    const langIdx = props.languageIndex ? props.languageIndex : langIndex;
+    console.log("langIdx: ", langIdx);
+    const url = mapToBE(`/api/v1/translation/${langIdx}/${props.layoutName}`);
     axios.get(url)
     .then((res) => setTitle(res.data.one))
     .catch((err) => console.log("Hader/useEffect()/err: ", err));
