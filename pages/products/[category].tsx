@@ -174,8 +174,8 @@ const Products : NextPageWithLayout = () => {
         let c = router.query.category;
         let category_index = category_map[c ? c.toString() : "과일"];
         handleCategoryBtnClick(category_index);
-        // let url_products = mapToBE(`/api/v1/products/${convertCategory(router.query.category ? router.query.category : '과일')}`);
-        let url_products = `http://localhost:8080/api/v1/products?category=${convertCategory(router.query.category ? router.query.category : '과일')}`;
+        let url_products = mapToBE(`/api/v1/products?category=${convertCategory(router.query.category ? router.query.category : '과일')}`);
+        // let url_products = `http://localhost:8080/api/v1/products?category=${convertCategory(router.query.category ? router.query.category : '과일')}`;
 
         axios(
             url_products,
