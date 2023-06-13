@@ -16,6 +16,7 @@ import axios from 'axios';
 import { totalPriceState } from '@/state/totalPriceState';
 import { totalOriginPriceState } from '@/state/totalOriginPriceStatet';
 import { OrderNameState } from '@/state/OrderNameState';
+import { mapToBE } from '@/components/globalfunctions/mapToBE';
 
 const CartList : NextPageWithLayout = () => {
     const rt = useRouter();
@@ -86,6 +87,19 @@ const CartList : NextPageWithLayout = () => {
         }
         
     }, [delProductId])
+    const convertToCartItemType = (itemList: CartType[]) => {
+        let retList = [];
+        for (let i = 0; i < itemList.length; i++) {
+            const item = {
+                'productId': 0,
+                'cartQty': 0
+            };
+            item['productId'] = itemList[i].product_id;
+            item['cartQty'] = itemList[i].cartQty;
+            retList.push(item);
+        }
+        return retList;
+    }
 
     const handleModal = () => {
         console.log('modal')
@@ -100,7 +114,34 @@ const CartList : NextPageWithLayout = () => {
         } else { // 주문이름 설정
             const firstItem = cartList[0].name;
             const cnt = cartList.length - 1;
-            setOrderName(firstItem + "외 " + cnt + "건");
+            setOrderName(firstItem + " 외 " + cnt + "건");
+            const url = mapToBE(`/api/v1/carts/add`);
+            const cartItemListData = convertToCartItemType(cartList);
+            let tOPrice = 0;
+            for (let c = 0; c < cartList.length; c++) {
+                tOPrice += cartList[c].origin_price;
+            }
+
+            const reqData = {
+                "storeId": process.env.NEXT_PUBLIC_ENV_STORE_ID,
+                "posId": process.env.NEXT_PUBLIC_ENV_POS_ID,
+                "cartItemList": cartItemListData,
+                "totalPrice": totalPrice,
+                "totalOriginPrice": tOPrice,
+                "orderName": firstItem + " 외 " + cnt + "건",
+            }
+            axios(url, 
+                {
+                    method: 'post',
+                    data: reqData
+                }
+            )
+            .then((res) => {
+                console.log("cart-list/index.tsx/handleModal()/res: ", res);
+            })
+            .catch((err) => {
+                console.log("cart-list/index.tsx/handleModal()/err: ", err);
+            })
         }
       }
 

@@ -203,20 +203,23 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
             'posId' : process.env.NEXT_PUBLIC_ENV_POS_ID,
             'storeId': process.env.NEXT_PUBLIC_ENV_STORE_ID,
             'success': true,
+            "merchantUid": payData['merchant_uid'],
+            "payMethod": payData['pay_method'],
+            "pg": payData['pg'],
+            "name": orderName,
+            'paidAmount': Math.floor(finalTotalPriceToBE),
+            "charge": Math.floor(finalTotalPriceToBE * chargeByNice),
+            "pointAmount": Number(usePointsNumber),
+            "couponUsePrice": couponUseAmount,
+            // 
             'error_msg': "결제 성공했습니다.",
             'imp_uid': IMP_UID,
-            // 
-            'paidAmount': Math.floor(finalTotalPriceToBE * chargeByNice),
-
-            "merchantUid": payData['merchant_uid'],
             "cardName": res.card_name,
             "cardNumber": res.card_number,
-            "charge": chargeByNice,
-            "pointAmount": poinUseAmount,
             "giftCardAmount": couponUseAmount,
-            "couponUsePrice": couponUseAmount,
+            
         };
-        console.log("reqData: ", data);
+        console.log("reqData to BE: ", data);
         const url = mapToBE(`/api/v1/payment/callback-receive`);
         // const url = `http://localhost:8080/api/v1/payment/callback-receive`;
         const headers = {
