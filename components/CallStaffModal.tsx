@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import style from "./CallStaffModal.module.css";
+import style from "./CallstaffModal.module.css";
 import Image from 'next/image';
 
 export default function CallStaffModal(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
