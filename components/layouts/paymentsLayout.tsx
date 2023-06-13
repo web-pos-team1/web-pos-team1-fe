@@ -28,6 +28,7 @@ import PhoneNumber from "../PhoneNumber";
 import { CouponUseState } from "@/state/CouponUseState";
 import { PointUseState } from "@/state/PointUseState";
 import { formatMoney } from "../globalfunctions/formatMoney";
+import { MarchantUidState } from "@/state/MarchantUidState";
 
 interface Props {
   children: React.ReactNode;
@@ -68,6 +69,8 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
   const orderName = useRecoilValue(OrderNameState);
 
   const [finalTotalPriceToBE, setFinalTotalPriceBE] = useState<number>(totalPrice);
+
+  const [marchantUid, setMarchantUid] = useRecoilState<string>(MarchantUidState);
 
   // let finalTotalPriceToBE = totalPrice;
 
@@ -227,6 +230,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
         })
         .then((res: any) => {
           console.log("res after request_pay(): ", res);
+          setMarchantUid(payData['merchant_uid']);
           setTimeout(renderPaySuccessAnimation(), 2000);
         })
         .catch((err: any) => {
@@ -296,7 +300,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
     console.log("finalTotalPrice: ", totalPrice);
     console.log("dashedPhone: ", insertDash(buyerTel));
     console.log("couponUseAmount: ", couponUseAmount);
-    setPointSaveAmount(Math.floor(finalTotalPriceToBE * 0.001));
+    setPointSaveAmount(Math.floor((totalPrice - couponUseAmount - Number(usePointsNumber)) * 0.001));
     setFinalTotalPriceBE(totalPrice - couponUseAmount - Number(usePointsNumber));
     payData['merchant_uid'] = makeUID();
   }, [isUsePoint])
@@ -370,7 +374,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       {children}
       <div className={style.text}>
       <div className={style.step}>STEP01</div>
-      <p>신세계포인트를 사용여부를 선택해 주세요</p>
+      <p>신세계포인트 사용여부를 선택해 주세요</p>
       </div>
 
       <div className={style.points}>
@@ -384,6 +388,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
                   className={style.default}
                   width={70}
                   height={70}
+                  style={{ "marginLeft": "10px" }}
                   />
               </span>
               </li>
@@ -407,7 +412,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
           </div>
       </div>
 
-      <div className={style.text}>
+      <div className={style.text2}>
       <div className={style.step}>STEP02</div>
       <p>결제 방식을 선택해 주세요</p>
       </div>
@@ -435,12 +440,35 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
 
       <div className={style.discountFirst}>
         <ul>
+          <li>총 주문 금액</li>
+          <li>₩ {formatMoney(totalPrice)}</li>
+        </ul>
+      </div>
+
+      <div className={style.discountSecond}>
+        <ul>
+          <li>총 할인 금액</li>
+          <li>-₩ {couponUseAmount + Number(usePointsNumber)}</li>
+        </ul>
+      </div>
+
+      <div className={style.discountThird}>
+        <ul>
+          <li>적립 예정 포인트</li>
+          <li>{pointSaveAmount}p</li>
+        </ul>
+      </div>
+
+      {/* <div className={style.discountFirst}>
+        <ul>
           <li>포인트 적립 예정 금액</li>
           <li>
-            <span className={style.pointUseAmount}>{pointSaveAmount}p</span>
+            <span className={style.pointUseAmount}>
+              {pointSaveAmount}p
+            </span>
           </li>
-          <li>상품권 사용금액</li>
-          <li><span>₩ {couponUseAmount}</span></li>
+          <li>상품권 사용</li>
+          <li><span>-₩ {couponUseAmount}</span></li>
         </ul>
       </div>
 
@@ -448,10 +476,10 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
         <ul>
           <li>총 주문 금액</li>
           <li><span>₩{formatMoney(totalPrice)}</span></li>
-          <li>포인트 사용 금액</li>
-          <li><span>{usePointsNumber !== '' ? usePointsNumber : 0 }p</span></li>
+          <li>포인트 사용</li>
+          <li><span>-{usePointsNumber !== '' ? usePointsNumber : 0 }p</span></li>
         </ul>
-      </div>
+      </div> */}
 
         <Footer 
           finalTotalPriceToBE={finalTotalPriceToBE}

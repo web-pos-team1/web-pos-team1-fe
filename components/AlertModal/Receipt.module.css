@@ -1,10 +1,10 @@
 .modal {
     background-color: #4C304F;
     width: 600px;
-    height: 400px;
+    height: 300px;
     border-radius: 30px;
-    padding: 20px;
-    z-index: 100;
+    padding: 30px;
+    z-index: 1100;
     box-sizing: border-box;
 }
 
@@ -30,18 +30,6 @@
     padding-left: 10px;
 }
 
-.title {
-    padding-top: 10px;
-    color : #E0C798;
-    font-size: 38px;
-    text-align: center;
-    font-weight: 500;
-}
-
-.title p {
-    padding-top: 15px;
-}
-
 .overlay {
     position: absolute;
     top: 0;
@@ -53,6 +41,7 @@
     background: center;
     backdrop-filter: blur(5px);
     background: rgba(0, 0, 0, 0.5);
+    border-radius: 45px;
 }
 
 .body {
@@ -62,16 +51,9 @@
 
 .body p {
     color: #ffffff;
-    font-size: 28px;
+    font-size: 26px;
     display: flex;
     justify-content: center;
-    padding: 55px 0;
+    padding: 60px 0;
     line-height: 50px;
-}
-
-.body p span {
-    /* font-size: 30px; */
-    width: 100px;
-    color: #E0C798;
-    /* color: red; */
 }

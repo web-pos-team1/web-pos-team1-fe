@@ -1,11 +1,14 @@
 import { Dispatch, SetStateAction } from "react";
-import style from "./AlertModal.module.css";
+import style from "./Receipt.module.css";
 import Image from 'next/image';
+import { useRouter } from "next/router";
 
 export default function Receipt(props:{show:boolean, onClose:Dispatch<SetStateAction<boolean>>}) {
 
 
     if(!props.show) return null
+
+    const router = useRouter();
     
     return (
         <div className={style.overlay}>

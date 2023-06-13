@@ -14,7 +14,10 @@ export default function CallStaffModal(props:{show:boolean, onClose:Dispatch<Set
                     <p>직원 호출</p>    
                 </div>
                 <div className={style.body}>
-                    <p><span>확인</span>버튼을 누르면 직원호출이 취소됩니다 <br/> 직원이 올때까지 기다려주세요</p>
+                    <p><span>확인 </span>
+                    버튼을 누르면 직원호출이 취소됩니다 
+                    {/* <br/>  */}
+                    직원이 올때까지 기다려주세요</p>
                 </div>
                 <div className={style.footer}>
                     <button onClick={()=>props.onClose(false)}>

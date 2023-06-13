@@ -5,7 +5,10 @@ import styles from '@/styles/Last.module.css'
 import Link from 'next/link'
 import { NextPageWithLayout } from './_app'
 import LastLayout from '@/components/layouts/lastLayout'
-import { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import Receipt from '@/components/AlertModal/Receipt'
+import { useRecoilValue } from 'recoil'
+import { MarchantUidState } from '@/state/MarchantUidState'
 
 const ibmPlexSansKR = IBM_Plex_Sans_KR({
   subsets: ['latin'],
@@ -13,11 +16,17 @@ const ibmPlexSansKR = IBM_Plex_Sans_KR({
 })
 
 const Last: NextPageWithLayout = () => {
+  const [showReceipt, setShowReceipt] = useState<boolean>(false);
+  const marchantUid = useRecoilValue<string>(MarchantUidState);
+
   useEffect(() => {
     localStorage.setItem("cartList", '[]');
+    console.log("send to BE marchantUid: ", marchantUid);
+    setShowReceipt(true);
   }, [])
   return (
     <>
+      <Receipt show={showReceipt} onClose={setShowReceipt} />
       <Head>
         <title>POS success</title>
         <meta name="description" content="The last page" />

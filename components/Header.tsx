@@ -67,9 +67,6 @@ export default function Header(
     const langIdx = props.languageIndex ? props.languageIndex : langIndex;
     console.log("langIdx: ", langIdx);
     const url = mapToBE(`/api/v1/translation/${langIdx}/${props.layoutName}`);
-    axios.get(url)
-    .then((res) => setTitle(res.data.one))
-    .catch((err) => console.log("Hader/useEffect()/err: ", err));
 
     const res = transeData.filter(item => item.key === pathName)
     if ( res.length > 0 ) {
@@ -99,6 +96,14 @@ export default function Header(
       }
   ];
   setButtons(tempButtons);
+
+  if (props.layoutName === undefined) {
+    return;
+  }
+  // 국제화 기능
+  axios.get(url)
+  .then((res) => setTitle(res.data.one))
+  .catch((err) => console.log("Hader/useEffect()/err: ", err));
 
   },[pathName, props.languageIndex]);
 

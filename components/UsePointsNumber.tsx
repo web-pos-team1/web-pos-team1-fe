@@ -42,7 +42,8 @@ export default function UsePointsNumber(
       //   setUserLoginState(true)
       // }
       props.setIsUSePoint(!props.isUsePoint)
-      setUsePointsNumber(usePointsNumber);
+      props.setUsePointNumber(usePointsNumber);
+
       props.onClose(false);
   
   };
@@ -63,7 +64,7 @@ export default function UsePointsNumber(
       console.log("handleUsePoints() / res: ", res);
       console.log("handleUsePoints() / res.status: ", res.status);
       setPoints(res.data.pointAmount);
-      props.setUsePointNumber(res.data.pointAmount);
+      // props.setUsePointNumber(res.data.pointAmount);
     })
     .catch((err) => {
     console.log('handleUsePoints() / err: ', err);
@@ -89,6 +90,7 @@ export default function UsePointsNumber(
       <UsePointsNumberInput
         usePointsNumber={usePointsNumber}
         setUsePointsNumber={setUsePointsNumber}
+        userPoints={points}
       />      
       <div className={style.caution}>
       <p>*10p 이상 사용 가능</p>
