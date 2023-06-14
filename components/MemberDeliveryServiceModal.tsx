@@ -379,9 +379,12 @@ const AddressItem = (props:{
                 <li>
                     <p>{data.requestInfo}</p>
                 </li>
-                <li>
-                    <p><span>수정</span></p>
-                    <p><span>삭제</span></p>
+                <li
+                    className={style.sideBtn}
+                >
+                    <div>수정</div>
+                    <br/>
+                    <div>삭제</div>
                 </li>
             </ul>
             <hr className={style.line}/>
