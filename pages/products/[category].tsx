@@ -38,6 +38,7 @@ const Products : NextPageWithLayout = () => {
     const [cartId, setCartId] = useState();
     const [categoryIndex, setCategoryIndex] = useState<number>(0);
     const [barcode, setBarcode] = useState<number>();
+    const [itemListAll, setItemListAll] = useState<ProductType[]>([]);
 
     const payObjectState = useRecoilValue(PayObjectState);
 
@@ -147,9 +148,12 @@ const Products : NextPageWithLayout = () => {
 
         // 처음 장바구니에 담기는 상품 
         let cartQty = 1;
-        for (let j = 0; j < itemList.length; j++) {
-            if (itemList[j].product_code === product_code) {
-                const cart = convertProductToCart(itemList[j], cartQty);
+        // for (let j = 0; j < itemList.length; j++) {
+        for (let j = 0; j < itemListAll.length; j++) {
+            // if (itemList[j].product_code === product_code) {
+            if (itemListAll[j].product_code === product_code) {
+                // const cart = convertProductToCart(itemList[j], cartQty);
+                const cart = convertProductToCart(itemListAll[j], cartQty);
                 setCartList([...cartList, cart]);
                 return;
             }
@@ -176,7 +180,8 @@ const Products : NextPageWithLayout = () => {
         handleCategoryBtnClick(category_index);
         let url_products = mapToBE(`/api/v1/products?category=${convertCategory(router.query.category ? router.query.category : '과일')}`);
         // let url_products = `http://localhost:8080/api/v1/products?category=${convertCategory(router.query.category ? router.query.category : '과일')}`;
-
+        
+        // 카테고리 별로 상품목록 조회
         axios(
             url_products,
             {
@@ -187,9 +192,24 @@ const Products : NextPageWithLayout = () => {
             console.log("products/res: ", res);
             setItemList(res.data)
         })
-        .catch((err) => console.log("products/err: ", err));
+        .catch((err : any) => console.log("products/err: ", err));
 
-    
+        // 전체 상품목록 조회
+        let url_productsAll = mapToBE(`/api/v1/products/all`);
+        // let url_productsAll = `http://localhost:8080/api/v1/products/all`;
+        axios(
+            url_productsAll,
+            {
+                method: 'get'
+            }
+        ).then((res : any) => {
+            console.log("productsAll/res: ", res);
+            setItemListAll(res.data);
+        })
+        .catch((err : any) => {
+            console.log("productsAll/err: ", err)
+        })
+
 
         // Cart 컴포넌트에서 "삭제" 이벤트 발생했을 경우
         if (delProductId !== 0) {

@@ -127,38 +127,38 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
   
   const handleMobilePayBtnClick = () => {
     console.log("1. 모바일페이 선택");
-    // if (IMP) {
-    //   IMP.init(IMP_UID);
-    //   console.log("[mobilePay] success to init IMP: ", IMP);
-    //   console.log("==start to request pay==")
+    if (IMP) {
+      IMP.init(IMP_UID);
+      console.log("[mobilePay] success to init IMP: ", IMP);
+      console.log("==start to request pay==")
 
-    //   payData['pg'] = "kcp";
-    //   payData['pay_method'] = "samsung";
-    //   payData['amount'] = totalPrice;
+      payData['pg'] = "kcp";
+      payData['pay_method'] = "samsung";
+      payData['amount'] = totalPrice;
 
-    //   console.log("payData: ", payData);
-    //   IMP.request_pay(payData, onPaymentAccepted);
+      console.log("payData: ", payData);
+      IMP.request_pay(payData, onPaymentAccepted);
 
-    // } else {
-    //   alert("결제를 진행할 수 없습니다. 다시 시도해주시기 바랍니다.");
-    // }
+    } else {
+      alert("결제를 진행할 수 없습니다. 다시 시도해주시기 바랍니다.");
+    }
   }
   const handleSimplePayBtnClick = () => {
     console.log("2. 카카오 페이 선택");
-    // if (IMP) {
-    //   IMP.init(IMP_UID);
-    //   console.log("[simplePay] success to init IMP: ", IMP);
-    //   console.log("==start to request pay==");
-    //   payData['pg'] = "kakaopay";
-    //   payData['pay_method'] = "card";
-    //   payData['amount'] = totalPrice;
+    if (IMP) {
+      IMP.init(IMP_UID);
+      console.log("[simplePay] success to init IMP: ", IMP);
+      console.log("==start to request pay==");
+      payData['pg'] = "kakaopay";
+      payData['pay_method'] = "card";
+      payData['amount'] = totalPrice;
 
-    //   console.log("payData: ", payData);
+      console.log("payData: ", payData);
 
-    //   IMP.request_pay(payData, onPaymentAccepted);
-    // } else {
-    //   alert("결제를 진행할 수 없습니다. 다시 시도해주시기 바랍니다.");
-    // }
+      IMP.request_pay(payData, onPaymentAccepted);
+    } else {
+      alert("결제를 진행할 수 없습니다. 다시 시도해주시기 바랍니다.");
+    }
   }
   // iamport로 전화번호를 전달할 땐, dash필요
   const insertDash = (pn: string) => {

@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import style from './NumberInput.module.css'
 
@@ -14,6 +14,8 @@ const GiftCardNumberInput: React.FC<Props> = (
   }) => {
     const [inputValue, setInputValue] = useState<string>('');
   
+    const ref = useRef();
+
     const handleNumberClick = (value: number) => {
 
       if (inputValue.length < 13) {
@@ -33,13 +35,24 @@ const GiftCardNumberInput: React.FC<Props> = (
       setInputValue((prevValue) => prevValue.slice(0, -1));
       setSerialNumber((prevValue) => prevValue.slice(0, -1));
     };
+    let barcode = '';
+    const handleBarcodeScan = (e: any) => {
+      console.log("e.target.value: ", e.target.value);
+      barcode = barcode + e.target.value;
+      if (barcode.length === 13) {
+        setSerialNumber(barcode);
+        e.target.value = '';
+        barcode = '';
+      }
+    }
+    useEffect(() => {
+
+    }, [])
 
     return (
       <div className={style.phoneWrap}>
         {/* <input type="text" value={inputValue} readOnly  placeholder='모바일 쿠폰 번호를 입력해 주세요 />*/}
-        <input type='text' value={serialNumber} readOnly 
-          placeholder=''
-        />
+        <input type='text' value={serialNumber} onChange={handleBarcodeScan} autoFocus/>
 
         <div className={style.NumberPad}>
           <button onClick={() => handleNumberClick(1)}>1</button>
