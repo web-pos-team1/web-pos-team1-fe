@@ -134,7 +134,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
 
       payData['pg'] = "kcp";
       payData['pay_method'] = "samsung";
-      payData['amount'] = totalPrice;
+      payData['amount'] = finalTotalPriceToBE;
 
       console.log("payData: ", payData);
       IMP.request_pay(payData, onPaymentAccepted);
@@ -151,7 +151,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       console.log("==start to request pay==");
       payData['pg'] = "kakaopay";
       payData['pay_method'] = "card";
-      payData['amount'] = totalPrice;
+      payData['amount'] = finalTotalPriceToBE;
 
       console.log("payData: ", payData);
 
@@ -180,7 +180,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       
       payData['pg'] = pg;
       payData['pay_method'] = pay_method;
-      payData['amount'] = totalPrice;
+      payData['amount'] = finalTotalPriceToBE;
       payData['buyer_tel'] = insertDash(buyerTel);
       payData['name'] = orderName;
       
