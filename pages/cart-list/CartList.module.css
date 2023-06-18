@@ -85,8 +85,9 @@
 .next_btn li {
     color: #FFFFFF;
     align-items: center;
-    font-size: 35px;
+    font-size: 32px;
     font-weight: 600;
+    padding-bottom: 5px;
 }
 
 .next_btn li:first-child {

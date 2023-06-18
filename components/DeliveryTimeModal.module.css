@@ -107,3 +107,7 @@
 .deliveryTimeList input:checked {
     background-color: #4C304F;
   }
+
+.disabled input {
+    color: red;
+}

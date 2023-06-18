@@ -28,6 +28,7 @@ import PhoneNumber from "../PhoneNumber";
 import { CouponUseState } from "@/state/CouponUseState";
 import { PointUseState } from "@/state/PointUseState";
 import { formatMoney } from "../globalfunctions/formatMoney";
+import { MarchantUidState } from "@/state/MarchantUidState";
 
 interface Props {
   children: React.ReactNode;
@@ -68,6 +69,8 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
   const orderName = useRecoilValue(OrderNameState);
 
   const [finalTotalPriceToBE, setFinalTotalPriceBE] = useState<number>(totalPrice);
+
+  const [marchantUid, setMarchantUid] = useRecoilState<string>(MarchantUidState);
 
   // let finalTotalPriceToBE = totalPrice;
 
@@ -124,38 +127,38 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
   
   const handleMobilePayBtnClick = () => {
     console.log("1. 모바일페이 선택");
-    // if (IMP) {
-    //   IMP.init(IMP_UID);
-    //   console.log("[mobilePay] success to init IMP: ", IMP);
-    //   console.log("==start to request pay==")
+    if (IMP) {
+      IMP.init(IMP_UID);
+      console.log("[mobilePay] success to init IMP: ", IMP);
+      console.log("==start to request pay==")
 
-    //   payData['pg'] = "kcp";
-    //   payData['pay_method'] = "samsung";
-    //   payData['amount'] = totalPrice;
+      payData['pg'] = "kcp";
+      payData['pay_method'] = "samsung";
+      payData['amount'] = finalTotalPriceToBE;
 
-    //   console.log("payData: ", payData);
-    //   IMP.request_pay(payData, onPaymentAccepted);
+      console.log("payData: ", payData);
+      IMP.request_pay(payData, onPaymentAccepted);
 
-    // } else {
-    //   alert("결제를 진행할 수 없습니다. 다시 시도해주시기 바랍니다.");
-    // }
+    } else {
+      alert("결제를 진행할 수 없습니다. 다시 시도해주시기 바랍니다.");
+    }
   }
   const handleSimplePayBtnClick = () => {
     console.log("2. 카카오 페이 선택");
-    // if (IMP) {
-    //   IMP.init(IMP_UID);
-    //   console.log("[simplePay] success to init IMP: ", IMP);
-    //   console.log("==start to request pay==");
-    //   payData['pg'] = "kakaopay";
-    //   payData['pay_method'] = "card";
-    //   payData['amount'] = totalPrice;
+    if (IMP) {
+      IMP.init(IMP_UID);
+      console.log("[simplePay] success to init IMP: ", IMP);
+      console.log("==start to request pay==");
+      payData['pg'] = "kakaopay";
+      payData['pay_method'] = "card";
+      payData['amount'] = finalTotalPriceToBE;
 
-    //   console.log("payData: ", payData);
+      console.log("payData: ", payData);
 
-    //   IMP.request_pay(payData, onPaymentAccepted);
-    // } else {
-    //   alert("결제를 진행할 수 없습니다. 다시 시도해주시기 바랍니다.");
-    // }
+      IMP.request_pay(payData, onPaymentAccepted);
+    } else {
+      alert("결제를 진행할 수 없습니다. 다시 시도해주시기 바랍니다.");
+    }
   }
   // iamport로 전화번호를 전달할 땐, dash필요
   const insertDash = (pn: string) => {
@@ -177,7 +180,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       
       payData['pg'] = pg;
       payData['pay_method'] = pay_method;
-      payData['amount'] = totalPrice;
+      payData['amount'] = finalTotalPriceToBE;
       payData['buyer_tel'] = insertDash(buyerTel);
       payData['name'] = orderName;
       
@@ -200,20 +203,23 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
             'posId' : process.env.NEXT_PUBLIC_ENV_POS_ID,
             'storeId': process.env.NEXT_PUBLIC_ENV_STORE_ID,
             'success': true,
+            "merchantUid": payData['merchant_uid'],
+            "payMethod": payData['pay_method'],
+            "pg": payData['pg'],
+            "name": orderName,
+            'paidAmount': Math.floor(finalTotalPriceToBE),
+            "charge": Math.floor(finalTotalPriceToBE * chargeByNice),
+            "pointAmount": Number(usePointsNumber),
+            "couponUsePrice": couponUseAmount,
+            // 
             'error_msg': "결제 성공했습니다.",
             'imp_uid': IMP_UID,
-            // 
-            'paidAmount': Math.floor(finalTotalPriceToBE * chargeByNice),
-
-            "merchantUid": payData['merchant_uid'],
             "cardName": res.card_name,
             "cardNumber": res.card_number,
-            "charge": chargeByNice,
-            "pointAmount": poinUseAmount,
             "giftCardAmount": couponUseAmount,
-            "couponUsePrice": couponUseAmount,
+            
         };
-        console.log("reqData: ", data);
+        console.log("reqData to BE: ", data);
         const url = mapToBE(`/api/v1/payment/callback-receive`);
         // const url = `http://localhost:8080/api/v1/payment/callback-receive`;
         const headers = {
@@ -227,6 +233,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
         })
         .then((res: any) => {
           console.log("res after request_pay(): ", res);
+          setMarchantUid(payData['merchant_uid']);
           setTimeout(renderPaySuccessAnimation(), 2000);
         })
         .catch((err: any) => {
@@ -296,7 +303,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
     console.log("finalTotalPrice: ", totalPrice);
     console.log("dashedPhone: ", insertDash(buyerTel));
     console.log("couponUseAmount: ", couponUseAmount);
-    setPointSaveAmount(Math.floor(finalTotalPriceToBE * 0.001));
+    setPointSaveAmount(Math.floor((totalPrice - couponUseAmount - Number(usePointsNumber)) * 0.001));
     setFinalTotalPriceBE(totalPrice - couponUseAmount - Number(usePointsNumber));
     payData['merchant_uid'] = makeUID();
   }, [isUsePoint])
@@ -370,7 +377,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
       {children}
       <div className={style.text}>
       <div className={style.step}>STEP01</div>
-      <p>신세계포인트를 사용여부를 선택해 주세요</p>
+      <p>신세계포인트 사용여부를 선택해 주세요</p>
       </div>
 
       <div className={style.points}>
@@ -384,6 +391,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
                   className={style.default}
                   width={70}
                   height={70}
+                  style={{ "marginLeft": "10px" }}
                   />
               </span>
               </li>
@@ -407,7 +415,7 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
           </div>
       </div>
 
-      <div className={style.text}>
+      <div className={style.text2}>
       <div className={style.step}>STEP02</div>
       <p>결제 방식을 선택해 주세요</p>
       </div>
@@ -435,12 +443,35 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
 
       <div className={style.discountFirst}>
         <ul>
+          <li>총 주문 금액</li>
+          <li>₩ {formatMoney(totalPrice)}</li>
+        </ul>
+      </div>
+
+      <div className={style.discountSecond}>
+        <ul>
+          <li>총 할인 금액</li>
+          <li>-₩ {couponUseAmount + Number(usePointsNumber)}</li>
+        </ul>
+      </div>
+
+      <div className={style.discountThird}>
+        <ul>
+          <li>적립 예정 포인트</li>
+          <li>{pointSaveAmount}p</li>
+        </ul>
+      </div>
+
+      {/* <div className={style.discountFirst}>
+        <ul>
           <li>포인트 적립 예정 금액</li>
           <li>
-            <span className={style.pointUseAmount}>{pointSaveAmount}p</span>
+            <span className={style.pointUseAmount}>
+              {pointSaveAmount}p
+            </span>
           </li>
-          <li>상품권 사용금액</li>
-          <li><span>₩ {couponUseAmount}</span></li>
+          <li>상품권 사용</li>
+          <li><span>-₩ {couponUseAmount}</span></li>
         </ul>
       </div>
 
@@ -448,10 +479,10 @@ const PaymentsLayout: React.FC<Props> = ({ children }) => {
         <ul>
           <li>총 주문 금액</li>
           <li><span>₩{formatMoney(totalPrice)}</span></li>
-          <li>포인트 사용 금액</li>
-          <li><span>{usePointsNumber !== '' ? usePointsNumber : 0 }p</span></li>
+          <li>포인트 사용</li>
+          <li><span>-{usePointsNumber !== '' ? usePointsNumber : 0 }p</span></li>
         </ul>
-      </div>
+      </div> */}
 
         <Footer 
           finalTotalPriceToBE={finalTotalPriceToBE}

@@ -8,6 +8,11 @@
     background-color: #D4D8DB;
     margin-bottom: 35px;
     outline: none;
+    cursor: none;
+}
+.phoneWrap input:focus {
+    outline: none;
+    cursor: none;
 }
 
 /* .phoneWrap input:focus-within {

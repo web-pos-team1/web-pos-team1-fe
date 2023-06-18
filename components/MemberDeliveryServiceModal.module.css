@@ -311,3 +311,13 @@
     color: #FFFFFF;
 }
 
+.disabled {
+    font-size: 30px;
+    font-weight: 300;
+    color: gray;
+}
+
+.sideBtn {
+    font-size: 15px;
+    transform: translate(-110%, 10%);
+}

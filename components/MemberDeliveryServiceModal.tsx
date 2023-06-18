@@ -283,20 +283,40 @@ const Step02 = (props:{
         <div className={style.deliveryTimeList}>
             <form>
             {
-                deliveryTimeList && deliveryTimeList.map((time:DeliveryTimeType, index:number) => (
-                <div key={time.id}>
-                    <label>
-                    <input
+            deliveryTimeList && deliveryTimeList.map((time:DeliveryTimeType, index:number) => 
+            {
+              if (index < 0) {
+                return(
+                  <div key={time.id}>
+                    <div className={style.disabled}>
+                      <input 
                         type='radio' 
-                        name='delivery' 
+                        name="delivery" 
                         value={time.title}
-                        onChange={onChangeHandler} 
-                    />
+                        onChange={onChangeHandler}
+                      />
                     {time.title}
-                    </label>
+                  </div>
                 <hr/>
                 </div>
-                ))}
+                )
+              } else {
+                return(
+                  <div key={time.id}>
+                  <label>
+                    <input 
+                      type='radio' 
+                      name="delivery" 
+                      value={time.title}
+                      onChange={onChangeHandler}
+                    />
+                    {time.title}
+                  </label>
+                <hr/>
+                </div>
+                )
+              }
+            })}
             </form>
         </div>
         </div>
@@ -359,9 +379,12 @@ const AddressItem = (props:{
                 <li>
                     <p>{data.requestInfo}</p>
                 </li>
-                <li>
-                    <p><span>수정</span></p>
-                    <p><span>삭제</span></p>
+                <li
+                    className={style.sideBtn}
+                >
+                    <div>수정</div>
+                    <br/>
+                    <div>삭제</div>
                 </li>
             </ul>
             <hr className={style.line}/>
